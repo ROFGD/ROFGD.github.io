@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/202301181039030.jpg">
+  <link rel="icon" href="/img/202301181039030.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="Java">
+  
+    <meta name="description" content="# 第 1 章 Java 语言概述 # 1.1、java 语言概述  计算机语言：人与计算机之间进行信息交流沟通的一种特殊语言 Java 语言：是美国 Sun 公司（Stanford University Network）在 1995 年推出的计算机语言 java 之父：詹姆斯・高斯林（James Gosling） 重要事件：2009 年，Sun 公司被甲骨文公司收购，所以我们现在访问 oracl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSe基础---语法">
+<meta property="og:url" content="https://rofgd.github.io/2020/05/01/JavaSe%E5%9F%BA%E7%A1%80---%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="# 第 1 章 Java 语言概述 # 1.1、java 语言概述  计算机语言：人与计算机之间进行信息交流沟通的一种特殊语言 Java 语言：是美国 Sun 公司（Stanford University Network）在 1995 年推出的计算机语言 java 之父：詹姆斯・高斯林（James Gosling） 重要事件：2009 年，Sun 公司被甲骨文公司收购，所以我们现在访问 oracl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301181547410.png">
+<meta property="article:published_time" content="2020-05-01T07:26:44.000Z">
+<meta property="article:modified_time" content="2023-01-20T03:43:06.706Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="JavaSe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301181547410.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>JavaSe基础---语法 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="ReadPond的小屋" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/friend/">
+                <i class="iconfont icon-xbox-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301181547412.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JavaSe基础---语法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        ReadPond
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-05-01 15:26" pubdate>
+          2020年5月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          40 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaSe基础---语法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="第1章java语言概述"><a class="markdownIt-Anchor" href="#第1章java语言概述">#</a> 第 1 章 Java 语言概述</h3>
+<h4 id="11-java语言概述"><a class="markdownIt-Anchor" href="#11-java语言概述">#</a> 1.1、java 语言概述</h4>
+<ul>
+<li>计算机语言：人与计算机之间进行信息交流沟通的一种特殊语言</li>
+<li>Java 语言：是美国 Sun 公司（Stanford University Network）在 1995 年推出的计算机语言</li>
+<li>java 之父：詹姆斯・高斯林（James Gosling）</li>
+<li>重要事件：2009 年，Sun 公司被甲骨文公司收购，所以我们现在访问 oracle 官网即可：<a target="_blank" rel="noopener" href="https://www.oracle.com">https://www.oracle.com</a></li>
+</ul>
+<h4 id="12-java应用版本的区分"><a class="markdownIt-Anchor" href="#12-java应用版本的区分">#</a> 1.2、java 应用版本的区分</h4>
+<ul>
+<li>
+<p>2005 年，Java 诞生十周年，从之前的 J2SE/J2EE/J2ME 分别改名为：JaveSE/JavaEE/JavaME。</p>
+</li>
+<li>
+<p>JavaSE 是 Java 的标准版，是学习 JavaEE 和 JavaME 的基础，JavaEE 是企业版，JavaME 是微型版。</p>
+</li>
+<li>
+<p>JavaSE：java 基础语法 + 核心技术🤺</p>
+</li>
+<li>
+<p>JavaEE：企业版</p>
+</li>
+<li>
+<ul>
+<li>为我们提供了 13 项技术规范，这些技术规范其中都包含了例如：Web 开发，数据库，JDBC 开发，邮件开发…… 但是实际项目开发中，JavaEE（企业版），我们根本就不用！！！因为 Java 的类库，不仅仅只是第一方强大，很多第三方提供的类库更加的强大。如果说要使用 JavaEE 的类库，我们只学习使用两项规范。分别是 servlet 规范，以及 jsp 规范。</li>
+</ul>
+</li>
+<li>
+<p>JavaME：微型版、游戏版  —&gt; 现在早就已经过时了</p>
+</li>
+<li>
+<p>Java 版本划分：</p>
+</li>
+<li>
+<p>JavaSE 标准版 Java 核心技术 必学</p>
+</li>
+<li>
+<p>JavaEE 企业版 13 项技术规范 servlet jsp</p>
+</li>
+<li>
+<p>JavaME 微型版 / 游戏版  过时了 肯定不用</p>
+</li>
+</ul>
+<h4 id="13-java语言特性"><a class="markdownIt-Anchor" href="#13-java语言特性">#</a> 1.3、java 语言特性</h4>
+<ul>
+<li>
+<p><strong>简单性（相对于 C 和 C++）</strong>：Java 语言底层采用 C 语言实现，相对于 C 来说，Java 是简单的，在 Java 语言中程序员不需要再操作复杂的指针（指针的操作是很复杂的），继承方面也是只支持单继承（C 语言是一种半面向对象的编程语言，支持多继承，多继承会导致关系很复杂），在很多方面进行了简化。</p>
+</li>
+<li>
+<p><strong>面向对象</strong>：Java 中提供了<strong>封装、继承、多态</strong>的面向对象机制。</p>
+</li>
+<li>
+<p><strong>健壮性：<strong>在 C 程序当中的无用数据 / 垃圾数据需要编程人员手动释放，当忘记释放内存的时候，会导致内存使用率降低，影响程序的执行；在 Java 语言当中这种问题得到了解决，因为 Java 语言引入了</strong>自动垃圾回收机制（GC 机制）</strong>，Java 程序启动了一个单独的垃圾回收线程，时刻监测内存使用情况，在特定时机会回收 / 释放垃圾数据，这样会让内存时刻处于最好的状态。</p>
+</li>
+<li>
+<p>** 多线程：**Java 语言支持多个线程同时并发执行，同时也提供了多线程环境下的安全机制。</p>
+</li>
+<li>
+<p><strong>可移植性 / 跨平台：</strong></p>
+<ul>
+<li>
+<p>a. 平台：指的是操作系统</p>
+<ul>
+<li>Windows</li>
+<li>MacOS</li>
+<li>Linux</li>
+</ul>
+</li>
+<li>
+<p>b. 跨平台</p>
+<ul>
+<li>Java 程序不需要进行任何修改，就可以在任意操作系统上运行。（注意：不是所有语言都具备这样的特征。例如 C# 只能在 Windows 上运行）</li>
+</ul>
+</li>
+<li>
+<p>c. 实现跨平台的原理</p>
+</li>
+</ul>
+</li>
+<li>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181038055.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>编写的 Java 代码并不是直接运行在操作系统当中的。而是运行在操作系统安装的 JVM 虚拟机中。每一个操作系统都会对应各自版本的 JVM 虚拟机</p>
+</li>
+</ul>
+<h4 id="14-jdk-jre-jvm-三者关系"><a class="markdownIt-Anchor" href="#14-jdk-jre-jvm-三者关系">#</a> 1.4、JDK、JRE、JVM 三者关系</h4>
+<ul>
+<li>
+<p>JDK：JDK（Java Development Kit） 是 Java 语言的软件开发工具包（SDK）。它是每一个 Java 软件开发人员必须安装的。JDK 安装之后，它会自带一个 JRE，因为软件开发人员编写完代码之后总是要运行的。</p>
+</li>
+<li>
+<p>JRE：JRE（Java Runtime Environment，Java 运行环境），运行 JAVA 程序所必须的环境的集合，包含 JVM 标准实现及 Java 核心类库。</p>
+<ul>
+<li>JVM：JVM 是 Java Virtual Machine（Java 虚拟机）的缩写，JVM 是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。JVM 是实现 Java 语言跨平台的法宝。
+<ul>
+<li>如下图所示：</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181112614.png" srcset="/img/loading.gif" lazyload alt=""></p>
+</li>
+<li>
+<p>JDK、JRE、JVM 之间存在这样的包含关系：JDK 包含 JRE，JRE 又包含 JVM。换句话说，只要安装了 JDK，JRE 和 JVM 则自动就安装了。</p>
+</li>
+<li>
+<p>JDK: Java 开发工具包。做 Java 开发，必须安装，安装 JDK，自带安装 JRE</p>
+</li>
+<li>
+<p>JRE: Java 运行环境。JVM 虚拟机 + Java 核心类库</p>
+</li>
+<li>
+<p>JVM：Java 虚拟机，作用运行 Java 程序可实现跨平台</p>
+</li>
+</ul>
+<h4 id="15-初步了解java的加载与执行"><a class="markdownIt-Anchor" href="#15-初步了解java的加载与执行">#</a> 1.5、初步了解 java 的加载与执行</h4>
+<ul>
+<li>在编写第一个 Java 程序之前，我们应当对 Java 的加载与执行提前有一个简单的了解<br>
+如图所示：
+<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181105386.png" srcset="/img/loading.gif" lazyload alt=""></li>
+</ul>
+</li>
+</ul>
+<h3 id="第2章java基础语法"><a class="markdownIt-Anchor" href="#第2章java基础语法">#</a> 第 2 章 Java 基础语法</h3>
+<h4 id="21-注释"><a class="markdownIt-Anchor" href="#21-注释">#</a> 2.1、注释</h4>
+<ul>
+<li>
+<p>作用：解释说明，在程序中不运行，增加程序的可读性</p>
+</li>
+<li>
+<p>注释的分类：</p>
+<ul>
+<li>
+<p>(1) 单行注释 //</p>
+</li>
+<li>
+<p>(2) 多行注释 /  注释内容  /</p>
+</li>
+<li>
+<p>(3) 文档注释 /** 注释内容 */</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="22-关键字"><a class="markdownIt-Anchor" href="#22-关键字">#</a> 2.2、关键字</h4>
+<ul>
+<li>
+<p>（1）关键字在 Java 中具有一定特殊含义，全部小写，如：class  public   static  void ………</p>
+</li>
+<li>
+<p>（2）注意：在 EditPlus 中，编写 Java 源文件时没有更改主题，则蓝色的字体都是 Java 中的关键字</p>
+</li>
+<li>
+<p>（3）Java 中的关键字，如图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181133527.png" srcset="/img/loading.gif" lazyload alt=""></p>
+</li>
+</ul>
+<h4 id="23-标识符"><a class="markdownIt-Anchor" href="#23-标识符">#</a> 2.3、标识符</h4>
+<ul>
+<li>
+<p>标识符就是名字，对类名、变量名称、方法名称、参数名等修饰</p>
+</li>
+<li>
+<p>标识符的命名规则：</p>
+<ul>
+<li>标识符可以由字母，数字，下划线 (_) ， 美元符 ($) 构成 （注意中文标识符）</li>
+<li>数字不能开头</li>
+<li>区分大小写</li>
+<li>不能使用关键字</li>
+<li>注意：以上几点需要大家在以后不断的练习中进行掌握，不需要死记硬背</li>
+</ul>
+</li>
+<li>
+<p>标识符的命名规范：</p>
+<ul>
+<li>建议：标识符<strong>见名知意</strong>，也就是编写单词，如：name  age</li>
+<li>建议：<strong>类名每个单词首字母大写</strong>，如：HelloWorld  Homework  Student</li>
+<li>建议：<strong>使用驼峰命名规则</strong></li>
+<li>建议：比较长的单词也可以适当以缩写形式呈现（没有具体规则）</li>
+<li>注意：中文的标识符是可以使用的，<strong>但是开发中千万不要使用中文的标识符</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="24-变量"><a class="markdownIt-Anchor" href="#24-变量">#</a> 2.4、变量</h4>
+<h5 id="241-字面量"><a class="markdownIt-Anchor" href="#241-字面量">#</a> 2.4.1、字面量</h5>
+<ul>
+<li>字面量就是数据（文字信息 / 数值等 都是数据）例如：1234，true，”abc”，” 你好”，3.14 都是数据。在现实生活中每天都会接触到数据，例如：你今天的体重是 86Kg，你今天花了 500 元，买了个西瓜重量是 8.6Kg，外面明明是晴天，你却说狂风暴雨，你说的是假话（false）。<br>
+以上这些具体的数据就是字面量。</li>
+</ul>
+<h5 id="242-变量"><a class="markdownIt-Anchor" href="#242-变量">#</a> 2.4.2、变量</h5>
+<ul>
+<li>
+<p>变量：</p>
+<ul>
+<li>变量是用来存放以上字面量的容器</li>
+<li>存放的数据是可以改变的，所以叫变量</li>
+</ul>
+</li>
+<li>
+<p>变量的操作步骤</p>
+</li>
+<li>
+<p>优化变量的操作步骤</p>
+</li>
+<li>
+<p>常用的数据类型:</p>
+<ul>
+<li>
+<p>整数类型 int</p>
+</li>
+<li>
+<p>浮点类型 double</p>
+</li>
+<li>
+<p>字符串类型 String</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="243-变量的分类"><a class="markdownIt-Anchor" href="#243-变量的分类">#</a> 2.4.3、变量的分类</h5>
+<ul>
+<li>变量按声明的位置 (作用范围) 分为：
+<ul>
+<li>局部变量：在方法中声明的</li>
+<li>成员变量：在方法外声明的，也就是在类中声明的变量。例如：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> <span class="hljs-number">18</span>; <span class="hljs-comment">// 对于整个java文件来说这是一个全局变量</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Hello</span>{  <span class="hljs-comment">// 这是一个类</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;  <span class="hljs-comment">// 对于这个类来说，这是一个全局变量</span><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">hello</span><span class="hljs-params">()</span>{  <span class="hljs-comment">// 这是一个方法</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; <span class="hljs-comment">// 对于这个类中的hello方法来说这是一个局部变量</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>变量按数据类型分为：
+<ul>
+<li>基本数据类型变量：在内存中存放真正的值，如：int、double、char………</li>
+<li>引用数据类型变量：在内存中存放的是地址，如：String…</li>
+</ul>
+</li>
+</ul>
+<h4 id="25-基本数据类型"><a class="markdownIt-Anchor" href="#25-基本数据类型">#</a> 2.5、基本数据类型</h4>
+<h4 id="251-基本数据类型概述"><a class="markdownIt-Anchor" href="#251-基本数据类型概述">#</a> 2.5.1、基本数据类型概述</h4>
+<p>java 中的数据类型包括两大类：一类是基本数据类型，一类是引用数据类型，基本数据类型又包括：</p>
+<ul>
+<li>整数型：byte，short，int，long</li>
+<li>浮点型：float，double</li>
+<li>字符型：char</li>
+<li>布尔型：boolean</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181133527.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<ul>
+<li>
+<p>补充：计算机存储的是二进制信息，也就是 0 和 1（日常生活中使用十进制 0----9）计算机中以字节为单位存储和解释信息，规定一个字节由八个二进制位构成。</p>
+</li>
+<li>
+<p>计算机存储单位：</p>
+<ul>
+<li>
+<p>8bit（位）------------------------ &gt;1byte</p>
+</li>
+<li>
+<p>1024byte ---------------- &gt;1KB</p>
+</li>
+<li>
+<p>1024KB ------------------ &gt;1MB</p>
+</li>
+<li>
+<p>1024MB ----------------- &gt;1GB</p>
+</li>
+<li>
+<p>1024GB ------------------ &gt;1TB</p>
+</li>
+<li>
+<p>PB、EB、ZB、YB、BB、NB、DB、CB…</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="26-字符编码"><a class="markdownIt-Anchor" href="#26-字符编码">#</a> 2.6、字符编码</h4>
+<ul>
+<li>对于以上的八种基本数据类型来说，其中七种类型 byte,short,int,long,float,double,boolean 计算机表示起来是很容易的，因为这七种类型底层直接就是数字，十进制的数字和二进制之间有固定的转换规则，所以计算机可直接表示和处理。但是大家别忘了，除了以上的七种数据类型之外，还有一种类型叫做字符型 char，这个对于计算机来说表示起来就不是那么容易了，因为字符毕竟是现实世界当中的文字，而文字每个国家又是不同的。</li>
+<li>最初的时候美国标准协会制定了 ASCII 码，ASCII 码采用 1 个字节编码，1 个字节可以表示 256 种不同的形式（前面说过了），对于英文来说这个足够了，因为英文单词就是由 26 个英文字母拼凑而成，大小写全部才 52 个，再加上数字和标点符号也不会超过 256 个。但 ASCII 码对于中文来说那就不够了，因为汉字不止 256 个。<br>
+常见的 ASCII 码需要大家能够记住几个，在 ASCII 码中规定<br>
+<strong>’a’对应 97，'b’对应 98，以此类推，'A’对应 65，'B’对应 66</strong>，以此类推，<strong>'0’字符对应 48，'1’字符对应 49</strong>。</li>
+<li>在字符编码当中，有这样两个常见的术语需要大家了解一下：编码和解码，它们都是什么，我们拿字符’a’来解释一下：’**a’是 97，97 对应的二进制是 01100001，那么从’a’到二进制 01100001 的转换过程称为编码，从二进制 01100001 到’a’的转换过程称为解码。** 大家一定要注意：编码和解码要采用同一种字符编码方式（要采用同一个对照表），不然会出现乱码。这也是乱码出现的本质原因。</li>
+<li>在上世纪 90 年代初，国际组织制定了一种字符编码方式，叫做 Unicode 编码，这种编码方式统一了全球所有国家的文字，具体的实现包括：UTF-8，UTF-16，UTF-32 等。Java 为了国际化，为了支持所有国家的语言，所以 Java 采用的编码方式为 Unicode 编码。例如字符’中’对应的 Unicode 码是’\u4e2d’。在实际开发中几乎所有的团队都会使用 Unicode 编码方式，因为这种方式更通用，兼容性更好。Java 采用 unicode 编码，目前在实际的开发中大部分团队都会选择 UTF-8 的编码方式。</li>
+</ul>
+<h4 id="27-数据类型"><a class="markdownIt-Anchor" href="#27-数据类型">#</a> 2.7、数据类型</h4>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">byte</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> [];<br><span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-type">char</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> <span class="hljs-string">"张三"</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">title</span> <span class="hljs-operator">=</span> <span class="hljs-string">"这是我的第一篇文章"</span>;<br><span class="hljs-type">double</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">3.13</span>;<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>基本数据类型之间是存在固定的转换规则的，现总结出以下 6 条规则，无论是哪个程序，将这 6 个规则套用进去，问题迎刃而解：</p>
+</li>
+<li>
+<ul>
+<li>八种基本数据类型中，除 boolean 类型不能转换，剩下七种类型之间都可以进行转换；如果整数型字面量没有超出 byte,short,char 的取值范围，可以直接将其赋值给 byte,short,char 类型的变量；</li>
+<li>小容量向大容量转换称为自动类型转换，容量（以及转换规则）从小到大的排序为：byte &lt;short (char) &lt; int &lt; long &lt; float &lt; double，其中 short 和 char 都占用两个字节，但是 char 可以表示更大的正整数；</li>
+<li>大容量转换成小容量，称为强制类型转换，编写时必须添加 “强制类型转换符”（类型），但运行时可能出现精度损失，谨慎使用；</li>
+<li>byte,short,char 类型混合运算时，先各自转换成 int 类型再做运算；未来的实际项目开发，不会出现 byte，short，char 的混合运算，对于整型的计算，一般我们直接将变量的类型声明为 int 就可以了，如果需求分析中确定 int 不够用，我们会使用 long 类型。</li>
+<li>多种数据类型混合运算，各自先转换成容量最大的那一种再做运算。</li>
+</ul>
+</li>
+<li></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JavaSe/" class="category-chain-item">JavaSe</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JavaSe/">#JavaSe</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JavaSe基础---语法</div>
+      <div>https://rofgd.github.io/2020/05/01/JavaSe基础---语法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ReadPond</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年5月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/01/JavaSe%E5%9F%BA%E7%A1%80---%E7%B1%BB%E5%BA%93/" title="JavaSe基础---类库">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaSe基础---类库</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

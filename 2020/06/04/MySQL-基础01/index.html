@@ -1,0 +1,1112 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/202301181039030.jpg">
+  <link rel="icon" href="/img/202301181039030.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="渗透测试,Java,PHP,Python,等">
+  
+    <meta name="description" content="# 一、MySQL 数据库 # 1、常见数据命令： 12345678910111213141516171819select version(); #----查看数据库版本(或者：mysql -V)show databases;   # -------查看当前所有数据库use 库名  # ------打开指定库名show tables from  库名; #-----------查看其他库的所有表s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL---基础01">
+<meta property="og:url" content="https://rofgd.github.io/2020/06/04/MySQL-%E5%9F%BA%E7%A1%8001/index.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="# 一、MySQL 数据库 # 1、常见数据命令： 12345678910111213141516171819select version(); #----查看数据库版本(或者：mysql -V)show databases;   # -------查看当前所有数据库use 库名  # ------打开指定库名show tables from  库名; #-----------查看其他库的所有表s">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301181547411.png">
+<meta property="article:published_time" content="2020-06-04T08:28:33.000Z">
+<meta property="article:modified_time" content="2023-01-20T03:20:32.412Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301181547411.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>MySQL---基础01 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="ReadPond的小屋" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/friend/">
+                <i class="iconfont icon-xbox-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301181547411.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MySQL---基础01"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        ReadPond
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-06-04 16:28" pubdate>
+          2020年6月4日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          58 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL---基础01</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="一-mysql数据库"><a class="markdownIt-Anchor" href="#一-mysql数据库">#</a> 一、MySQL 数据库</h3>
+<h4 id="1-常见数据命令"><a class="markdownIt-Anchor" href="#1-常见数据命令">#</a> 1、常见数据命令：</h4>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select version(); #----查看数据库版本(或者：mysql -V)<br>show databases;   # -------查看当前所有数据库<br>use 库名  # ------打开指定库名<br>show tables from  库名; #-----------查看其他库的所有表<br>show          #----------查看当前数据库的所有表<br># 创建表<br>Create table 表名(<br>		列名 列类型,<br>		列名 列类型,<br>		列名 列类型,<br>		……..<br>		列名 列类型<br>)<br>注意：结尾语句没有标点符号<br>#查看表结构<br>desc 表名;<br># 创建数据库<br>create database 创建数据库名称; <br><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="2-简单查询语句"><a class="markdownIt-Anchor" href="#2-简单查询语句">#</a> 2、简单查询语句</h4>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs mysql">/*<br>select 查询列表 from 表名;<br><br> 特点：<br>    1.查询列表可以是表中字段，常量值，表达式，函数<br>    2.查询的结果可以是一个虚拟的表格<br>*/<br><br>#1.查询表中单个字段<br>SELECT last_name FROM employees;<br><br>#2.查询表中多个字段<br>SELECT last_name,first_name,email,salary FROM employees;<br><br>#3.查询表中所有字段<br>SELECT * FROM employees;<br><br>#4.查询表中常量值<br>SELECT 600;<br><br>#5.查询表中函数<br>SELECT VERSION();<br><br>#6.查询表中表达式<br>SELECT 100 / 5;<br><br>#7.起别名<br>SELECT 100 % 98 AS 结果;<br>SELECT first_name AS 姓,last_name AS 名 FROM employees;<br><br>#8.去重。查询员工号表将多余的编号去掉<br># 注意：disinct出现在两个字段之前表示两个字段联合起来去重<br>SELECT DISTINCT department_id,salary<br>FROM employees;<br><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3-常用函数"><a class="markdownIt-Anchor" href="#3-常用函数">#</a> 3、常用函数</h4>
+<h5 id="31-数学函数"><a class="markdownIt-Anchor" href="#31-数学函数">#</a> 3.1、<strong>数学函数</strong></h5>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ABS(x)</td>
+<td>返回 x 的绝对值  SELECT ABS (-1) – 返回 1</td>
+</tr>
+<tr>
+<td>CEIL(x),CEILING(x)</td>
+<td>返回大于或等于 x 的最小整数  SELECT CEIL (1.5) – 返回 2</td>
+</tr>
+<tr>
+<td>FLOOR(x)</td>
+<td>返回小于或等于 x 的最大整数  SELECT FLOOR (1.5) – 返回 1</td>
+</tr>
+<tr>
+<td>RAND()</td>
+<td>返回 0-&gt;1 的随机数  SELECT  RAND () --0.93099315644334</td>
+</tr>
+<tr>
+<td>RAND(x)</td>
+<td>返回 0-&gt;1 的随机数，x 值相同时返回的随机数相同  SELECT  RAND (2) --1.5865798029924</td>
+</tr>
+<tr>
+<td>SIGN(x)</td>
+<td>返回 x 的符号，x 是负数、0、正数分别返回 - 1、0 和 1  SELECT SIGN (-10) – (-1)</td>
+</tr>
+<tr>
+<td>PI()</td>
+<td>返回圆周率 (3.141593）  SELECT PI () --3.141593</td>
+</tr>
+<tr>
+<td>TRUNCATE(x,y)</td>
+<td>返回数值 x 保留到小数点后 y 位的值（与 ROUND 最大的区别是不会进行四舍五入）  SELECT TRUNCATE (1.23456,3) – 1.234</td>
+</tr>
+<tr>
+<td>ROUND(x)</td>
+<td>返回离 x 最近的整数 SELECT ROUND (1.23456) --1</td>
+</tr>
+<tr>
+<td>ROUND(x,y)</td>
+<td>保留 x 小数点后 y 位的值，但截断时要进行四舍五入  SELECT  ROUND (1.23456,3) – 1.235</td>
+</tr>
+<tr>
+<td>POW(x,y).POWER(x,y)</td>
+<td>返回 x 的 y 次方  SELECT POW (2,3) – 8</td>
+</tr>
+<tr>
+<td>SQRT(x)</td>
+<td>返回 x 的平方根  SELECT SQRT (25) – 5</td>
+</tr>
+<tr>
+<td>EXP(x)</td>
+<td>返回 e 的 x 次方  SELECT EXP (3) –  20.085536923188</td>
+</tr>
+<tr>
+<td>MOD(x,y)</td>
+<td>返回 x 除以 y 以后的余数  SELECT MOD (5,2) – 1</td>
+</tr>
+<tr>
+<td>LOG(x)</td>
+<td>返回自然对数 (以 e 为底的对数)  SELECT LOG (20.085536923188) – 3</td>
+</tr>
+<tr>
+<td>LOG10(x)</td>
+<td>返回以 10 为底的对数  SELECT LOG10 (100) – 2</td>
+</tr>
+<tr>
+<td>RADIANS(x)</td>
+<td>将角度转换为弧度  SELECT RADIANS (180) –  3.1415926535898</td>
+</tr>
+<tr>
+<td>DEGREES(x)</td>
+<td>将弧度转换为角度  SELECT  DEGREES (3.1415926535898) – 180</td>
+</tr>
+<tr>
+<td>SIN(x)</td>
+<td>求正弦值 (参数是弧度)  SELECT SIN (RADIANS (30)) – 0.5</td>
+</tr>
+<tr>
+<td>ASIN(x)</td>
+<td>求反正弦值 (参数是弧度)</td>
+</tr>
+<tr>
+<td>COS(x)</td>
+<td>求余弦值 (参数是弧度)</td>
+</tr>
+<tr>
+<td>ACOS(x)</td>
+<td>求反余弦值 (参数是弧度)</td>
+</tr>
+<tr>
+<td>TAN(x)</td>
+<td>求正切值 (参数是弧度)</td>
+</tr>
+<tr>
+<td>ATAN(x) ATAN2(x)</td>
+<td>求反正切值 (参数是弧度)</td>
+</tr>
+<tr>
+<td>COT(x)</td>
+<td>求余切值 (参数是弧度)</td>
+</tr>
+</tbody>
+</table>
+<h5 id="32-字符串函数"><a class="markdownIt-Anchor" href="#32-字符串函数">#</a> 3.2、<strong>字符串函数</strong></h5>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHAR_LENGTH(s)</td>
+<td>返回字符串 s 的字符数  SELECT CHAR_LENGTH (‘你好 123’) – 5</td>
+</tr>
+<tr>
+<td>LENGTH(s)</td>
+<td>返回字符串 s 的长度  SELECT LENGTH (‘你好 123’) – 9</td>
+</tr>
+<tr>
+<td>CONCAT(s1,s2,…)</td>
+<td>将字符串 s1,s2 等多个字符串合并为一个字符串  SELECT CONCAT (‘12’,‘34’) –  1234</td>
+</tr>
+<tr>
+<td>CONCAT_WS(x,s1,s2,…)</td>
+<td>同 CONCAT (s1,s2,…) 函数，但是每个字符串直接要加上 x  SELECT  CONCAT_WS (’@’,‘12’,‘34’) – 12@34</td>
+</tr>
+<tr>
+<td>INSERT(s1,x,len,s2)</td>
+<td>将字符串 s2 替换 s1 的 x 位置开始长度为 len 的字符串  SELECT  INSERT (‘12345’,1,3,‘abc’) – abc45</td>
+</tr>
+<tr>
+<td>UPPER(s),UCAASE(S)</td>
+<td>将字符串 s 的所有字母变成大写字母  SELECT UPPER (‘abc’) – ABC</td>
+</tr>
+<tr>
+<td>LOWER(s),LCASE(s)</td>
+<td>将字符串 s 的所有字母变成小写字母  SELECT LOWER (‘ABC’) – abc</td>
+</tr>
+<tr>
+<td>LEFT(s,n)</td>
+<td>返回字符串 s 的前 n 个字符  SELECT LEFT (‘abcde’,2) – ab</td>
+</tr>
+<tr>
+<td>RIGHT(s,n)</td>
+<td>返回字符串 s 的后 n 个字符  SELECT RIGHT (‘abcde’,2) – de</td>
+</tr>
+<tr>
+<td>LPAD(s1,len,s2)</td>
+<td>字符串 s2 来填充 s1 的开始处，使字符串长度达到 len  SELECT LPAD (‘abc’,5,‘xx’) –  xxabc</td>
+</tr>
+<tr>
+<td>RPAD(s1,len,s2)</td>
+<td>字符串 s2 来填充 s1 的结尾处，使字符串的长度达到 len  SELECT RPAD (‘abc’,5,‘xx’) –  abcxx</td>
+</tr>
+<tr>
+<td>LTRIM(s)</td>
+<td>去掉字符串 s 开始处的空格</td>
+</tr>
+<tr>
+<td>RTRIM(s)</td>
+<td>去掉字符串 s 结尾处的空格</td>
+</tr>
+<tr>
+<td>TRIM(s)</td>
+<td>去掉字符串 s 开始和结尾处的空格</td>
+</tr>
+<tr>
+<td>TRIM(s1 FROM s)</td>
+<td>去掉字符串 s 中开始处和结尾处的字符串 s1  SELECT TRIM (’@’ FROM  ‘@@abc@@’) – abc</td>
+</tr>
+<tr>
+<td>REPEAT(s,n)</td>
+<td>将字符串 s 重复 n 次  SELECT REPEAT (‘ab’,3) –  ababab</td>
+</tr>
+<tr>
+<td>SPACE(n)</td>
+<td>返回 n 个空格</td>
+</tr>
+<tr>
+<td>REPLACE(s,s1,s2)</td>
+<td>将字符串 s2 替代字符串 s 中的字符串 s1  SELECT  REPLACE (‘abc’,‘a’,‘x’) --xbc</td>
+</tr>
+<tr>
+<td>STRCMP(s1,s2)</td>
+<td>比较字符串 s1 和 s2</td>
+</tr>
+<tr>
+<td>SUBSTRING(s,n,len)</td>
+<td>获取从字符串 s 中的第 n 个位置开始长度为 len 的字符串</td>
+</tr>
+<tr>
+<td>MID(s,n,len)</td>
+<td>同 SUBSTRING (s,n,len)</td>
+</tr>
+<tr>
+<td>LOCATE(s1,s),POSITION(s1 IN s)</td>
+<td>从字符串 s 中获取 s1 的开始位置  SELECT LOCATE (‘b’, ‘abc’) – 2</td>
+</tr>
+<tr>
+<td>INSTR(s,s1)</td>
+<td>从字符串 s 中获取 s1 的开始位置  SELECT INSTR (‘abc’,‘b’) – 2</td>
+</tr>
+<tr>
+<td>REVERSE(s)</td>
+<td>将字符串 s 的顺序反过来  SELECT REVERSE (‘abc’) – cba</td>
+</tr>
+<tr>
+<td>ELT(n,s1,s2,…)</td>
+<td>返回第 n 个字符串  SELECT ELT (2,‘a’,‘b’,‘c’) – b</td>
+</tr>
+<tr>
+<td>EXPORT_SET(x,s1,s2)</td>
+<td>返回一个字符串，在这里对于在 “bits” 中设定每一位，你得到一个 “on” 字符串，并且对于每个复位 (reset) 的位，你得到一个 “off” 字符串。每个字符串用 “separator” 分隔 (缺省 “,”)，并且只有 “bits” 的 “number_of_bits”  (缺省 64) 位被使用。  SELECT  EXPORT_SET (5,‘Y’,‘N’,’,’,4) – Y,N,Y,N</td>
+</tr>
+<tr>
+<td>FIELD(s,s1,s2…)</td>
+<td>返回第一个与字符串 s 匹配的字符串位置  SELECT FIELD (‘c’,‘a’,‘b’,‘c’) – 3</td>
+</tr>
+<tr>
+<td>FIND_IN_SET(s1,s2)</td>
+<td>返回在字符串 s2 中与 s1 匹配的字符串的位置</td>
+</tr>
+<tr>
+<td>MAKE_SET(x,s1,s2)</td>
+<td>返回一个集合 (包含由 “,”  字符分隔的子串组成的一个 字符串)，由相应的位在 bits 集合中的的字符串组成。str1 对应于位 0，str2 对 应位 1，等等。  SELECT  MAKE_SET (1|4,‘a’,‘b’,‘c’); – a,c</td>
+</tr>
+<tr>
+<td>SUBSTRING_INDEX</td>
+<td>返回从字符串 str 的第 count 个出现的分隔符 delim 之后的子串。  如果 count 是正数，返回第 count 个字符左边的字符串。  如果 count 是负数，返回第 (count 的绝对值 (从右边数)) 个字符右边的字符串。  SELECT SUBSTRING_INDEX (‘a<em>b’,’</em>’,1)  – a  SELECT  SUBSTRING_INDEX(‘a<em>b’,’</em>’,-1) – b  SELECT  SUBSTRING_INDEX(SUBSTRING_INDEX(‘a<em>b</em>c<em>d</em>e’,’<em>’,3),’</em>’,-1) – c</td>
+</tr>
+<tr>
+<td>LOAD_FILE(file_name)</td>
+<td>读入文件并且作为一个字符串返回文件内容。文件必须在服务器上，你必须指定到文件的完整路径名，而且你必须有 file 权 限。文件必须所有内容都是可读的并且小于 max_allowed_packet。  如果文件不存在或由于上面原因之一不能被读出，函数返回 NULL。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="33-日期和时间函数"><a class="markdownIt-Anchor" href="#33-日期和时间函数">#</a> 3.3、<strong>日期和时间函数</strong></h5>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CURDATE(),CURRENT_DATE()</td>
+<td style="text-align:center">返回当前日期  SELECT CURDATE ()  -&gt;2014-12-17</td>
+</tr>
+<tr>
+<td>CURTIME(),CURRENT_TIME</td>
+<td style="text-align:center">返回当前时间  SELECT CURTIME ()  -&gt;15:59:02</td>
+</tr>
+<tr>
+<td>NOW(),CURRENT_TIMESTAMP(),LOCALTIME(),  SYSDATE(),LOCALTIMESTAMP()</td>
+<td style="text-align:center">返回当前日期和时间  SELECT NOW ()  -&gt;2014-12-17 15:59:02</td>
+</tr>
+<tr>
+<td>UNIX_TIMESTAMP()</td>
+<td style="text-align:center">以 UNIX 时间戳的形式返回当前时间  SELECT UNIX_TIMESTAMP ()  -&gt;1418803177</td>
+</tr>
+<tr>
+<td>UNIX_TIMESTAMP(d)</td>
+<td style="text-align:center">将时间 d 以 UNIX 时间戳的形式返回  SELECT UNIX_TIMESTAMP (‘2011-11-11  11:11:11’)  -&gt;1320981071</td>
+</tr>
+<tr>
+<td>FROM_UNIXTIME(d)</td>
+<td style="text-align:center">将 UNIX 时间戳的时间转换为普通格式的时间  SELECT FROM_UNIXTIME (1320981071)  -&gt;2011-11-11 11:11:11</td>
+</tr>
+<tr>
+<td>UTC_DATE()</td>
+<td style="text-align:center">返回 UTC 日期  SELECT UTC_DATE ()  -&gt;2014-12-17</td>
+</tr>
+<tr>
+<td>UTC_TIME()</td>
+<td style="text-align:center">返回 UTC 时间  SELECT UTC_TIME ()  -&gt;08:01:45 (慢了 8 小时)</td>
+</tr>
+<tr>
+<td>MONTH(d)</td>
+<td style="text-align:center">返回日期 d 中的月份值，1-&gt;12  SELECT MONTH (‘2011-11-11 11:11:11’)  -&gt;11</td>
+</tr>
+<tr>
+<td>MONTHNAME(d)</td>
+<td style="text-align:center">返回日期当中的月份名称，如 Janyary  SELECT MONTHNAME (‘2011-11-11  11:11:11’)  -&gt;November</td>
+</tr>
+<tr>
+<td>DAYNAME(d)</td>
+<td style="text-align:center">返回日期 d 是星期几，如 Monday,Tuesday  SELECT DAYNAME (‘2011-11-11  11:11:11’)  -&gt;Friday</td>
+</tr>
+<tr>
+<td>DAYOFWEEK(d)</td>
+<td style="text-align:center">日期 d 今天是星期几，1 星期日，2 星期一  SELECT DAYOFWEEK (‘2011-11-11  11:11:11’)  -&gt;6</td>
+</tr>
+<tr>
+<td>WEEKDAY(d)</td>
+<td style="text-align:center">日期 d 今天是星期几，   0 表示星期一，1 表示星期二</td>
+</tr>
+<tr>
+<td>WEEK(d)，WEEKOFYEAR(d)</td>
+<td style="text-align:center">计算日期 d 是本年的第几个星期，范围是 0-&gt;53  SELECT WEEK (‘2011-11-11 11:11:11’)  -&gt;45</td>
+</tr>
+<tr>
+<td>DAYOFYEAR(d)</td>
+<td style="text-align:center">计算日期 d 是本年的第几天  SELECT DAYOFYEAR (‘2011-11-11  11:11:11’)  -&gt;315</td>
+</tr>
+<tr>
+<td>DAYOFMONTH(d)</td>
+<td style="text-align:center">计算日期 d 是本月的第几天  SELECT DAYOFMONTH (‘2011-11-11  11:11:11’)  -&gt;11</td>
+</tr>
+<tr>
+<td>QUARTER(d)</td>
+<td style="text-align:center">返回日期 d 是第几季节，返回 1-&gt;4  SELECT QUARTER (‘2011-11-11  11:11:11’)  -&gt;4</td>
+</tr>
+<tr>
+<td>HOUR(t)</td>
+<td style="text-align:center">返回 t 中的小时值  SELECT HOUR (‘1:2:3’)  -&gt;1</td>
+</tr>
+<tr>
+<td>MINUTE(t)</td>
+<td style="text-align:center">返回 t 中的分钟值  SELECT MINUTE (‘1:2:3’)  -&gt;2</td>
+</tr>
+<tr>
+<td>SECOND(t)</td>
+<td style="text-align:center">返回 t 中的秒钟值  SELECT SECOND (‘1:2:3’)  -&gt;3</td>
+</tr>
+<tr>
+<td>EXTRACT(type FROM d)</td>
+<td style="text-align:center">从日期 d 中获取指定的值，type 指定返回的值  SELECT EXTRACT (MINUTE FROM  ‘2011-11-11 11:11:11’)   -&gt;11  type 可取值为：  MICROSECOND  SECOND  MINUTE  HOUR  DAY  WEEK  MONTH  QUARTER  YEAR  SECOND_MICROSECOND  MINUTE_MICROSECOND  MINUTE_SECOND  HOUR_MICROSECOND  HOUR_SECOND  HOUR_MINUTE  DAY_MICROSECOND  DAY_SECOND  DAY_MINUTE  DAY_HOUR  YEAR_MONTH</td>
+</tr>
+<tr>
+<td>TIME_TO_SEC(t)</td>
+<td style="text-align:center">将时间 t 转换为秒  SELECT TIME_TO_SEC (‘1:12:00’)  -&gt;4320</td>
+</tr>
+<tr>
+<td>SEC_TO_TIME(s)</td>
+<td style="text-align:center">将以秒为单位的时间 s 转换为时分秒的格式  SELECT SEC_TO_TIME (4320)  -&gt;01:12:00</td>
+</tr>
+<tr>
+<td>TO_DAYS(d)</td>
+<td style="text-align:center">计算日期 d 距离 0000 年 1 月 1 日的天数  SELECT TO_DAYS (‘0001-01-01  01:01:01’)  -&gt;366</td>
+</tr>
+<tr>
+<td>FROM_DAYS(n)</td>
+<td style="text-align:center">计算从 0000 年 1 月 1 日开始 n 天后的日期  SELECT FROM_DAYS (1111)  -&gt;0003-01-16</td>
+</tr>
+<tr>
+<td>DATEDIFF (d1,d2)  Timestampdiff () 根据指定值返回</td>
+<td style="text-align:center">计算日期 d1-&gt;d2 之间相隔的天数  SELECT  DATEDIFF (‘2001-01-01’,‘2001-02-02’)  -&gt;-32</td>
+</tr>
+<tr>
+<td>ADDDATE(d,n)</td>
+<td style="text-align:center">计算其实日期 d 加上 n 天的日期</td>
+</tr>
+<tr>
+<td>ADDDATE(d，INTERVAL expr type)</td>
+<td style="text-align:center">计算起始日期 d 加上一个时间段后的日期  SELECT ADDDATE (‘2011-11-11  11:11:11’,1)  -&gt;2011-11-12 11:11:11 (默认是天)  SELECT ADDDATE (‘2011-11-11  11:11:11’, INTERVAL 5 MINUTE)  -&gt;2011-11-11 11:16:11  (TYPE 的取值与上面那个列出来的函数类似)</td>
+</tr>
+<tr>
+<td>DATE_ADD(d,INTERVAL expr type)</td>
+<td style="text-align:center">同上</td>
+</tr>
+<tr>
+<td>SUBDATE(d,n)</td>
+<td style="text-align:center">日期 d 减去 n 天后的日期  SELECT SUBDATE (‘2011-11-11  11:11:11’, 1)  -&gt;2011-11-10 11:11:11 (默认是天)</td>
+</tr>
+<tr>
+<td>SUBDATE(d,INTERVAL expr type)</td>
+<td style="text-align:center">日期 d 减去一个时间段后的日期  SELECT SUBDATE (‘2011-11-11  11:11:11’, INTERVAL 5 MINUTE)  -&gt;2011-11-11 11:06:11  (TYPE 的取值与上面那个列出来的函数类似)</td>
+</tr>
+<tr>
+<td>ADDTIME(t,n)</td>
+<td style="text-align:center">时间 t 加上 n 秒的时间  SELECT ADDTIME (‘2011-11-11  11:11:11’, 5)  -&gt;2011-11-11 11:11:16 (秒)</td>
+</tr>
+<tr>
+<td>SUBTIME(t,n)</td>
+<td style="text-align:center">时间 t 减去 n 秒的时间  SELECT SUBTIME (‘2011-11-11  11:11:11’, 5)  -&gt;2011-11-11 11:11:06 (秒)</td>
+</tr>
+<tr>
+<td>DATE_FORMAT(d,f)</td>
+<td style="text-align:center">按表达式 f 的要求显示日期 d  SELECT DATE_FORMAT (‘2011-11-11  11:11:11’,’% Y-% m-% d % r’)  -&gt;2011-11-11 11:11:11 AM</td>
+</tr>
+<tr>
+<td>TIME_FORMAT(t,f)</td>
+<td style="text-align:center">按表达式 f 的要求显示时间 t  SELECT TIME_FORMAT (‘11:11:11’,’% r’)  11:11:11 AM</td>
+</tr>
+<tr>
+<td>GET_FORMAT(type,s)</td>
+<td style="text-align:center">获得国家地区时间格式函数  select get_format (date,‘usa’)  -&gt;% m.% d.% Y (注意返回的就是这个奇怪  的字符串 (format 字符串))</td>
+</tr>
+<tr>
+<td>LAST_DAY(date)</td>
+<td style="text-align:center">返回当前日期的最后一天</td>
+</tr>
+</tbody>
+</table>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MySQL/">#MySQL</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MySQL---基础01</div>
+      <div>https://rofgd.github.io/2020/06/04/MySQL-基础01/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ReadPond</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年6月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/08/MySQL-%E5%9F%BA%E7%A1%8002/" title="MySQL---基础02">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL---基础02</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/21/JavaSe%E5%9F%BA%E7%A1%80---%E7%AE%80%E5%8D%95%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" title="JavaSe基础---简单网络编程">
+                        <span class="hidden-mobile">JavaSe基础---简单网络编程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

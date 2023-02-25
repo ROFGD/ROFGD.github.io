@@ -141,32 +141,6 @@
   </entry>
   
   <entry>
-    <title>HackBox---起点(四)</title>
-    <link href="https://rofgd.github.io/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/"/>
-    <id>https://rofgd.github.io/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/</id>
-    <published>2022-11-20T12:42:20.000Z</published>
-    <updated>2023-02-09T15:59:40.914Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="hackbox起点四"><a class="markdownIt-Anchor" href="#hackbox起点四">#</a> HackBox— 起点 (四)</h4><ul><li>Which TCP port is open on the machine?(机器上打开了哪个 TCP 端口？)<ul><li>6379</li></ul></li><li>Which service is running on the port that is open on the machine?(哪个服务在机器上打开的端口上运行？)<ul><li>redis</li></ul></li><li>What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database (Redis 是什么类型的数据库？从以下选项中进行选择：(i) 内存数据库，(ii) 传统数据库)<ul><li>In-memory Database</li></ul></li><li>Which command-line utility is used to interact with the Redis server? Enter the program name you would enter into the terminal without any arguments.(哪个命令行实用程序用于与 Redis 服务器交互？输入您要在终端中输入的程序名称，不带任何参数。)<ul><li>redis-cli</li></ul></li><li>Which flag is used with the Redis command-line utility to specify the hostname?(Redis 命令行实用程序使用哪个标志来指定主机名？)<ul><li>-h</li></ul></li><li>Once connected to a Redis server, which command is used to obtain the information and statistics about the Redis server?(连接到 Redis 服务器后，使用哪个命令获取有关 Redis 服务器的信息和统计信息？)<ul><li>info</li></ul></li><li>What is the version of the Redis server being used on the target machine?(目标机器上使用的 Redis 服务器的版本是什么？)<ul><li>5.0.7</li></ul></li><li>Which command is used to select the desired database in Redis?(在 Redis 中使用哪个命令来选择所需的数据库？)<ul><li>select</li></ul></li><li>How many keys are present inside the database with index 0?(索引为 0 的数据库中有多少个键？)<ul><li>4</li></ul></li><li>Which command is used to obtain all the keys in a database?(哪个命令用于获取数据库中的所有键？)<ul><li>keys *</li></ul></li></ul><p>参考链接:</p><ul><li><a href="https://www.cnblogs.com/Hekeats-L/p/16536247.html">https://www.cnblogs.com/Hekeats-L/p/16536247.html</a></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;hackbox起点四&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#hackbox起点四&quot;&gt;#&lt;/a&gt; HackBox— 起点 (四)&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;Which TCP port is open on the machin</summary>
-      
-    
-    
-    
-    <category term="靶场" scheme="https://rofgd.github.io/categories/%E9%9D%B6%E5%9C%BA/"/>
-    
-    
-    <category term="HackBox" scheme="https://rofgd.github.io/tags/HackBox/"/>
-    
-  </entry>
-  
-  <entry>
     <title>HackBox---起点</title>
     <link href="https://rofgd.github.io/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9/"/>
     <id>https://rofgd.github.io/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9/</id>
@@ -183,6 +157,32 @@
 &lt;li&gt;What does the acronym VM stand for?
 &lt;ul&gt;
 &lt;</summary>
+      
+    
+    
+    
+    <category term="靶场" scheme="https://rofgd.github.io/categories/%E9%9D%B6%E5%9C%BA/"/>
+    
+    
+    <category term="HackBox" scheme="https://rofgd.github.io/tags/HackBox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HackBox---起点(四)</title>
+    <link href="https://rofgd.github.io/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/"/>
+    <id>https://rofgd.github.io/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/</id>
+    <published>2022-11-20T12:42:20.000Z</published>
+    <updated>2023-02-09T15:59:40.914Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="hackbox起点四"><a class="markdownIt-Anchor" href="#hackbox起点四">#</a> HackBox— 起点 (四)</h4><ul><li>Which TCP port is open on the machine?(机器上打开了哪个 TCP 端口？)<ul><li>6379</li></ul></li><li>Which service is running on the port that is open on the machine?(哪个服务在机器上打开的端口上运行？)<ul><li>redis</li></ul></li><li>What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database (Redis 是什么类型的数据库？从以下选项中进行选择：(i) 内存数据库，(ii) 传统数据库)<ul><li>In-memory Database</li></ul></li><li>Which command-line utility is used to interact with the Redis server? Enter the program name you would enter into the terminal without any arguments.(哪个命令行实用程序用于与 Redis 服务器交互？输入您要在终端中输入的程序名称，不带任何参数。)<ul><li>redis-cli</li></ul></li><li>Which flag is used with the Redis command-line utility to specify the hostname?(Redis 命令行实用程序使用哪个标志来指定主机名？)<ul><li>-h</li></ul></li><li>Once connected to a Redis server, which command is used to obtain the information and statistics about the Redis server?(连接到 Redis 服务器后，使用哪个命令获取有关 Redis 服务器的信息和统计信息？)<ul><li>info</li></ul></li><li>What is the version of the Redis server being used on the target machine?(目标机器上使用的 Redis 服务器的版本是什么？)<ul><li>5.0.7</li></ul></li><li>Which command is used to select the desired database in Redis?(在 Redis 中使用哪个命令来选择所需的数据库？)<ul><li>select</li></ul></li><li>How many keys are present inside the database with index 0?(索引为 0 的数据库中有多少个键？)<ul><li>4</li></ul></li><li>Which command is used to obtain all the keys in a database?(哪个命令用于获取数据库中的所有键？)<ul><li>keys *</li></ul></li></ul><p>参考链接:</p><ul><li><a href="https://www.cnblogs.com/Hekeats-L/p/16536247.html">https://www.cnblogs.com/Hekeats-L/p/16536247.html</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;hackbox起点四&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#hackbox起点四&quot;&gt;#&lt;/a&gt; HackBox— 起点 (四)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Which TCP port is open on the machin</summary>
       
     
     

@@ -14,28 +14,28 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="ReadPond">
-  <meta name="keywords" content="爬虫">
+  <meta name="keywords" content="数据库连接">
   
-    <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&#39;&#39;&#39;# -*- coding: utf-8 -*-# @Time    : 2022&#x2F;10&#x2F;29 23:49# @Author  : ReadPond# @Comment : 爬取豆瓣电影详情----&gt;批量爬取&#39;&#39;&#39;imp">
+    <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344import pymysql#1.创建链接对象conn &#x3D; pymysql.Connect(    host&#x3D;&#39;127.0.0.1&#39;,#数据库服务器主机地址    port&#x3D;3306, #mysql的端口号    user&#x3D;&#39;root&#39;, #">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python---爬取练习">
-<meta property="og:url" content="https://rofgd.github.io/2020/10/21/python-%E7%88%AC%E5%8F%96%E7%BB%83%E4%B9%A0/index.html">
+<meta property="og:title" content="python---连接数据库">
+<meta property="og:url" content="https://rofgd.github.io/2020/10/21/python---%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
 <meta property="og:site_name" content="ReadPond的小屋">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&#39;&#39;&#39;# -*- coding: utf-8 -*-# @Time    : 2022&#x2F;10&#x2F;29 23:49# @Author  : ReadPond# @Comment : 爬取豆瓣电影详情----&gt;批量爬取&#39;&#39;&#39;imp">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344import pymysql#1.创建链接对象conn &#x3D; pymysql.Connect(    host&#x3D;&#39;127.0.0.1&#39;,#数据库服务器主机地址    port&#x3D;3306, #mysql的端口号    user&#x3D;&#39;root&#39;, #">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://rofgd.github.io/img/202301181446480.png">
+<meta property="og:image" content="https://rofgd.github.io/img/202301181444586.png">
 <meta property="article:published_time" content="2020-10-21T03:52:14.000Z">
-<meta property="article:modified_time" content="2023-01-21T03:30:12.736Z">
+<meta property="article:modified_time" content="2023-01-21T03:27:12.645Z">
 <meta property="article:author" content="ReadPond">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://rofgd.github.io/img/202301181446480.png">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301181444586.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>python---爬取练习 - ReadPond的小屋</title>
+  <title>python---连接数据库 - ReadPond的小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,13 +204,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/202301181446480.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/202301181444586.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="python---爬取练习"></span>
+            <span id="subtitle" data-typed-text="python---连接数据库"></span>
           
         </div>
 
@@ -238,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          961 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
         
-          10 分钟
+          9 分钟
         
       </span>
     
@@ -291,12 +291,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">python---爬取练习</h1>
+            <h1 style="display: none">python---连接数据库</h1>
             
             
               <div class="markdown-body">
                 
-                <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">'''</span><br><span class="hljs-string"># -*- coding: utf-8 -*-</span><br><span class="hljs-string"># @Time    : 2022/10/29 23:49</span><br><span class="hljs-string"># @Author  : ReadPond</span><br><span class="hljs-string"># @Comment : 爬取豆瓣电影详情----&gt;批量爬取</span><br><span class="hljs-string">'''</span><br><span class="hljs-keyword">import</span> requests<br><br>head = {        <span class="hljs-comment"># 设定一个头部信息</span><br>    <span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.24"</span><br>}<br><br>url = <span class="hljs-string">"https://movie.douban.com/j/chart/top_list"</span>   <span class="hljs-comment"># 根据抓包工具分析我们爬取内容的地址</span><br><br><br><span class="hljs-string">'''</span><br><span class="hljs-string">通过抓包工具分析得知，当前网站的电影排行榜中的内容为动态数据，且url地址也不是正常官网地址，</span><br><span class="hljs-string">电影名称和评分等信息没有存放在主体页面中，而是通过json请求到后端数据库中，所以我们这里需要根据当前网站定义</span><br><span class="hljs-string">传入的数据（每个网站的数据方式不同，这里需要具体网站具体分析）</span><br><span class="hljs-string">'''</span><br>param = {<br>    <span class="hljs-string">"type"</span>: <span class="hljs-string">"12"</span>,       <span class="hljs-comment"># 表示电影类型，该网站电影类型数为31个</span><br>    <span class="hljs-string">"interval_id"</span>: <span class="hljs-string">"100:90"</span>,<br>    <span class="hljs-string">"action"</span>:<span class="hljs-string">""</span>,<br>    <span class="hljs-string">"start"</span>:<span class="hljs-string">"0"</span> ,  <span class="hljs-comment"># 该网站 start表示从第几条数据开始</span><br>    <span class="hljs-string">"limit"</span>: <span class="hljs-string">"10"</span>   <span class="hljs-comment"># 读取几条数据</span><br>}<br>data_html = requests.get(url=url,headers=head,params=param)     <span class="hljs-comment"># 发起请求</span><br><br><span class="hljs-comment"># 获取响应数据</span><br>html_text = data_html.json() <span class="hljs-comment"># json()可以将获取到的json格式的字符串进行反序列化</span><br><br><span class="hljs-string">'''</span><br><span class="hljs-string">通过对数据分析，我们得到评分数据以字典的方式存储，每一个电影都以一个object存储</span><br><span class="hljs-string">'''</span><br><span class="hljs-comment"># 将数据保存到本地</span><br>file = <span class="hljs-built_in">open</span>(file=<span class="hljs-string">'电影排名.txt'</span>,mode=<span class="hljs-string">'w'</span>,encoding=<span class="hljs-string">'utf-8'</span>)<br><span class="hljs-keyword">for</span> dic <span class="hljs-keyword">in</span> html_text:<br>    types = dic[<span class="hljs-string">'types'</span>]<br>    title = dic[<span class="hljs-string">'title'</span>]<br>    score = dic[<span class="hljs-string">'score'</span>]<br>    release_date = dic[<span class="hljs-string">'release_date'</span>]<br>    file.write(<span class="hljs-string">f"<span class="hljs-subst">{types}</span>:<span class="hljs-subst">{title}</span>:<span class="hljs-subst">{score}</span>-上映时间：<span class="hljs-subst">{release_date}</span>"</span>+<span class="hljs-string">"\n"</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f"<span class="hljs-subst">{title}</span>保存成功~~"</span>)<br>file.close()<br><br><br></code></pre></td></tr></tbody></table></figure>
+                <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pymysql<br><span class="hljs-comment">#1.创建链接对象</span><br>conn = pymysql.Connect(<br>    host=<span class="hljs-string">'127.0.0.1'</span>,<span class="hljs-comment">#数据库服务器主机地址</span><br>    port=<span class="hljs-number">3306</span>, <span class="hljs-comment">#mysql的端口号</span><br>    user=<span class="hljs-string">'root'</span>, <span class="hljs-comment">#数据库的用户名</span><br>    password=<span class="hljs-string">'boboadmin'</span>, <span class="hljs-comment">#数据库密码</span><br>    db=<span class="hljs-string">'AnHui'</span>,<span class="hljs-comment">#数据仓库的名称</span><br>    charset=<span class="hljs-string">'utf8'</span>)<br><span class="hljs-comment">#创建一个游标对象</span><br>cusor = conn.cursor()<br><span class="hljs-comment">#2.增加记录操作</span><br><span class="hljs-comment"># sql = 'insert into emp(name,sex,age,dep_id)values("%s","%s",%d,%d)'%('haha','female',20,200)</span><br><span class="hljs-comment"># cusor.execute(sql)</span><br><span class="hljs-comment"># conn.commit() #对数据进行整改后，记得进行事物的提交</span><br><br><span class="hljs-comment">#3.删除记录</span><br><span class="hljs-comment"># sql = 'delete from emp where name = "%s"'%'haha'</span><br><span class="hljs-comment"># print(sql)</span><br><span class="hljs-comment"># cusor.execute(sql)</span><br><span class="hljs-comment"># conn.commit()</span><br><br><span class="hljs-comment">#4.修改操作</span><br><span class="hljs-comment"># new_age = input('enter a new age:')</span><br><span class="hljs-comment"># new_age = int(new_age)</span><br><span class="hljs-comment"># sql = 'update emp set age = %d where id = 3'%new_age</span><br><span class="hljs-comment"># print(sql)</span><br><span class="hljs-comment"># cusor.execute(sql)</span><br><span class="hljs-comment"># conn.commit()</span><br><br><span class="hljs-comment">#查询操作</span><br>sql = <span class="hljs-string">'select * from emp where age &gt; 30'</span><br>cusor.execute(sql) <span class="hljs-comment">#负责执行sql语句</span><br><span class="hljs-comment">#fetchall返回的是一个元组，元组元素又为一个元素，该元组中存储的是查询到的一条记录</span><br><span class="hljs-comment"># all_data = cusor.fetchall() #获取查询到所有的数据，如果没有查询到数据返回一个空元组</span><br><span class="hljs-comment"># print(all_data)</span><br><br><span class="hljs-comment">#fetchone只会返回查询到的第一条数据</span><br>one_data = cusor.fetchone() <span class="hljs-comment">#如果没有查询到数据返回None</span><br><span class="hljs-built_in">print</span>(one_data)<br><br><span class="hljs-comment">#关闭打开的资源对象</span><br>cusor.close()<br>conn.close()<br></code></pre></td></tr></tbody></table></figure>
 
                 
               </div>
@@ -342,8 +342,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>python---爬取练习</div>
-      <div>https://rofgd.github.io/2020/10/21/python-爬取练习/</div>
+      <div>python---连接数据库</div>
+      <div>https://rofgd.github.io/2020/10/21/python---连接数据库/</div>
     </div>
     <div class="license-meta">
       
@@ -387,9 +387,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/14/%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86---CSRF%E6%BC%8F%E6%B4%9E/" title="漏洞原理---CSRF漏洞">
+                      <a href="/2020/10/21/python---%E7%88%AC%E5%8F%96%E7%BB%83%E4%B9%A0/" title="python---爬取练习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">漏洞原理---CSRF漏洞</span>
+                        <span class="hidden-mobile">python---爬取练习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -397,8 +397,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/21/python-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/" title="python---连接数据库">
-                        <span class="hidden-mobile">python---连接数据库</span>
+                      <a href="/2020/10/20/python---requests/" title="python---requests">
+                        <span class="hidden-mobile">python---requests</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

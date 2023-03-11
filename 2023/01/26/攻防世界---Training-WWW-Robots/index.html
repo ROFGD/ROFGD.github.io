@@ -16,27 +16,26 @@
   <meta name="author" content="ReadPond">
   <meta name="keywords" content="渗透测试,Java,PHP,Python,等">
   
-    <meta name="description" content="# Nginx 解析漏洞 # 一、版本信息  Nginx 1.x 最新版 PHP 7.x 最新版  # 二、复现  环境：Ubuntu18 (靶机)，Win10 (攻击机) Ubuntu 中进入到 Nginx 文件夹中， docker-compose up -d  启动环境 在攻击机中访问靶机地址 1.1.1.1&#x2F;index.php    选择一个图片，使用文本编辑器在打开图片，最后一行加入一句话">
+    <meta name="description" content="# Training-WWW-Robots 题目说明：访问链接后，将其翻译过来如图所示，说明这个是有关爬虫 robots.txt 文件的内容。  所以，我的思路是先尝试访问 robots.txt 看看能不能找到什么信息，在网址后面拼上 robots.txt 得到如图内容：  根据文件信息可以看到禁止了所有 robots 引擎访问 f10g.php 这个文件，但是允许 Yandex 搜索引擎访问除过">
 <meta property="og:type" content="article">
-<meta property="og:title" content="漏洞复现----Nginx解析漏洞">
-<meta property="og:url" content="https://rofgd.github.io/2022/10/14/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-Nginx%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:title" content="攻防世界---Training-WWW-Robots">
+<meta property="og:url" content="https://rofgd.github.io/2023/01/26/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C---Training-WWW-Robots/index.html">
 <meta property="og:site_name" content="ReadPond的小屋">
-<meta property="og:description" content="# Nginx 解析漏洞 # 一、版本信息  Nginx 1.x 最新版 PHP 7.x 最新版  # 二、复现  环境：Ubuntu18 (靶机)，Win10 (攻击机) Ubuntu 中进入到 Nginx 文件夹中， docker-compose up -d  启动环境 在攻击机中访问靶机地址 1.1.1.1&#x2F;index.php    选择一个图片，使用文本编辑器在打开图片，最后一行加入一句话">
+<meta property="og:description" content="# Training-WWW-Robots 题目说明：访问链接后，将其翻译过来如图所示，说明这个是有关爬虫 robots.txt 文件的内容。  所以，我的思路是先尝试访问 robots.txt 看看能不能找到什么信息，在网址后面拼上 robots.txt 得到如图内容：  根据文件信息可以看到禁止了所有 robots 引擎访问 f10g.php 这个文件，但是允许 Yandex 搜索引擎访问除过">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://rofgd.github.io/img/202302201311139.png">
-<meta property="article:published_time" content="2022-10-14T05:13:56.000Z">
-<meta property="article:modified_time" content="2023-02-25T13:22:12.878Z">
+<meta property="og:image" content="https://rofgd.github.io/img/202301241049221.png">
+<meta property="article:published_time" content="2023-01-26T05:13:56.000Z">
+<meta property="article:modified_time" content="2023-02-09T15:50:56.466Z">
 <meta property="article:author" content="ReadPond">
-<meta property="article:tag" content="漏洞">
-<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://rofgd.github.io/img/202302201311139.png">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301241049221.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>漏洞复现----Nginx解析漏洞 - ReadPond的小屋</title>
+  <title>攻防世界---Training-WWW-Robots - ReadPond的小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,13 +204,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/202302201311139.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/202301241049221.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="漏洞复现----Nginx解析漏洞"></span>
+            <span id="subtitle" data-typed-text="攻防世界---Training-WWW-Robots"></span>
           
         </div>
 
@@ -227,8 +226,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-14 13:13" pubdate>
-          2022年10月14日 下午
+        <time datetime="2023-01-26 13:13" pubdate>
+          2023年1月26日 下午
         </time>
       </span>
     
@@ -239,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          913 字
+          268 字
         
       </span>
     
@@ -250,7 +249,7 @@
         
         
         
-          8 分钟
+          3 分钟
         
       </span>
     
@@ -292,51 +291,18 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">漏洞复现----Nginx解析漏洞</h1>
+            <h1 style="display: none">攻防世界---Training-WWW-Robots</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="nginx解析漏洞"><a class="markdownIt-Anchor" href="#nginx解析漏洞">#</a> Nginx 解析漏洞</h3>
-<h4 id="一-版本信息"><a class="markdownIt-Anchor" href="#一-版本信息">#</a> 一、版本信息</h4>
-<ul>
-<li>Nginx 1.x 最新版</li>
-<li>PHP 7.x 最新版</li>
-</ul>
-<h4 id="二-复现"><a class="markdownIt-Anchor" href="#二-复现">#</a> 二、复现</h4>
-<ul>
-<li>环境：Ubuntu18 (靶机)，Win10 (攻击机)</li>
-<li>Ubuntu 中进入到 Nginx 文件夹中， <code>docker-compose up -d</code>  启动环境</li>
-<li>在攻击机中访问靶机地址 <code>1.1.1.1/index.php</code></li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916262.png" srcset="/img/loading.gif" lazyload alt="image-20230225190826953"></p>
-<ul>
-<li>选择一个图片，使用文本编辑器在打开图片，最后一行加入一句话木马 (图片不宜过大)</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916906.png" srcset="/img/loading.gif" lazyload alt="image-20230225190956432"></p>
-<ul>
-<li>选择上传后，访问图片地址，并在图片地址 <code>http://IP/uploadfiles/图片名称.jpg</code>  后面拼上 <code>/.php</code>  或者一个不存在的 php 文件。</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916986.png" srcset="/img/loading.gif" lazyload alt="image-20230225191218679"></p>
-<ul>
-<li>删除镜像 <code>docker-compose down</code></li>
-</ul>
-<h4 id="三-分析"><a class="markdownIt-Anchor" href="#三-分析">#</a> 三、分析</h4>
-<ul>
-<li>该漏洞是由于配置不当引起。</li>
-<li>由于错误配置，Nginx 首先会把 <code>.php</code>  结尾的文件交给 <code>fastcgi</code>  处理，所以才能在图片路径后面拼接一个不存在的 php 文件。</li>
-<li>但是 <code>fastcgi</code>  在处理这个不存在的文件时，会受到 <code>php.ini</code>  配置文件中 <code>cgi.fix_pathinfo=1</code>  这个选项的影响 (这项配置用于修复路径，如果当前路径不存在则采用上层路径)，到上一级中执行解析 (也就是在靶机中 <code>/uploadfiles/d9d99c01b2d14ca7b00c65362f88c7b7.png/aa.php</code> ， <code>fastcgi</code>  发现 <code>aa.php</code>  文件不存在会对 <code>/uploadfiles/d9d99c01b2d14ca7b00c65362f88c7b7.png</code>  进行解析， <code>d9d99c01b2d14ca7b00c65362f88c7b7.png</code>  文件是真实存在的)，但是解析时候又受到 <code>php-fpm.conf</code>  中的配置选项 <code>security.limit_extensions</code>  的影响，只有在此选项为空的时候才能指定 <code>.png</code>  等其他文件转为代码解析，如果此选项后面设置参数，那么解析的时候就按设置的参数进行解析，比如：</li>
-</ul>
-<figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">security.limit_extensions = <span class="hljs-string">.php</span> <span class="hljs-string">.php3</span> <span class="hljs-string">.php4</span> <span class="hljs-string">.php5</span> <br><span class="hljs-comment">#为了安全，限制能执行的脚本后缀</span><br></code></pre></td></tr></tbody></table></figure>
-<h4 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接">#</a> 参考链接：</h4>
-<ul>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/0daybug/p/13611542.html">https://www.cnblogs.com/0daybug/p/13611542.html</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.laruence.com/php-internal">https://www.laruence.com/php-internal</a></p>
-</li>
-</ul>
+                <h3 id="training-www-robots"><a class="markdownIt-Anchor" href="#training-www-robots">#</a> Training-WWW-Robots</h3>
+<p>题目说明：访问链接后，将其翻译过来如图所示，说明这个是有关爬虫 robots.txt 文件的内容。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301261159412.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>所以，我的思路是先尝试访问 robots.txt 看看能不能找到什么信息，在网址后面拼上 robots.txt 得到如图内容：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301261202472.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>根据文件信息可以看到禁止了所有 robots 引擎访问 f10g.php 这个文件，但是允许 Yandex 搜索引擎访问除过 f10g.php 文件的所有内容，所以这里看看能不能尝试访问这个被禁止的文件 (到了这里能拼在网址后面的只有那个被禁止的文件，所以先尝试拼一下，看能不能行)，访问后得到 flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301261204350.png" srcset="/img/loading.gif" lazyload alt=""></p>
 
                 
               </div>
@@ -355,7 +321,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="category-chain-item">漏洞复现</a>
+  <a href="/categories/%E9%9D%B6%E5%9C%BA/" class="category-chain-item">靶场</a>
   
   
 
@@ -370,9 +336,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%BC%8F%E6%B4%9E/">#漏洞</a>
-      
-        <a href="/tags/Nginx/">#Nginx</a>
+        <a href="/tags/CTF/">#CTF</a>
       
     </div>
   
@@ -384,8 +348,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>漏洞复现----Nginx解析漏洞</div>
-      <div>https://rofgd.github.io/2022/10/14/漏洞复现-Nginx解析漏洞/</div>
+      <div>攻防世界---Training-WWW-Robots</div>
+      <div>https://rofgd.github.io/2023/01/26/攻防世界---Training-WWW-Robots/</div>
     </div>
     <div class="license-meta">
       
@@ -397,7 +361,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月14日</div>
+          <div>2023年1月26日</div>
         </div>
       
       
@@ -429,9 +393,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F---%E7%AE%80%E5%8D%95%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="简单域环境搭建以及内网信息收集">
+                      <a href="/2023/03/08/APP%E6%8A%93%E5%8C%85/" title="APP抓包">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">简单域环境搭建以及内网信息收集</span>
+                        <span class="hidden-mobile">APP抓包</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -439,8 +403,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/14/%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86---%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8%E5%92%8C%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE/" title="漏洞原理---数据库安全和常见应用服务协议">
-                        <span class="hidden-mobile">漏洞原理---数据库安全和常见应用服务协议</span>
+                      <a href="/2023/01/20/%E5%AF%B9%E4%BA%8EXSS%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9C%8B%E6%B3%95/" title="对于XSS主机的一些看法">
+                        <span class="hidden-mobile">对于XSS主机的一些看法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

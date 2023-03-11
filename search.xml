@@ -144,61 +144,11 @@
     
     
     <entry>
-      <title>HackBox---起点(三)</title>
-      <link href="/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E4%B8%89)/"/>
-      <url>/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E4%B8%89)/</url>
-      
-        <content type="html"><![CDATA[<h3 id="hackbox起点三"><a class="markdownIt-Anchor" href="#hackbox起点三">#</a> HackBox— 起点 (三)</h3><ul><li>What does the 3-letter acronym SMB stand for?(3 个字母的首字母缩略词 SMB 代表什么？)<ul><li>Server Message Block</li></ul></li><li>What port does SMB use to operate at?(SMB 使用哪个端口进行操作？)<ul><li>445</li></ul></li><li>What is the service name for port 445 that came up in our Nmap scan?(我们的 Nmap 扫描中出现的端口 445 的服务名称是什么？)<ul><li>microsoft-ds</li></ul></li><li>What is the ‘flag’ or ‘switch’ we can use with the SMB tool to ‘list’ the contents of the share?(我们可以使用 SMB 工具来 “列出” 共享内容的 “标志” 或 “开关” 是什么？)<ul><li>-L</li></ul></li><li>How many shares are there on Dancing?(Dancing 有多少个)<ul><li>5</li></ul></li><li>What is the name of the share we are able to access in the end with a blank password?(我们最终能够使用空白密码访问的共享名称是什么？)<ul><li>WorkShares</li></ul></li><li>What is the command we can use within the SMB shell to download the files we find?(我们可以在 SMB shell 中使用什么命令来下载我们找到的文件？)<ul><li>get</li></ul></li><li>获取 flag:</li><li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302092346833.png" alt="image-20230209234633789"></li></ul><h5 id="备注"><a class="markdownIt-Anchor" href="#备注">#</a> 备注：</h5><figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">smbclient \\\\<span class="hljs-number">10.129</span>.<span class="hljs-number">194.55</span>\\WorkShares     <span class="hljs-comment">#连接用户WorkShares</span><br>ls                                          <span class="hljs-comment">#列出WorkShares目录下信息</span><br>cd James.p                                  <span class="hljs-comment">#进入目录James.p</span><br>ls                                          <span class="hljs-comment">#列出James.p目录下信息</span><br>get flag.txt                                <span class="hljs-comment">#下载文件flag.txt到本地</span><br><span class="hljs-keyword">exit</span>                                        <span class="hljs-comment">#退出SMB服务</span><br>cat flag.txt                                <span class="hljs-comment">#查看flag.txt</span><br></code></pre></td></tr></tbody></table></figure><h5 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接">#</a> 参考链接</h5><ul><li><a href="https://www.cnblogs.com/Hekeats-L/p/16535920.html">https://www.cnblogs.com/Hekeats-L/p/16535920.html</a></li><li><a href="https://docs.oracle.com/cd/E19253-01/820-5488/gfhaq/index.html">https://docs.oracle.com/cd/E19253-01/820-5488/gfhaq/index.html</a></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 靶场 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> HackBox </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>HackBox---起点(二)</title>
       <link href="/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E4%BA%8C)/"/>
       <url>/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E4%BA%8C)/</url>
       
         <content type="html"><![CDATA[<h3 id="hackbox起点二"><a class="markdownIt-Anchor" href="#hackbox起点二">#</a> HackBox— 起点 (二)</h3><ul><li><p>What does the 3-letter acronym FTP stand for?(3 个字母的首字母缩略词 FTP 代表什么？)</p><ul><li>File Transfer Protocol (文件传输协议)</li></ul></li><li><p>Which port does the FTP service listen on usually?(FTP 服务通常监听哪个端口？)</p><ul><li>21</li></ul></li><li><p>What acronym is used for the secure version of FTP?(FTP 的安全版本使用什么首字母缩写词？)</p><ul><li>SFTP</li></ul></li><li><p>What is the command we can use to send an ICMP echo request to test our connection to the target?(我们可以使用什么命令发送 ICMP 回显请求来测试我们与目标的连接？)</p><ul><li>ping</li></ul></li><li><p>From your scans, what version is FTP running on the target?(根据您的扫描结果，目标上运行的 FTP 版本是什么？)</p><ul><li>vsftpd 3.0.3</li></ul></li><li><p>From your scans, what OS type is running on the target?(根据您的扫描结果，目标上运行的操作系统类型是什么？)</p><ul><li>Unix</li></ul></li><li><p>What is the command we need to run in order to display the ‘ftp’ client help menu?(为了显示 “ftp” 客户端帮助菜单，我们需要运行什么命令？)</p><ul><li>ftp -h</li></ul></li><li><p>What is username that is used over FTP when you want to log in without having an account?(当您想在没有帐户的情况下登录时，通过 FTP 使用的用户名是什么？)</p><ul><li>anonymous</li></ul></li><li><p>What is the response code we get for the FTP message ‘Login successful’?(我们得到的 FTP 消息 “登录成功” 的响应代码是什么？)</p><ul><li>230</li></ul></li><li><p>There are a couple of commands we can use to list the files and directories available on the FTP server. One is dir. What is the other that is a common way to list files on a Linux system.(我们可以使用几个命令来列出 FTP 服务器上可用的文件和目录。一个是目录。另一种是在 Linux 系统上列出文件的常用方法。)</p><ul><li>ls</li></ul></li><li><p>What is the command used to download the file we found on the FTP server?(用于下载我们在 FTP 服务器上找到的文件的命令是什么？)</p><ul><li>get</li></ul></li><li><p>获取 flag</p></li><li><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302092222339.png" alt="image-20230209222253771"></p><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302092225390.png" alt="image-20230209222507154"></p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 靶场 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> HackBox </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>HackBox---起点(四)</title>
-      <link href="/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/"/>
-      <url>/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/</url>
-      
-        <content type="html"><![CDATA[<h4 id="hackbox起点四"><a class="markdownIt-Anchor" href="#hackbox起点四">#</a> HackBox— 起点 (四)</h4><ul><li>Which TCP port is open on the machine?(机器上打开了哪个 TCP 端口？)<ul><li>6379</li></ul></li><li>Which service is running on the port that is open on the machine?(哪个服务在机器上打开的端口上运行？)<ul><li>redis</li></ul></li><li>What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database (Redis 是什么类型的数据库？从以下选项中进行选择：(i) 内存数据库，(ii) 传统数据库)<ul><li>In-memory Database</li></ul></li><li>Which command-line utility is used to interact with the Redis server? Enter the program name you would enter into the terminal without any arguments.(哪个命令行实用程序用于与 Redis 服务器交互？输入您要在终端中输入的程序名称，不带任何参数。)<ul><li>redis-cli</li></ul></li><li>Which flag is used with the Redis command-line utility to specify the hostname?(Redis 命令行实用程序使用哪个标志来指定主机名？)<ul><li>-h</li></ul></li><li>Once connected to a Redis server, which command is used to obtain the information and statistics about the Redis server?(连接到 Redis 服务器后，使用哪个命令获取有关 Redis 服务器的信息和统计信息？)<ul><li>info</li></ul></li><li>What is the version of the Redis server being used on the target machine?(目标机器上使用的 Redis 服务器的版本是什么？)<ul><li>5.0.7</li></ul></li><li>Which command is used to select the desired database in Redis?(在 Redis 中使用哪个命令来选择所需的数据库？)<ul><li>select</li></ul></li><li>How many keys are present inside the database with index 0?(索引为 0 的数据库中有多少个键？)<ul><li>4</li></ul></li><li>Which command is used to obtain all the keys in a database?(哪个命令用于获取数据库中的所有键？)<ul><li>keys *</li></ul></li></ul><p>参考链接:</p><ul><li><a href="https://www.cnblogs.com/Hekeats-L/p/16536247.html">https://www.cnblogs.com/Hekeats-L/p/16536247.html</a></li></ul>]]></content>
       
       
       <categories>
@@ -244,6 +194,56 @@
     
     
     <entry>
+      <title>HackBox---起点(三)</title>
+      <link href="/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E4%B8%89)/"/>
+      <url>/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E4%B8%89)/</url>
+      
+        <content type="html"><![CDATA[<h3 id="hackbox起点三"><a class="markdownIt-Anchor" href="#hackbox起点三">#</a> HackBox— 起点 (三)</h3><ul><li>What does the 3-letter acronym SMB stand for?(3 个字母的首字母缩略词 SMB 代表什么？)<ul><li>Server Message Block</li></ul></li><li>What port does SMB use to operate at?(SMB 使用哪个端口进行操作？)<ul><li>445</li></ul></li><li>What is the service name for port 445 that came up in our Nmap scan?(我们的 Nmap 扫描中出现的端口 445 的服务名称是什么？)<ul><li>microsoft-ds</li></ul></li><li>What is the ‘flag’ or ‘switch’ we can use with the SMB tool to ‘list’ the contents of the share?(我们可以使用 SMB 工具来 “列出” 共享内容的 “标志” 或 “开关” 是什么？)<ul><li>-L</li></ul></li><li>How many shares are there on Dancing?(Dancing 有多少个)<ul><li>5</li></ul></li><li>What is the name of the share we are able to access in the end with a blank password?(我们最终能够使用空白密码访问的共享名称是什么？)<ul><li>WorkShares</li></ul></li><li>What is the command we can use within the SMB shell to download the files we find?(我们可以在 SMB shell 中使用什么命令来下载我们找到的文件？)<ul><li>get</li></ul></li><li>获取 flag:</li><li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302092346833.png" alt="image-20230209234633789"></li></ul><h5 id="备注"><a class="markdownIt-Anchor" href="#备注">#</a> 备注：</h5><figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">smbclient \\\\<span class="hljs-number">10.129</span>.<span class="hljs-number">194.55</span>\\WorkShares     <span class="hljs-comment">#连接用户WorkShares</span><br>ls                                          <span class="hljs-comment">#列出WorkShares目录下信息</span><br>cd James.p                                  <span class="hljs-comment">#进入目录James.p</span><br>ls                                          <span class="hljs-comment">#列出James.p目录下信息</span><br>get flag.txt                                <span class="hljs-comment">#下载文件flag.txt到本地</span><br><span class="hljs-keyword">exit</span>                                        <span class="hljs-comment">#退出SMB服务</span><br>cat flag.txt                                <span class="hljs-comment">#查看flag.txt</span><br></code></pre></td></tr></tbody></table></figure><h5 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接">#</a> 参考链接</h5><ul><li><a href="https://www.cnblogs.com/Hekeats-L/p/16535920.html">https://www.cnblogs.com/Hekeats-L/p/16535920.html</a></li><li><a href="https://docs.oracle.com/cd/E19253-01/820-5488/gfhaq/index.html">https://docs.oracle.com/cd/E19253-01/820-5488/gfhaq/index.html</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HackBox </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HackBox---起点(四)</title>
+      <link href="/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/"/>
+      <url>/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/</url>
+      
+        <content type="html"><![CDATA[<h4 id="hackbox起点四"><a class="markdownIt-Anchor" href="#hackbox起点四">#</a> HackBox— 起点 (四)</h4><ul><li>Which TCP port is open on the machine?(机器上打开了哪个 TCP 端口？)<ul><li>6379</li></ul></li><li>Which service is running on the port that is open on the machine?(哪个服务在机器上打开的端口上运行？)<ul><li>redis</li></ul></li><li>What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database (Redis 是什么类型的数据库？从以下选项中进行选择：(i) 内存数据库，(ii) 传统数据库)<ul><li>In-memory Database</li></ul></li><li>Which command-line utility is used to interact with the Redis server? Enter the program name you would enter into the terminal without any arguments.(哪个命令行实用程序用于与 Redis 服务器交互？输入您要在终端中输入的程序名称，不带任何参数。)<ul><li>redis-cli</li></ul></li><li>Which flag is used with the Redis command-line utility to specify the hostname?(Redis 命令行实用程序使用哪个标志来指定主机名？)<ul><li>-h</li></ul></li><li>Once connected to a Redis server, which command is used to obtain the information and statistics about the Redis server?(连接到 Redis 服务器后，使用哪个命令获取有关 Redis 服务器的信息和统计信息？)<ul><li>info</li></ul></li><li>What is the version of the Redis server being used on the target machine?(目标机器上使用的 Redis 服务器的版本是什么？)<ul><li>5.0.7</li></ul></li><li>Which command is used to select the desired database in Redis?(在 Redis 中使用哪个命令来选择所需的数据库？)<ul><li>select</li></ul></li><li>How many keys are present inside the database with index 0?(索引为 0 的数据库中有多少个键？)<ul><li>4</li></ul></li><li>Which command is used to obtain all the keys in a database?(哪个命令用于获取数据库中的所有键？)<ul><li>keys *</li></ul></li></ul><p>参考链接:</p><ul><li><a href="https://www.cnblogs.com/Hekeats-L/p/16536247.html">https://www.cnblogs.com/Hekeats-L/p/16536247.html</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HackBox </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HackBox---ArcheType</title>
       <link href="/2022/11/20/HackBox-ArcheType/"/>
       <url>/2022/11/20/HackBox-ArcheType/</url>
@@ -261,6 +261,33 @@
         <tags>
             
             <tag> HackBox </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>内网渗透---三层内网穿透实验</title>
+      <link href="/2022/11/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F---%E4%B8%89%E5%B1%82%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%AE%9E%E9%AA%8C/"/>
+      <url>/2022/11/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F---%E4%B8%89%E5%B1%82%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%AE%9E%E9%AA%8C/</url>
+      
+        <content type="html"><![CDATA[<h3 id="三层内网穿透实验"><a class="markdownIt-Anchor" href="#三层内网穿透实验">#</a> 三层内网穿透实验</h3><h4 id="一-实验环境"><a class="markdownIt-Anchor" href="#一-实验环境">#</a> 一、实验环境</h4><ul><li>VM16pro windows server 2019 R2，win10_02 的克隆虚拟机，win10_03 的克隆虚拟机，frp_0.46.1_windows_amd64，Proxifier PE</li></ul><h4 id="二-实验配置参数"><a class="markdownIt-Anchor" href="#二-实验配置参数">#</a> 二、实验配置参数</h4><ul><li><p>windows server 2019 R2 选择 “选择 —&gt; 虚拟网络编辑器”，创建三张新网卡，三张网卡设置 IP 段如下：</p><figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">vm10</span><span class="hljs-params">(仅主机)</span></span>:<span class="hljs-number">192.168</span>.<span class="hljs-number">168.0</span><br><span class="hljs-function"><span class="hljs-title">vm11</span><span class="hljs-params">(仅主机)</span></span>:<span class="hljs-number">172.16</span>.<span class="hljs-number">16.0</span><br><span class="hljs-function"><span class="hljs-title">vm12</span><span class="hljs-params">(仅主机)</span></span>:<span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span><br></code></pre></td></tr></tbody></table></figure></li><li><p>windows server 2019 R2— 创建两张新网卡 vm10,vm11</p></li><li><p>win10_02— 创建两张新网卡 vm11,vm12</p></li><li><p>win10_03— 创建一张新网卡 vm12</p></li></ul><h4 id="三-实验步骤"><a class="markdownIt-Anchor" href="#三-实验步骤">#</a> 三、实验步骤</h4><ul><li>windows server 2019 R2 中 frp 可开启也可不开启，如果开启，客户端连接上服务端将客户端的端口映射到服务端公网端口上</li><li>先让 win10_02 与 win10_03 打通再让 server2019 与 win10_02 互通，最后在 server2019 上使用 PE 访问 win10_03 上的网页内容</li><li>首先设置 server2019 上的网卡，在 vm 设置中移除原有网络适配器，重新添加两个新的网络适配器分别为 vm10,vm11，如图：</li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302081949622.png" alt="image-20230208194607766"></p><ul><li><p>同样的方法设置 win10_02 和 win10_03 的网络适配器</p></li><li><table><thead><tr><th>主机名</th><th>网络适配器 1</th><th>网络适配器 2</th></tr></thead><tbody><tr><td>server2019 R2</td><td>192.168.168.123</td><td>172.16.16.111</td></tr><tr><td>win10_02</td><td>172.16.16.2</td><td>10.0.0.1</td></tr><tr><td>win10_03</td><td>10.0.0.2</td><td></td></tr></tbody></table></li><li><p>由于这里模拟是 server2019 是被渗透的主机，通过模拟内网信息收集得知，最内层网络中存在 win10_02 与 win10_03，使用 ping 命令发现，只有 server2019 与 win10_02 可以 ping 通。所以先在 server2019 上开启服务端，让 win10_02 连接 server2019，再 win10_02 上通过 ping 查看 win10_02 与 win10_03 互通，所以在 win10_02 上重新启动一个服务端，在 win10_03 上启动一个客户端，让 win10_02 与 win10_03 相连接，然后在 server2019 上使用 PE，此时就能实现在被渗透的主机上访问内网中最深层的主机</p></li><li><p>win10_02 客户端配置文件，服务端配置文件使用默认 7000 端口</p></li><li><pre><code class="hljs">[common]server_addr = 172.16.16.111 # win10_02的IP地址server_port = 7000[socket_192]  # 配置文件中名称不能重复使用type = tcpremote_port = 8000  # 端口使用一个不被占用的端口plugin = socks5[socket_172]type = tcpplugin = socks5local_ip = 127.0.0.1local_port = 9999  remote_port = 9000  # 将本地的9999端口映射到公网9000端口上，外网访问9000端口实际上就访问的是本地9999端口 <figure class="highlight elm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs elm"><br>-   win10_03客户端配置文件，服务端使用默认<br><br>-   ```<br>    [common]<br>    server_addr = <span class="hljs-number">10.0</span><span class="hljs-number">.0</span><span class="hljs-number">.137</span> # win10_02主机的<span class="hljs-type">IP</span>地址<br>    server_<span class="hljs-keyword">port</span> = 7000<br>    <br>    [socks_172_10]<br>    <span class="hljs-keyword">type</span> = tcp<br>    plugin = socks5<br>    remote_<span class="hljs-keyword">port</span> = 9999<br></code></pre></td></tr></tbody></table></figure></code></pre></li><li><p>当客户端出现 <code>start proxy success</code> ，服务端出现  <code>type [tcp] success</code>  关键词时则表明连接成功</p></li><li><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082125250.png" alt="image-20230208212534056"></p></li><li><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082125281.png" alt="image-20230208212504525"></p></li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082126436.png" alt="image-20230208212604177"></p><ul><li>在 win10_03 上开启小皮面板，然后再 server2019 上使用 PE，使用浏览器查看是否能访问到最内层主机</li><li>再 PE 上，配置 127.0.0.1：9000, 代理走 socks5</li><li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082129569.png" alt="image-20230208212946591"></li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082130943.png" alt="image-20230208213037472"></p><h4 id="四-备注"><a class="markdownIt-Anchor" href="#四-备注">#</a> 四、备注</h4><ul><li>如果有连接失败的情况，首先检查服务端和客户端的配置文件中 IP 地址是否填写错误。</li><li>检查虚拟机中的虚拟网络设置的网段划分是否是常见内网地址。</li><li>检查每台虚拟机中的虚拟网卡是否设置为自定义 (仅主机模式)。</li><li>查看每台主机的网址划分，然后使用 Ping 进行查看对应主机是否通信正常，如果不正常尝试关闭防火墙。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 内网 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 内网 </tag>
+            
+            <tag> FRP </tag>
             
         </tags>
       
@@ -298,33 +325,6 @@
     
     
     <entry>
-      <title>内网渗透---三层内网穿透实验</title>
-      <link href="/2022/11/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F---%E4%B8%89%E5%B1%82%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%AE%9E%E9%AA%8C/"/>
-      <url>/2022/11/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F---%E4%B8%89%E5%B1%82%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%AE%9E%E9%AA%8C/</url>
-      
-        <content type="html"><![CDATA[<h3 id="三层内网穿透实验"><a class="markdownIt-Anchor" href="#三层内网穿透实验">#</a> 三层内网穿透实验</h3><h4 id="一-实验环境"><a class="markdownIt-Anchor" href="#一-实验环境">#</a> 一、实验环境</h4><ul><li>VM16pro windows server 2019 R2，win10_02 的克隆虚拟机，win10_03 的克隆虚拟机，frp_0.46.1_windows_amd64，Proxifier PE</li></ul><h4 id="二-实验配置参数"><a class="markdownIt-Anchor" href="#二-实验配置参数">#</a> 二、实验配置参数</h4><ul><li><p>windows server 2019 R2 选择 “选择 —&gt; 虚拟网络编辑器”，创建三张新网卡，三张网卡设置 IP 段如下：</p><figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">vm10</span><span class="hljs-params">(仅主机)</span></span>:<span class="hljs-number">192.168</span>.<span class="hljs-number">168.0</span><br><span class="hljs-function"><span class="hljs-title">vm11</span><span class="hljs-params">(仅主机)</span></span>:<span class="hljs-number">172.16</span>.<span class="hljs-number">16.0</span><br><span class="hljs-function"><span class="hljs-title">vm12</span><span class="hljs-params">(仅主机)</span></span>:<span class="hljs-number">10.0</span>.<span class="hljs-number">0.0</span><br></code></pre></td></tr></tbody></table></figure></li><li><p>windows server 2019 R2— 创建两张新网卡 vm10,vm11</p></li><li><p>win10_02— 创建两张新网卡 vm11,vm12</p></li><li><p>win10_03— 创建一张新网卡 vm12</p></li></ul><h4 id="三-实验步骤"><a class="markdownIt-Anchor" href="#三-实验步骤">#</a> 三、实验步骤</h4><ul><li>windows server 2019 R2 中 frp 可开启也可不开启，如果开启，客户端连接上服务端将客户端的端口映射到服务端公网端口上</li><li>先让 win10_02 与 win10_03 打通再让 server2019 与 win10_02 互通，最后在 server2019 上使用 PE 访问 win10_03 上的网页内容</li><li>首先设置 server2019 上的网卡，在 vm 设置中移除原有网络适配器，重新添加两个新的网络适配器分别为 vm10,vm11，如图：</li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302081949622.png" alt="image-20230208194607766"></p><ul><li><p>同样的方法设置 win10_02 和 win10_03 的网络适配器</p></li><li><table><thead><tr><th>主机名</th><th>网络适配器 1</th><th>网络适配器 2</th></tr></thead><tbody><tr><td>server2019 R2</td><td>192.168.168.123</td><td>172.16.16.111</td></tr><tr><td>win10_02</td><td>172.16.16.2</td><td>10.0.0.1</td></tr><tr><td>win10_03</td><td>10.0.0.2</td><td></td></tr></tbody></table></li><li><p>由于这里模拟是 server2019 是被渗透的主机，通过模拟内网信息收集得知，最内层网络中存在 win10_02 与 win10_03，使用 ping 命令发现，只有 server2019 与 win10_02 可以 ping 通。所以先在 server2019 上开启服务端，让 win10_02 连接 server2019，再 win10_02 上通过 ping 查看 win10_02 与 win10_03 互通，所以在 win10_02 上重新启动一个服务端，在 win10_03 上启动一个客户端，让 win10_02 与 win10_03 相连接，然后在 server2019 上使用 PE，此时就能实现在被渗透的主机上访问内网中最深层的主机</p></li><li><p>win10_02 客户端配置文件，服务端配置文件使用默认 7000 端口</p></li><li><pre><code class="hljs">[common]server_addr = 172.16.16.111 # win10_02的IP地址server_port = 7000[socket_192]  # 配置文件中名称不能重复使用type = tcpremote_port = 8000  # 端口使用一个不被占用的端口plugin = socks5[socket_172]type = tcpplugin = socks5local_ip = 127.0.0.1local_port = 9999  remote_port = 9000  # 将本地的9999端口映射到公网9000端口上，外网访问9000端口实际上就访问的是本地9999端口 <figure class="highlight elm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs elm"><br>-   win10_03客户端配置文件，服务端使用默认<br><br>-   ```<br>    [common]<br>    server_addr = <span class="hljs-number">10.0</span><span class="hljs-number">.0</span><span class="hljs-number">.137</span> # win10_02主机的<span class="hljs-type">IP</span>地址<br>    server_<span class="hljs-keyword">port</span> = 7000<br>    <br>    [socks_172_10]<br>    <span class="hljs-keyword">type</span> = tcp<br>    plugin = socks5<br>    remote_<span class="hljs-keyword">port</span> = 9999<br></code></pre></td></tr></tbody></table></figure></code></pre></li><li><p>当客户端出现 <code>start proxy success</code> ，服务端出现  <code>type [tcp] success</code>  关键词时则表明连接成功</p></li><li><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082125250.png" alt="image-20230208212534056"></p></li><li><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082125281.png" alt="image-20230208212504525"></p></li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082126436.png" alt="image-20230208212604177"></p><ul><li>在 win10_03 上开启小皮面板，然后再 server2019 上使用 PE，使用浏览器查看是否能访问到最内层主机</li><li>再 PE 上，配置 127.0.0.1：9000, 代理走 socks5</li><li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082129569.png" alt="image-20230208212946591"></li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302082130943.png" alt="image-20230208213037472"></p><h4 id="四-备注"><a class="markdownIt-Anchor" href="#四-备注">#</a> 四、备注</h4><ul><li>如果有连接失败的情况，首先检查服务端和客户端的配置文件中 IP 地址是否填写错误。</li><li>检查虚拟机中的虚拟网络设置的网段划分是否是常见内网地址。</li><li>检查每台虚拟机中的虚拟网卡是否设置为自定义 (仅主机模式)。</li><li>查看每台主机的网址划分，然后使用 Ping 进行查看对应主机是否通信正常，如果不正常尝试关闭防火墙。</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 内网 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 内网 </tag>
-            
-            <tag> FRP </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>漏洞原理---PHP特性&amp;缺陷对比函数</title>
       <link href="/2022/10/14/%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86---PHP%E7%89%B9%E6%80%A7-%E7%BC%BA%E9%99%B7%E5%AF%B9%E6%AF%94%E5%87%BD%E6%95%B0/"/>
       <url>/2022/10/14/%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86---PHP%E7%89%B9%E6%80%A7-%E7%BC%BA%E9%99%B7%E5%AF%B9%E6%AF%94%E5%87%BD%E6%95%B0/</url>
@@ -342,33 +342,6 @@
         <tags>
             
             <tag> PHP危险函数 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>漏洞复现----Nginx解析漏洞</title>
-      <link href="/2022/10/14/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0---Nginx%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/"/>
-      <url>/2022/10/14/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0---Nginx%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/</url>
-      
-        <content type="html"><![CDATA[<h3 id="nginx解析漏洞"><a class="markdownIt-Anchor" href="#nginx解析漏洞">#</a> Nginx 解析漏洞</h3><h4 id="一-版本信息"><a class="markdownIt-Anchor" href="#一-版本信息">#</a> 一、版本信息</h4><ul><li>Nginx 1.x 最新版</li><li>PHP 7.x 最新版</li></ul><h4 id="二-复现"><a class="markdownIt-Anchor" href="#二-复现">#</a> 二、复现</h4><ul><li>环境：Ubuntu18 (靶机)，Win10 (攻击机)</li><li>Ubuntu 中进入到 Nginx 文件夹中， <code>docker-compose up -d</code>  启动环境</li><li>在攻击机中访问靶机地址 <code>1.1.1.1/index.php</code></li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916262.png" alt="image-20230225190826953"></p><ul><li>选择一个图片，使用文本编辑器在打开图片，最后一行加入一句话木马 (图片不宜过大)</li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916906.png" alt="image-20230225190956432"></p><ul><li>选择上传后，访问图片地址，并在图片地址 <code>http://IP/uploadfiles/图片名称.jpg</code>  后面拼上 <code>/.php</code>  或者一个不存在的 php 文件。</li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916986.png" alt="image-20230225191218679"></p><ul><li>删除镜像 <code>docker-compose down</code></li></ul><h4 id="三-分析"><a class="markdownIt-Anchor" href="#三-分析">#</a> 三、分析</h4><ul><li>该漏洞是由于配置不当引起。</li><li>由于错误配置，Nginx 首先会把 <code>.php</code>  结尾的文件交给 <code>fastcgi</code>  处理，所以才能在图片路径后面拼接一个不存在的 php 文件。</li><li>但是 <code>fastcgi</code>  在处理这个不存在的文件时，会受到 <code>php.ini</code>  配置文件中 <code>cgi.fix_pathinfo=1</code>  这个选项的影响 (这项配置用于修复路径，如果当前路径不存在则采用上层路径)，到上一级中执行解析 (也就是在靶机中 <code>/uploadfiles/d9d99c01b2d14ca7b00c65362f88c7b7.png/aa.php</code> ， <code>fastcgi</code>  发现 <code>aa.php</code>  文件不存在会对 <code>/uploadfiles/d9d99c01b2d14ca7b00c65362f88c7b7.png</code>  进行解析， <code>d9d99c01b2d14ca7b00c65362f88c7b7.png</code>  文件是真实存在的)，但是解析时候又受到 <code>php-fpm.conf</code>  中的配置选项 <code>security.limit_extensions</code>  的影响，只有在此选项为空的时候才能指定 <code>.png</code>  等其他文件转为代码解析，如果此选项后面设置参数，那么解析的时候就按设置的参数进行解析，比如：</li></ul><figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">security.limit_extensions = <span class="hljs-string">.php</span> <span class="hljs-string">.php3</span> <span class="hljs-string">.php4</span> <span class="hljs-string">.php5</span> <br><span class="hljs-comment">#为了安全，限制能执行的脚本后缀</span><br></code></pre></td></tr></tbody></table></figure><h4 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接">#</a> 参考链接：</h4><ul><li><p><a href="https://www.cnblogs.com/0daybug/p/13611542.html">https://www.cnblogs.com/0daybug/p/13611542.html</a></p></li><li><p><a href="https://www.laruence.com/php-internal">https://www.laruence.com/php-internal</a></p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 漏洞复现 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 漏洞 </tag>
-            
-            <tag> Nginx </tag>
             
         </tags>
       
@@ -396,6 +369,33 @@
             <tag> 漏洞 </tag>
             
             <tag> 文件上传 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>漏洞复现----Nginx解析漏洞</title>
+      <link href="/2022/10/14/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0---Nginx%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/"/>
+      <url>/2022/10/14/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0---Nginx%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/</url>
+      
+        <content type="html"><![CDATA[<h3 id="nginx解析漏洞"><a class="markdownIt-Anchor" href="#nginx解析漏洞">#</a> Nginx 解析漏洞</h3><h4 id="一-版本信息"><a class="markdownIt-Anchor" href="#一-版本信息">#</a> 一、版本信息</h4><ul><li>Nginx 1.x 最新版</li><li>PHP 7.x 最新版</li></ul><h4 id="二-复现"><a class="markdownIt-Anchor" href="#二-复现">#</a> 二、复现</h4><ul><li>环境：Ubuntu18 (靶机)，Win10 (攻击机)</li><li>Ubuntu 中进入到 Nginx 文件夹中， <code>docker-compose up -d</code>  启动环境</li><li>在攻击机中访问靶机地址 <code>1.1.1.1/index.php</code></li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916262.png" alt="image-20230225190826953"></p><ul><li>选择一个图片，使用文本编辑器在打开图片，最后一行加入一句话木马 (图片不宜过大)</li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916906.png" alt="image-20230225190956432"></p><ul><li>选择上传后，访问图片地址，并在图片地址 <code>http://IP/uploadfiles/图片名称.jpg</code>  后面拼上 <code>/.php</code>  或者一个不存在的 php 文件。</li></ul><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302251916986.png" alt="image-20230225191218679"></p><ul><li>删除镜像 <code>docker-compose down</code></li></ul><h4 id="三-分析"><a class="markdownIt-Anchor" href="#三-分析">#</a> 三、分析</h4><ul><li>该漏洞是由于配置不当引起。</li><li>由于错误配置，Nginx 首先会把 <code>.php</code>  结尾的文件交给 <code>fastcgi</code>  处理，所以才能在图片路径后面拼接一个不存在的 php 文件。</li><li>但是 <code>fastcgi</code>  在处理这个不存在的文件时，会受到 <code>php.ini</code>  配置文件中 <code>cgi.fix_pathinfo=1</code>  这个选项的影响 (这项配置用于修复路径，如果当前路径不存在则采用上层路径)，到上一级中执行解析 (也就是在靶机中 <code>/uploadfiles/d9d99c01b2d14ca7b00c65362f88c7b7.png/aa.php</code> ， <code>fastcgi</code>  发现 <code>aa.php</code>  文件不存在会对 <code>/uploadfiles/d9d99c01b2d14ca7b00c65362f88c7b7.png</code>  进行解析， <code>d9d99c01b2d14ca7b00c65362f88c7b7.png</code>  文件是真实存在的)，但是解析时候又受到 <code>php-fpm.conf</code>  中的配置选项 <code>security.limit_extensions</code>  的影响，只有在此选项为空的时候才能指定 <code>.png</code>  等其他文件转为代码解析，如果此选项后面设置参数，那么解析的时候就按设置的参数进行解析，比如：</li></ul><figure class="highlight jboss-cli"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">security.limit_extensions = <span class="hljs-string">.php</span> <span class="hljs-string">.php3</span> <span class="hljs-string">.php4</span> <span class="hljs-string">.php5</span> <br><span class="hljs-comment">#为了安全，限制能执行的脚本后缀</span><br></code></pre></td></tr></tbody></table></figure><h4 id="参考链接"><a class="markdownIt-Anchor" href="#参考链接">#</a> 参考链接：</h4><ul><li><p><a href="https://www.cnblogs.com/0daybug/p/13611542.html">https://www.cnblogs.com/0daybug/p/13611542.html</a></p></li><li><p><a href="https://www.laruence.com/php-internal">https://www.laruence.com/php-internal</a></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 漏洞复现 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+            <tag> Nginx </tag>
             
         </tags>
       

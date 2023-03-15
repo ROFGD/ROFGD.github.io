@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://rofgd.github.io/img/202301241049221.png">
 <meta property="article:published_time" content="2023-03-08T07:53:13.000Z">
-<meta property="article:modified_time" content="2023-03-08T09:57:54.129Z">
+<meta property="article:modified_time" content="2023-03-13T14:46:51.500Z">
 <meta property="article:author" content="ReadPond">
 <meta property="article:tag" content="APP">
 <meta property="article:tag" content="抓包">
@@ -239,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          310 字
+          884 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
         
-          3 分钟
+          8 分钟
         
       </span>
     
@@ -318,6 +318,34 @@
 <ul>
 <li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202303081630868.png" srcset="/img/loading.gif" lazyload alt="image-20230308163034121"></li>
 <li>保存后，需要将证书后缀更改为 <code>Burp.cer</code> ，模拟器中无法识别 <code>Burp.der</code>  后缀，更改完后，安装与上面安装相同</li>
+</ul>
+<h4 id="三-抓包当中遇到的问题"><a class="markdownIt-Anchor" href="#三-抓包当中遇到的问题">#</a> 三、抓包当中遇到的问题</h4>
+<ul>
+<li>在模拟器中测试时，设置代理后，通过代理能正常访问浏览器，并且 Burp 中有数据包测试抓包正常情况下，打开某个 APP 后发现抓包工具中没有任何数据包返回，同时 APP 中有 <code>网络连接失败</code> 等相关网络提示。可能存在以下情况：
+<ul>
+<li>此 APP 内部有反代理机制
+<ul>
+<li>自身抓包应用</li>
+<li>使用 Proxifier PE 转发
+<ul>
+<li>大致原理：如果设置了系统代理 app-&gt; 代理服务器 -&gt;burp-&gt; 服务端，APP 检查模拟器或者手机的代理设置，发现设置代理则会出现网络连接异常。但是如果使用 Proxifier PE 软件进行转发 (app-&gt;Proxifier PE-&gt; 本地 burp-&gt; 服务)，则不需要设置系统代理，相当于 (模拟器的网络出口时通过本机进行的) 将 APP 的流量流向 Proxifier PE，通过 Proxifier PE 将流量传递出去。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>证书问题，如果代理开的是 http 代理，但是 APP 数据走的是 SLL/https
+<ul>
+<li>情况 1，客户端不存在证书校验，服务器也不存在证书校验。</li>
+<li>情况 2，客户端存在校验服务端证书，服务器也不存在证书校验，单项校验。</li>
+<li>情况 3、客户端存在证书校验，服务器也存在证书校验，双向校验。
+<ul>
+<li>抓包使用 Burp 等抓包工具时，证书使用的是抓包工具自身的证书，并不是 APP 本身的证书，所以双向校验时前后端证书不一致就会出现开了 http 代理 app 不能正常运行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
                 

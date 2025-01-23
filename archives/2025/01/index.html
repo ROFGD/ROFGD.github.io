@@ -16,36 +16,30 @@
   <meta name="author" content="ReadPond">
   <meta name="keywords" content="渗透测试,Java,PHP,Python,等">
   
-    <meta name="description" content="# HackBox— 起点 (四)  Which TCP port is open on the machine?(机器上打开了哪个 TCP 端口？)  6379   Which service is running on the port that is open on the machine?(哪个服务在机器上打开的端口上运行？)  redis   What type of database">
-<meta property="og:type" content="article">
-<meta property="og:title" content="HackBox---起点(四)">
-<meta property="og:url" content="https://rofgd.github.io/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E5%9B%9B)/index.html">
+    <meta name="description" content="个人日记本">
+<meta property="og:type" content="website">
+<meta property="og:title" content="归档">
+<meta property="og:url" content="https://rofgd.github.io/archives/2025/01/index.html">
 <meta property="og:site_name" content="ReadPond的小屋">
-<meta property="og:description" content="# HackBox— 起点 (四)  Which TCP port is open on the machine?(机器上打开了哪个 TCP 端口？)  6379   Which service is running on the port that is open on the machine?(哪个服务在机器上打开的端口上运行？)  redis   What type of database">
+<meta property="og:description" content="个人日记本">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://rofgd.github.io/img/202301251815992.png">
-<meta property="article:published_time" content="2022-11-20T12:42:20.000Z">
-<meta property="article:modified_time" content="2023-02-09T15:59:40.914Z">
 <meta property="article:author" content="ReadPond">
-<meta property="article:tag" content="HackBox">
+<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="等">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://rofgd.github.io/img/202301251815992.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>HackBox---起点(四) - ReadPond的小屋</title>
+  <title>归档 - ReadPond的小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -204,60 +198,15 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/202301251815992.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/202301181438569.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HackBox---起点(四)"></span>
+            <span id="subtitle" data-typed-text="归档"></span>
           
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        ReadPond
-      </span>
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-20 20:42" pubdate>
-          2022年11月20日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          1.1k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          10 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
 
         
       </div>
@@ -277,247 +226,40 @@
 
   <main>
     
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">HackBox---起点(四)</h1>
-            
-            
-              <div class="markdown-body">
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
                 
-                <h4 id="hackbox起点四"><a class="markdownIt-Anchor" href="#hackbox起点四">#</a> HackBox— 起点 (四)</h4>
-<ul>
-<li>Which TCP port is open on the machine?(机器上打开了哪个 TCP 端口？)
-<ul>
-<li>6379</li>
-</ul>
-</li>
-<li>Which service is running on the port that is open on the machine?(哪个服务在机器上打开的端口上运行？)
-<ul>
-<li>redis</li>
-</ul>
-</li>
-<li>What type of database is Redis? Choose from the following options: (i) In-memory Database, (ii) Traditional Database (Redis 是什么类型的数据库？从以下选项中进行选择：(i) 内存数据库，(ii) 传统数据库)
-<ul>
-<li>In-memory Database</li>
-</ul>
-</li>
-<li>Which command-line utility is used to interact with the Redis server? Enter the program name you would enter into the terminal without any arguments.(哪个命令行实用程序用于与 Redis 服务器交互？输入您要在终端中输入的程序名称，不带任何参数。)
-<ul>
-<li>redis-cli</li>
-</ul>
-</li>
-<li>Which flag is used with the Redis command-line utility to specify the hostname?(Redis 命令行实用程序使用哪个标志来指定主机名？)
-<ul>
-<li>-h</li>
-</ul>
-</li>
-<li>Once connected to a Redis server, which command is used to obtain the information and statistics about the Redis server?(连接到 Redis 服务器后，使用哪个命令获取有关 Redis 服务器的信息和统计信息？)
-<ul>
-<li>info</li>
-</ul>
-</li>
-<li>What is the version of the Redis server being used on the target machine?(目标机器上使用的 Redis 服务器的版本是什么？)
-<ul>
-<li>5.0.7</li>
-</ul>
-</li>
-<li>Which command is used to select the desired database in Redis?(在 Redis 中使用哪个命令来选择所需的数据库？)
-<ul>
-<li>select</li>
-</ul>
-</li>
-<li>How many keys are present inside the database with index 0?(索引为 0 的数据库中有多少个键？)
-<ul>
-<li>4</li>
-</ul>
-</li>
-<li>Which command is used to obtain all the keys in a database?(哪个命令用于获取数据库中的所有键？)
-<ul>
-<li>keys *</li>
-</ul>
-</li>
-</ul>
-<p>参考链接:</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Hekeats-L/p/16536247.html">https://www.cnblogs.com/Hekeats-L/p/16536247.html</a></li>
-</ul>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
+<div class="list-group">
+  <p class="h4">共计 50 篇文章</p>
+  <hr>
   
   
     
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%9D%B6%E5%9C%BA/" class="category-chain-item">靶场</a>
-  
-  
-
-      </span>
+      
+      <p class="h5">2025</p>
     
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/HackBox/">#HackBox</a>
-      
-    </div>
+    <a href="/2025/01/22/2024%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+      <time>01-22</time>
+      <div class="list-group-item-title">2024年终总结</div>
+    </a>
   
 </div>
 
 
-              
-  
 
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>HackBox---起点(四)</div>
-      <div>https://rofgd.github.io/2022/11/20/HackBox---起点(四)/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>ReadPond</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年11月20日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
+
+
+              </div>
+            </div>
           </div>
         </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9(%E4%BA%8C)/" title="HackBox---起点(二)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">HackBox---起点(二)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2022/11/20/HackBox---%E8%B5%B7%E7%82%B9/" title="HackBox---起点">
-                        <span class="hidden-mobile">HackBox---起点</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
       </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
     
 
     
@@ -636,99 +378,6 @@
 
 
 
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 

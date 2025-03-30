@@ -1,0 +1,1169 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="python高级语法">
+  
+    <meta name="description" content="异常处理 首先我们要理解什么叫做**”异常”**？  在程序运行过程中，总会遇到各种各样的问题和错误。 有些错误是我们编写代码时自己造成的：  比如语法错误、调用错误，甚至逻辑错误。   还有一些错误，则是不可预料的错误，但是完全有可能发生的：  比如文件不存在、磁盘空间不足、网络堵塞、系统错误等等。   这些导致程序在运行过程中出现异常中断和退出的错误，我们统称为异常。大多数的异常都不会被程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python---异常">
+<meta property="og:url" content="https://rofgd.github.io/2020/10/17/python---%E5%BC%82%E5%B8%B8/index.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="异常处理 首先我们要理解什么叫做**”异常”**？  在程序运行过程中，总会遇到各种各样的问题和错误。 有些错误是我们编写代码时自己造成的：  比如语法错误、调用错误，甚至逻辑错误。   还有一些错误，则是不可预料的错误，但是完全有可能发生的：  比如文件不存在、磁盘空间不足、网络堵塞、系统错误等等。   这些导致程序在运行过程中出现异常中断和退出的错误，我们统称为异常。大多数的异常都不会被程序">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301191151474.png">
+<meta property="article:published_time" content="2020-10-17T03:52:14.000Z">
+<meta property="article:modified_time" content="2025-03-30T12:16:34.501Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="异常">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301191151474.png">
+  
+  
+  
+  <title>python---异常 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" target="_self">
+                    <i class="iconfont icon-a-yingyongchengxu3x"></i>
+                    <span>技术文章</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" target="_self">
+                    <i class="iconfont icon-a-wendang3x"></i>
+                    <span>日常随笔</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C/" target="_self">
+                    <i class="iconfont icon-a-jiangzhang3x"></i>
+                    <span>游戏体验</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301191151474.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="python---异常"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-10-17 11:52" pubdate>
+          2020年10月17日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          52 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">python---异常</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><a name="e449cf10"></a></p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><ul>
+<li>首先我们要理解什么叫做**”异常”**？ <ul>
+<li>在程序运行过程中，总会遇到各种各样的问题和错误。</li>
+<li>有些错误是我们编写代码时自己造成的： <ul>
+<li>比如语法错误、调用错误，甚至逻辑错误。</li>
+</ul>
+</li>
+<li>还有一些错误，则是不可预料的错误，但是完全有可能发生的： <ul>
+<li>比如文件不存在、磁盘空间不足、网络堵塞、系统错误等等。</li>
+</ul>
+</li>
+<li>这些导致程序在运行过程中出现异常中断和退出的错误，我们统称为异常。大多数的异常都不会被程序处理，而是以错误信息的形式展现出来。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#0不能被作为除数</span><br><span class="hljs-number">1</span>/<span class="hljs-number">0</span><br>异常信息为：ZeroDivisionError: division by zero<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>异常的分类： <ul>
+<li>异常有很多种类型，Python内置了几十种常见的异常，无需特别导入，直接就可使用。</li>
+<li>需要注意的是，所有的异常都是异常类，首字母是大写的！</li>
+</ul>
+</li>
+<li>异常的危害： <ul>
+<li>如果程序中一旦出现了异常的语句代码，则该异常就会立即中断程序的运行！</li>
+</ul>
+</li>
+<li>因此： <ul>
+<li>为了保证程序的正常运行，提高程序健壮性和可用性。我们应当尽量考虑全面，将可能出现的异常进行处理，而不是留在那里，任由其发生。</li>
+</ul>
+</li>
+<li>python处理异常的机制： <ul>
+<li>Python内置了一套try…except…finally（else）…的异常处理机制，来帮助我们进行异常处理。其基本语法是：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">pass</span><br><span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> ex:<br>    <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>机制说明： <ul>
+<li>首先，执行try子句（在关键字try和关键字except之间的语句） </li>
+<li>如果没有异常发生，忽略except子句，try子句执行后结束。 </li>
+<li>如果在执行try子句的过程中发生了异常，那么try子句余下的部分将被忽略。如果异常的类型和 except 之后的名称相符，那么对应的except子句将被执行。 </li>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;发生异常之前的语句正常执行&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">1</span>/<span class="hljs-number">0</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;发生异常之后的语句不会被执行&quot;</span>)<br><span class="hljs-keyword">except</span> ZeroDivisionError <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(e)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>如果程序发生的异常不在你的捕获列表中，那么依然会抛出别的异常: </li>
+<li></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 未捕获到异常，程序直接报错</span><br>s1 = <span class="hljs-string">&#x27;hello&#x27;</span><br><span class="hljs-keyword">try</span>:<br>    <span class="hljs-built_in">int</span>(s1)<br><span class="hljs-keyword">except</span> IndexError <span class="hljs-keyword">as</span> ex:    <span class="hljs-comment"># 本例为非法值异常，而你只捕获索引异常</span><br>    <span class="hljs-built_in">print</span>(ex)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>Exception是什么？ <ul>
+<li>在Python的异常中，有一个通用异常：<code>Exception</code>，它可以捕获任意异常。</li>
+<li>思考：那么既然有这个什么都能管的异常，其他诸如OSError、ZeroDivisionError的异常是不是就可以不需要了？ <ul>
+<li>当然不是！很多时候程序只会弹出那么几个异常，没有必要针对所有的异常进行捕获，那样的效率会很低。另外，根据不同的异常种类，制定不同的处理措施，用于准确判断错误类型，存储错误日志，都是非常有必要甚至强制的。</li>
+</ul>
+</li>
+<li>常见的异常类型：</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>异常名</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AttributeError</td>
+<td>试图访问一个对象没有的属性</td>
+</tr>
+<tr>
+<td>IOError</td>
+<td>输入&#x2F;输出异常</td>
+</tr>
+<tr>
+<td>ImportError</td>
+<td>无法引入模块或包；多是路径问题或名称错误</td>
+</tr>
+<tr>
+<td>IndentationError</td>
+<td>缩进错误</td>
+</tr>
+<tr>
+<td>IndexError</td>
+<td>下标索引错误</td>
+</tr>
+<tr>
+<td>KeyError</td>
+<td>试图访问不存在的键</td>
+</tr>
+<tr>
+<td>KeyboardInterrupt</td>
+<td>Ctrl+C被按下，键盘终止输入</td>
+</tr>
+<tr>
+<td>NameError</td>
+<td>使用未定义的变量</td>
+</tr>
+<tr>
+<td>SyntaxError</td>
+<td>语法错误</td>
+</tr>
+<tr>
+<td>TypeError</td>
+<td>传入对象的类型与要求的不符合</td>
+</tr>
+<tr>
+<td>UnboundLocalError</td>
+<td>试图访问一个还未被设置的局部变量</td>
+</tr>
+<tr>
+<td>ValueError</td>
+<td>传入一个调用者不期望的值，即使值的类型是正确的</td>
+</tr>
+<tr>
+<td>OSError</td>
+<td>操作系统执行错误</td>
+</tr>
+</tbody></table>
+<ul>
+<li><h2 id="Python的异常机制具有嵌套处理的能力-比如在函数f3-调用f2-，f2-调用f1-，虽然是在f1-出错了，但只需要在f3-进行异常捕获，不需要每一层都捕获异常"><a href="#Python的异常机制具有嵌套处理的能力-比如在函数f3-调用f2-，f2-调用f1-，虽然是在f1-出错了，但只需要在f3-进行异常捕获，不需要每一层都捕获异常" class="headerlink" title="Python的异常机制具有嵌套处理的能力: -  比如在函数f3()调用f2()，f2()调用f1()，虽然是在f1()出错了，但只需要在f3()进行异常捕获，不需要每一层都捕获异常 "></a>Python的异常机制具有嵌套处理的能力:<br> -  比如在函数f3()调用f2()，f2()调用f1()，虽然是在f1()出错了，但只需要在f3()进行异常捕获，不需要每一层都捕获异常 </h2></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#函数嵌套出现异常</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>/<span class="hljs-number">0</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>():<br>    f1()<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f3</span>():<br>    f2()<br><br>f3()<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>函数嵌套处理异常： </li>
+<li></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>/<span class="hljs-number">0</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>():<br>    f1()<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f3</span>():<br>    f2()<br><br><span class="hljs-keyword">try</span>:<br>    f3()<br><span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(e)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>try…excetion的嵌套 <ul>
+<li>之前我们说过，不是只使用通用的异常类Exception就万事大吉了，为了效率问题，我们需要对常见的异常信息进行精准的捕获，那么如果异常出现在用户层的话，则就需要对用户操作可能会出现的异常进行判断然后精准捕获了，如何操作呢？ <ul>
+<li>如果一个异常没有与任何的except匹配，那么这个异常将会传递给上层的try中。也就是前面说的嵌套处理能力。直到程序最顶端如果还没有被捕获，那么将弹出异常。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;发生异常之前的语句正常执行&quot;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-number">1</span>/<span class="hljs-number">0</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;发生异常之后的语句不会被执行&quot;</span>)<br>    <span class="hljs-keyword">except</span> ValueError <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-built_in">print</span>(e)<br><br><span class="hljs-keyword">except</span> ZeroDivisionError <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;里层没有抓好，只能辛苦我外层了&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<pre><code class="hljs">  -  或者使用一个try和多个except的形式： 
+  -  
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;发生异常之前的语句正常执行&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">1</span>/<span class="hljs-number">0</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;发生异常之后的语句不会被执行&quot;</span>)<br><span class="hljs-keyword">except</span> NameError <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(e)<br><span class="hljs-keyword">except</span> ZeroDivisionError <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我是第一个抓取到除零异常的&quot;</span>)<br><span class="hljs-keyword">except</span> (ValueError,ZeroDivisionError) <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我是备胎&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<pre><code class="hljs">  -  或者在except后面跟一个元组，元组中包含多个异常类 
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">except</span> (RuntimeError, TypeError, NameError):<br>      <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>finally和else子句 <ul>
+<li><code>try except</code>语法还有一个可选的else子句，如果使用这个子句，那么必须放在所有的except子句之后。这个子句将在try子句没有发生任何异常的时候执行： </li>
+<li>同样的，还有一个可选的finally子句。无论try执行情况和except异常触发情况如何，finally子句都会被执行！ </li>
+<li>当然，else和finally同时存在时：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">pass</span><br><span class="hljs-keyword">except</span>:<br>    <span class="hljs-keyword">pass</span><br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;else&quot;</span>)<br><span class="hljs-keyword">finally</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;finally&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>主动抛出异常：raise <ul>
+<li>很多时候，我们需要主动抛出一个异常。Python内置了一个关键字<code>raise</code>，可以主动触发异常。 </li>
+<li>疑问： <ul>
+<li>为什么要自己主动抛出异常？不嫌多事么？因为有的时候，你需要记录错误信息，然后将异常继续往上层传递，让上层去处理异常，如下：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    divNum = <span class="hljs-built_in">input</span>(<span class="hljs-string">&#x27;enter a divNum:&#x27;</span>)<br>    divNum = <span class="hljs-built_in">int</span>(divNum)<br><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-number">1</span>/divNum<br>    <span class="hljs-keyword">except</span> ZeroDivisionError <span class="hljs-keyword">as</span> ex:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;记录异常日志： &quot;</span>, ex)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;但是我自己无法处理，只能继续抛出，看看上层能否处理（甩锅）&quot;</span>)<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;非法录入&#x27;</span>)<br><span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(e)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;用户录入非法数据，请重新输入！&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<pre><code class="hljs">  -  有时候，你需要主动弹出异常，作为警告或特殊处理： 
+  -  
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#用户录入自己的性别：1表示男，2表示女</span><br>sex = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;Please input a number: &quot;</span>))<br><br><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">if</span> sex == <span class="hljs-number">1</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是个男人！&quot;</span>)<br>    <span class="hljs-keyword">elif</span> sex == <span class="hljs-number">0</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是个女人！&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;好像有什么不符合常理的事情发生了！！&quot;</span>)<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;非法的输入&quot;</span>)<br><span class="hljs-keyword">except</span> ValueError:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是个人妖！&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<p><a name="4c718d0b"></a></p>
+<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>在介绍迭代器之前，先说明下迭代的概念：</p>
+<ul>
+<li>迭代： <ul>
+<li>通过for循环遍历”对象”的每一个元素的过程。</li>
+<li>这里的对象指的就是可迭代对象。因此记住：for循环遍历的只能是可迭代的对象。</li>
+</ul>
+</li>
+<li>可迭代类型的对象： <ul>
+<li>在Python中，list&#x2F;tuple&#x2F;string&#x2F;dict&#x2F;set&#x2F;bytes都是可以迭代的数据类型&#x2F;可迭代对象！</li>
+</ul>
+</li>
+<li>如何判定一个对象是否为可迭代对象呢？(了解) <ul>
+<li>可以通过collections模块的Iterable类型作用在isinstance中来判断一个对象是否可迭代</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Iterable<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(<span class="hljs-string">&#x27;abc&#x27;</span>,Iterable))<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>迭代器 </p>
+<ul>
+<li>迭代器是一种可以被遍历的对象，并且能作用于next()函数。 </li>
+<li>性质： <ul>
+<li>迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往后遍历不能回溯，不像列表，你随时可以取后面的数据，也可以返回头取前面的数据。</li>
+</ul>
+</li>
+<li>迭代器通常要实现两个基本的方法：<code>iter()</code> 和 <code>next()</code>。 </li>
+<li>注意： <ul>
+<li>可迭代对象并不一定是迭代器！</li>
+<li>常见的数据结构，字符串、列表、元组都属于可迭代对象，并不是迭代器！</li>
+</ul>
+</li>
+<li>如何创建一个迭代器呢？ <ul>
+<li>字符串，列表或元组对象，甚至自定义对象都可用于创建迭代器：</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>思考：迭代器的作用是什么？ </p>
+<ul>
+<li>可迭代对象的优缺点： <ul>
+<li>可迭代对象的优点：可以直观查看里面的对象，如直接查看列表的内容</li>
+<li>可迭代对象缺点：全部内容要加载至内存中，故占用内存</li>
+</ul>
+</li>
+<li>迭代器的优缺点： <ul>
+<li>优点： <ul>
+<li>提供了一种通用不依赖索引的迭代取值方式；</li>
+<li>节省内存，迭代器在内存中相当于只占一个数据的空间：因为每次取值都上一条数据会在内存释放，加载当前的此条数据。</li>
+</ul>
+</li>
+<li>缺点： <ul>
+<li>因为有next方法，即只能往后取值,不能往前，取值不如按照索引的方式灵活，不能取指定的某一个值</li>
+<li>无法预测迭代器的长度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>总结：迭代器和可迭代的区别？</p>
+</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-number">1</span>.凡是可作用于for循环的对象都是可迭代类型；<br><br><span class="hljs-number">2</span>.凡是可作用于<span class="hljs-built_in">next</span>()函数的对象都是迭代器类型；<br><br><span class="hljs-number">3</span><span class="hljs-selector-class">.list</span>、dict、str等是可迭代的但不是迭代器，因为<span class="hljs-built_in">next</span>()函数无法调用它们。可以通过<span class="hljs-built_in">iter</span>()函数将它们转换成迭代器。<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>自定义迭代器 <ul>
+<li>很多时候，为了让我们自己写的类成为一个迭代器，需要在类里实现<code>__iter__()</code>和<code>__next__()</code>方法 <ul>
+<li>实际上，在使用next()函数的时候，调用的就是迭代器对象的<code>__next__</code>方法</li>
+<li>python要求迭代器本身也是可迭代的，所以我们还要为迭代器实现<code>__iter__</code>方法，而<code>__iter__</code>方法要返回一个迭代器。 <ul>
+<li>迭代器自身正是一个迭代器，所以迭代器的<code>__iter__</code>方法返回自身即可</li>
+</ul>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#迭代生成指定范围数列的平方值</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Squares</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, start, stop</span>):  <span class="hljs-comment"># 迭代起始、终止位</span><br>        <span class="hljs-variable language_">self</span>.start = start<br>        <span class="hljs-variable language_">self</span>.stop = stop<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):     <span class="hljs-comment"># 返回自身的迭代器</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__next__</span>(<span class="hljs-params">self</span>):     <span class="hljs-comment"># 返回下一个元素</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.start &gt; <span class="hljs-variable language_">self</span>.stop:   <span class="hljs-comment"># 结尾时抛出异常</span><br>            <span class="hljs-keyword">raise</span> (StopIteration)<br>        item = <span class="hljs-variable language_">self</span>.start**<span class="hljs-number">2</span><br>        <span class="hljs-variable language_">self</span>.start += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> item<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> Squares(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>):<br>        <span class="hljs-built_in">print</span>(i, end=<span class="hljs-string">&quot; &quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<p><a name="55f730a2"></a></p>
+<h3 id="推导式"><a href="#推导式" class="headerlink" title="推导式"></a>推导式</h3><ul>
+<li>Python语言有一种独特的语法，相当于语法糖的存在，可以帮你在某些场合写出比较精简酷炫的代码。但没有它，也不会有太多的影响。Python语言有几种不同类型的推导式 <ul>
+<li>列表推导式</li>
+<li>字典推导式</li>
+<li>集合推导式</li>
+<li>元组推导式?</li>
+</ul>
+</li>
+<li>列表推导式 <ul>
+<li>列表推导式是一种快速生成列表的方式。其形式是用方括号括起来的一段语句，如下例子所示：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">alist = [x*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>)]<br><span class="hljs-built_in">print</span>(alist)<br><span class="hljs-comment">############上下两组代码是等效</span><br>alist = []<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>):<br>    alist.append(x*<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(alist)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>列表推导式要这么理解，首先执行for循环，对于遍历的每一个x，代入x*x表达式中进行运算，将运算结果逐一添加到一个新列表内，循环结束，得到最终列表。它相当于下面的代码：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">alist = []<br>  <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>):<br>    alist.append(x*<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(alist)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>作用： <ul>
+<li>列表推导式为我们提供了一种在一行内实现较为复杂逻辑的生成列表的方法。其核心语法是用中括号[]将生成逻辑封装起来。当然列表推导式也有多样用法</li>
+</ul>
+</li>
+<li>增加条件语句</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">alist = [x * x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">11</span>) <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>]<br><span class="hljs-built_in">print</span>(alist)<br><br><span class="hljs-comment">##############相当于如下代码</span><br>alist_1 = []<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">11</span>):<br>    <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:<br>        alist_1.append(x*x)<br><span class="hljs-built_in">print</span>(alist_1)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>多重循环</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">re = [a+b <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;123&#x27;</span> <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;abc&#x27;</span>]<br><span class="hljs-built_in">print</span>(re)<br><br><span class="hljs-comment">#############</span><br>alist = []<br><span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;123&#x27;</span>:<br>    <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;abc&#x27;</span>:<br>        alist.append(a+b)<br><span class="hljs-built_in">print</span>(alist)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>字典推导式 <ul>
+<li>既然使用中括号[]可以编写列表推导式，那么使用大括号呢？你猜对了！使用大括号{}可以制造字典推导式！</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">dic = &#123;x:x**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> [<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>]&#125;<br><span class="hljs-built_in">print</span>(dic)<br><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">dic = &#123;&#125;</span><br><span class="hljs-string">for x in [2,4,6]:</span><br><span class="hljs-string">    dic[x] = x**2</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>注意x: x**2的写法，中间的冒号，表示左边的是key右边的是value。 </li>
+<li>集合推导式 <ul>
+<li>大括号除了能用作字典推导式，还可以用作集合推导式，两者仅仅在细微处有差别。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">a = &#123;x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;aabbccddeeff&#x27;</span>&#125;<br><span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>元组推导式 <ul>
+<li>使用了中括号和大括号，那么使用圆括号，是不是元组推导式？想法不错，但事实却没有。圆括号在Python中被用作生成器的语法了，很快我们就会讲到，没有元组推导式。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">a = (x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;aabbccddeeff&#x27;</span>)<br><span class="hljs-built_in">print</span>(a)<br><span class="hljs-comment">#&lt;generator object &lt;genexpr&gt; at 0x102f45970&gt;</span><br><span class="hljs-comment">#返回的是一个生成器对象</span><br></code></pre></td></tr></table></figure>
+
+
+<p><a name="1a34b8d9"></a></p>
+<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><ul>
+<li>在Python这门语言中，生成器毫无疑问是最有用的特性之一。 </li>
+<li>与此同时，也是使用的最不广泛的Python特性之一 </li>
+<li>究其原因，主要是因为，在其他主流语言里面没有生成器的概念。正是由于生成器是一个“新”的东西，所以，它一方面没有引起广大工程师的重视，另一方面，也增加了工程师的学习成本，最终导致大家错过了Python中如此有用的一个特性。那到底什么是生成器呢？ </li>
+<li>有时候，序列或集合内的元素的个数非常巨大，如果全制造出来并放入内存，对计算机的压力是非常大的。 <ul>
+<li>比如，假设需要获取一个10**20次方如此巨大的数据序列，把每一个数都生成出来，并放在一个内存的列表内，如果使用这种粗暴的方式，你能确保你的计算机会有如此大的内存么？</li>
+<li>那么如果元素可以按照某种算法推算出来，需要该元素的话那就计算到哪个元素，那么就可以在循环的过程中不断推算出后续的元素，而不必创建完整的元素集合，从而节省大量的空间。在Python中，这种一边循环一边计算出元素的机制，称为生成器：generator。</li>
+<li>因此：<strong>生成器是一种特殊的迭代器，生成器自动实现了“迭代器协议”（即__iter__和next方法）</strong>，不需要再手动实现两方法。</li>
+</ul>
+</li>
+<li><strong>下面，我们一起来看看如何创建一个生成器！2种方式</strong> <ul>
+<li>生成器推导式(忽略)</li>
+<li>for循环,yield关键字</li>
+</ul>
+</li>
+<li>生成器推导式：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">a = (x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;aabbccddeeff&#x27;</span>)<br><span class="hljs-built_in">print</span>(a)<span class="hljs-comment">#生成器对象</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>可以通过next()函数获得generator的下一个返回值：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">a = (x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;aabbccddeeff&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(a))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(a))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(a))<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">g = (x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> g:<br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>yield关键字创建生成器(重点) <ul>
+<li>在 Python中，使用yield返回的函数会变成一个生成器（generator）。 在调用生成器的过程中，每次遇到yield时函数会暂停并保存当前所有的运行信息，返回yield的值。并在下一次执行next()方法时从当前位置继续运行。下面重点理解yield关键字的使用： <ul>
+<li>yield 是一个类似 return 的关键字，只是这个函数返回的是个生成器</li>
+<li>当你调用这个函数的时候，函数内部的代码并不立马执行 ，这个函数只是返回一个生成器对象</li>
+<li>当你使用for进行遍历的时候或者调用next函数后，函数中的代码才会执行</li>
+</ul>
+</li>
+<li>简单示例代码：函数体通过for循环结合yield返回一个生成器</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">createGenerator</span>():<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;我是循环体！&#x27;</span>)<br>        <span class="hljs-keyword">yield</span> i*i <span class="hljs-comment">#使用了yield返回的结果而不是用return</span><br>g = createGenerator()<br><span class="hljs-built_in">print</span>(g)<br><span class="hljs-comment">#&lt;generator object createGenerator at 0x104bc5970&gt;</span><br>v1 = <span class="hljs-built_in">next</span>(g)<br><span class="hljs-built_in">print</span>(v1)<br><span class="hljs-comment">#我是循环体！</span><br><span class="hljs-comment">#0</span><br>v2 = <span class="hljs-built_in">next</span>(g)<br><span class="hljs-built_in">print</span>(v2)<br><span class="hljs-comment">#我是循环体！</span><br><span class="hljs-comment">#1</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>思考：下述函数的执行结果是什么？</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">yieldTest</span>():<br>    i = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> i &lt; <span class="hljs-number">3</span>:<br>        temp = <span class="hljs-keyword">yield</span> i <span class="hljs-comment">#赋值语句一定是先执行等号右侧的，在执行等号左侧</span><br>        <span class="hljs-built_in">print</span>(temp)<br>        i += <span class="hljs-number">1</span><br>     <span class="hljs-comment">#在生成器函数实现内部是可以向yield后面写代码</span><br>        <br>obj = yieldTest()<span class="hljs-comment">#创建一个生成器对象</span><br>v1 = <span class="hljs-built_in">next</span>(obj)<br><span class="hljs-built_in">print</span>(v1) <span class="hljs-comment">#执行结果：0</span><br><br>v2 = <span class="hljs-built_in">next</span>(obj)<br><span class="hljs-built_in">print</span>(v2) <span class="hljs-comment">#执行结果：None 1</span><br></code></pre></td></tr></table></figure>
+
+<p><a name="f90ead4e"></a></p>
+<h3 id="装饰器-了解"><a href="#装饰器-了解" class="headerlink" title="装饰器(了解)"></a>装饰器(了解)</h3><ul>
+<li>装饰器（Decorator）： <ul>
+<li>从字面上理解，就是装饰对象的器件。 </li>
+<li>就是可以在不修改原有代码的情况下，为被装饰的对象增加新的功能或者附加限制条件。 </li>
+<li>装饰器有很多种，有函数的装饰器，也有类的装饰器。装饰器在很多语言中的名字也不尽相同，它体现的是设计模式中的装饰模式。 </li>
+<li>装饰器的语法是将@装饰器名，放在被装饰对象上面。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@dec</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>():<br>  <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">def</span> <span class="hljs-title function_">outer</span>(<span class="hljs-params">f</span>)<span class="hljs-symbol">:</span><span class="hljs-comment">#2.f == func 将被装饰函数的名字传递给参数f</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">inner</span>():<br>        <span class="hljs-comment">#6.执行inner函数体操作</span><br>        f() <span class="hljs-comment">#6.1.调用原先的func函数</span><br>        print(<span class="hljs-string">&#x27;注册功能&#x27;</span>) <span class="hljs-comment">#6.2 执行添加的新功能</span><br>    <span class="hljs-keyword">return</span> inner <span class="hljs-comment">#3.此处的返回值会返回给被装饰函数的名字</span><br><br><span class="hljs-variable">@outer</span>  <span class="hljs-comment">#1.调用outer装饰器函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(): <span class="hljs-comment">#4. func == inner</span><br>    print(<span class="hljs-string">&#x27;登录功能&#x27;</span>)<br><br>func() <span class="hljs-comment">#5.func() == inner()</span><br><span class="hljs-comment">#需求：给func函数增添一个注册功能</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>在进行装饰器的介绍之前，我们必须先明确几个概念和原则： <ul>
+<li>首先，Python程序是从上往下顺序执行的,而且碰到函数的定义代码块是不会立即执行的，只有等到该函数被调用时，才会执行其内部的代码块</li>
+<li>其次，由于顺序执行的原因，如果你真的对同一个函数定义了两次，那么，后面的定义会覆盖前面的定义。因此，在Python中代码的放置位置是有区别的，不能随意摆放，通常函数体要放在调用的语句之前。</li>
+</ul>
+</li>
+<li>虚拟场景 <ul>
+<li>有一个大公司，下属的基础平台部负责内部应用程序及API的开发。另外还有上百个业务部门负责不同的业务，这些业务部门各自调用基础平台部提供的不同函数，也就是API处理自己的业务，情况如下：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#基础平台部门开发了上百个函数的API</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门1的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门2的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f3</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门3的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f100</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门100的数据接口......&#x27;</span>)<br>  <br><span class="hljs-comment">#各部分分别调用自己部分的API</span><br>f1()<br>f2()<br>f3()<br>f100()<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>公司还在创业初期时，基础平台部就开发了这些函数。由于各种原因，比如时间紧，比如人手不足，比如架构缺陷，比如考虑不周等等，没有为函数的调用进行安全认证。现在，公司发展壮大了，不能再像初创时期的“草台班子”一样将就下去了，基础平台部主管决定弥补这个缺陷，于是： <ul>
+<li>第一天：主管叫来了一个运维工程师，工程师跑上跑下逐个部门进行通知，让他们在代码里加上认证功能，然后，当天他被开除了。 </li>
+<li>第二天：主管叫来了一个python自动化开发工程师。哥们是这么干的，只对基础平台的代码进行重构，让N个业务部门无需做任何修改。这哥们很快也被开了，连运维也没得做。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#基础平台部门开发了上百个函数的API</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>  <span class="hljs-comment">#加入认证程序代码</span><br>  xxx<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门1的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>():<br>  <span class="hljs-comment">#加入认证程序代码</span><br>  xxx<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门2的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f3</span>():<br>  <span class="hljs-comment">#加入认证程序代码</span><br>  xxx<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门3的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f100</span>():<br>  <span class="hljs-comment">#加入认证程序代码</span><br>  xxx<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门100的数据接口......&#x27;</span>)<br>  <br><span class="hljs-comment">#各部分分别调用自己部分的API</span><br>f1()<br>f2()<br>f3()<br>f100()<br></code></pre></td></tr></table></figure>
+
+
+<pre><code class="hljs">  -  第三天：主管又换了个开发工程师。他是这么干的：定义个认证函数，在原来其他的函数中调用它，代码如下: 
+  -  
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#基础平台部门开发了上百个函数的API</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">cheak</span>():<br>  <span class="hljs-keyword">pass</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>  cheak()<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门1的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>():<br>  cheak()<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门2的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f3</span>():<br>  cheak()<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门3的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f100</span>():<br>  cheak()<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门100的数据接口......&#x27;</span>)<br>  <br><span class="hljs-comment">#各部分分别调用自己部分的API</span><br>f1()<br>f2()<br>f3()<br>f100()<br></code></pre></td></tr></table></figure>
+
+
+<pre><code class="hljs">  -  但是主管依然不满意，不过这一次他解释了为什么。 
+     - 主管说：写代码要遵循开放封闭原则，简单来说，已经实现的功能代码内部不允许被修改，但外部可以被扩展。如果将开放封闭原则应用在上面的需求中，那么就是不允许在函数f1 、f2、f3......f100的内部进行代码修改，但是可以在外部对它们进行扩展。
+  -  第四天：已经没有时间让主管找别人来干这活了，他决定亲自上阵，使用装饰器完成这一任务，并且打算在函数执行后再增加个日志功能。主管的代码如下： 
+  -  
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">outer</span>(<span class="hljs-params">func</span>):<br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">inner</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;认证功能操作&#x27;</span>)<br>    result = func()<br>    <span class="hljs-keyword">return</span> result<br>  <span class="hljs-keyword">return</span> inner<br><br><span class="hljs-comment">#基础平台部门开发了上百个函数的API</span><br><span class="hljs-meta">@outer</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门1的数据接口......&#x27;</span>)<br><span class="hljs-meta">@outer  </span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门2的数据接口......&#x27;</span>)<br><span class="hljs-meta">@outer</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f3</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门3的数据接口......&#x27;</span>)<br><span class="hljs-meta">@outer</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f100</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门100的数据接口......&#x27;</span>)<br>  <br><span class="hljs-comment">#各部分分别调用自己部分的API</span><br>f1()<br>f2()<br>f3()<br>f100()<br></code></pre></td></tr></table></figure>
+
+
+<pre><code class="hljs">  -  使用装饰器@outer，也是仅需对基础平台的代码进行拓展，就可以实现在其他部门调用函数API之前都进行认证操作，并且其他业务部门无需对他们自己的代码做任何修改，调用方式也不用变。 
+</code></pre>
+<ul>
+<li>装饰器机制分析 <ul>
+<li>下面以f1函数为例，对装饰器的运行机制进行分析：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#1.定义一个装饰器</span><br><span class="hljs-comment">#装饰器outer是有特殊要求的：</span><br><span class="hljs-comment">#要求1：装饰器函数必须要有一个参数（表示的是被装饰函数的函数名）</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">outer</span>(<span class="hljs-params">func</span>): <span class="hljs-comment">#step2.func == f1</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">inner</span>():<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;给f1函数增添的安全认证功能&#x27;</span>)<br>        func() <span class="hljs-comment">#step3:等同于在调用f1()</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;给f1函数增加了数据检测的功能&#x27;</span>)<br>    <span class="hljs-keyword">return</span> inner<span class="hljs-comment">#step4：inner表示的是内部函数的名字，该函数名就会替换被装饰的函数名</span><br>    <span class="hljs-comment">#2.使用定义好的装饰器，去装饰某一个函数（在不修改函数原有代码的基础上给其增添新的功能）</span><br>    <span class="hljs-comment">#如果装饰器装饰了一个函数，则装饰器函数就会被自动调用</span><br><span class="hljs-meta">@outer </span><span class="hljs-comment"># step1.调用装饰器函数，且将被装饰的函数名传递给装饰器函数的参数</span><br><span class="hljs-comment">#使用outer装饰器装饰f1函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>(): <span class="hljs-comment">#step5：f1 == inner; inner()函数调用就是在调用f1()</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;业务部门1的数据接口......&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>(): <span class="hljs-comment">#f2是没有被outer装饰的</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;f2函数的原有实现&#x27;</span>)<br><br>f1() <span class="hljs-comment">#实际上就是在调用inner()</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>思考：为什么我们要搞一个outer函数一个inner函数这么复杂呢？一层函数不行吗？ <ul>
+<li>请注意，@outer这句代码在程序执行到这里的时候就会自动执行outer函数内部的代码，如果不封装一下，在业务部门还未进行调用的时候，就执行了，这和初衷不符。当然，如果你对这个有需求也不是不行。</li>
+</ul>
+</li>
+<li>带参装饰器 <ul>
+<li>上面的例子中，f1函数没有参数，在实际情况中肯定会需要参数的，函数的参数怎么传递的呢？ </li>
+<li>在inner函数的定义部分也加上一个参数，调用func函数的时候传递这个参数：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">outer</span>(<span class="hljs-params">func</span>):<span class="hljs-comment">#2.func == f1</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">inner</span>(<span class="hljs-params">n</span>): <span class="hljs-comment">#3.n == name,n就是被装饰函数的参数</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;新功能！&#x27;</span>)<br>        func(n) <span class="hljs-comment">#4.func(n) == f1(n)</span><br>    <span class="hljs-keyword">return</span> inner <span class="hljs-comment">#5.inner就会覆盖原先的被装饰函数名f1</span><br><br><span class="hljs-meta">@outer </span><span class="hljs-comment">#1.调用装饰器函数，将被装饰的函数名f1作为实参，传递给outer的形参</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>(<span class="hljs-params">name</span>): <span class="hljs-comment">#6.f1 == inner</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;f1的原有功能，f1的参数值为：&#x27;</span>,name)<br><br>f1(<span class="hljs-string">&#x27;bobo&#x27;</span>) <span class="hljs-comment">#7.inner(&#x27;bobo&#x27;)</span><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" class="category-chain-item">技术文章</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/python/" class="print-no-link">#python</a>
+      
+        <a href="/tags/%E5%BC%82%E5%B8%B8/" class="print-no-link">#异常</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>python---异常</div>
+      <div>https://rofgd.github.io/2020/10/17/python---异常/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ReadPond</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年10月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/17/python---%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="python---并发编程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">python---并发编程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/17/%E5%B7%A5%E5%85%B7%E8%AF%B4%E6%98%8E%E4%B9%A601/" title="工具说明书01">
+                        <span class="hidden-mobile">工具说明书01</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

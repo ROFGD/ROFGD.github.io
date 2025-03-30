@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="方法,Java">
+  
+    <meta name="description" content="1.方法概述 我们先不讲方法是什么，先来看一段代码，分析以下程序存在哪些缺点，应该如何去改进：  123456789101112131415161718192021222324&#x2F;*需求：为两个数字，提供求和，以及以指定的方式在控制台打印打印的方式是：a+b&#x3D;c*&#x2F;int a1 &#x3D; 10;int b1 &#x3D; 20;System.out.println(a1+&quot;+&quot;+b1+&amp;quot">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JavaSe基础---方法">
+<meta property="og:url" content="https://rofgd.github.io/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/JavaSe%E5%9F%BA%E7%A1%80---%E6%96%B9%E6%B3%95.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="1.方法概述 我们先不讲方法是什么，先来看一段代码，分析以下程序存在哪些缺点，应该如何去改进：  123456789101112131415161718192021222324&#x2F;*需求：为两个数字，提供求和，以及以指定的方式在控制台打印打印的方式是：a+b&#x3D;c*&#x2F;int a1 &#x3D; 10;int b1 &#x3D; 20;System.out.println(a1+&quot;+&quot;+b1+&amp;quot">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301181443157.png">
+<meta property="article:published_time" content="2020-05-06T07:56:48.000Z">
+<meta property="article:modified_time" content="2025-03-30T12:15:19.426Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="JavaSe">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301181443157.png">
+  
+  
+  
+  <title>JavaSe基础---方法 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" target="_self">
+                    <i class="iconfont icon-a-yingyongchengxu3x"></i>
+                    <span>技术文章</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" target="_self">
+                    <i class="iconfont icon-a-wendang3x"></i>
+                    <span>日常随笔</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C/" target="_self">
+                    <i class="iconfont icon-a-jiangzhang3x"></i>
+                    <span>游戏体验</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301181439151.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JavaSe基础---方法"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h2 id="1-方法概述"><a href="#1-方法概述" class="headerlink" title="1.方法概述"></a>1.方法概述</h2><ul>
+<li>我们先不讲方法是什么，先来看一段代码，分析以下程序存在哪些缺点，应该如何去改进：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*</span><br><span class="hljs-comment">需求：</span><br><span class="hljs-comment">为两个数字，提供求和，以及以指定的方式在控制台打印</span><br><span class="hljs-comment">打印的方式是：a+b=c</span><br><span class="hljs-comment">*/</span><br><span class="hljs-type">int</span> <span class="hljs-variable">a1</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">b1</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;<br>System.out.println(a1+<span class="hljs-string">&quot;+&quot;</span>+b1+<span class="hljs-string">&quot;=&quot;</span>+(a1+b1));<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">需求：</span><br><span class="hljs-comment">为两个数字，提供求和，以及以指定的方式在控制台打印</span><br><span class="hljs-comment">打印的方式是：a+b=c</span><br><span class="hljs-comment">*/</span><br><span class="hljs-type">int</span> <span class="hljs-variable">a2</span> <span class="hljs-operator">=</span> <span class="hljs-number">100</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">b2</span> <span class="hljs-operator">=</span> <span class="hljs-number">200</span>;<br>System.out.println(a1+<span class="hljs-string">&quot;+&quot;</span>+b1+<span class="hljs-string">&quot;=&quot;</span>+(a1+b1));<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">需求：</span><br><span class="hljs-comment">为两个数字，提供求和，以及以指定的方式在控制台打印</span><br><span class="hljs-comment">打印的方式是：a+b=c</span><br><span class="hljs-comment">*/</span><br><span class="hljs-type">int</span> <span class="hljs-variable">a3</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">b3</span> <span class="hljs-operator">=</span> <span class="hljs-number">2000</span>;<br>System.out.println(a1+<span class="hljs-string">&quot;+&quot;</span>+b1+<span class="hljs-string">&quot;=&quot;</span>+(a1+b1));<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181455513.png" srcset="/img/loading.gif" lazyload></li>
+<li>以上代码完成了三个求和的功能，每一次求和的时候都把代码重新写了一遍，显然代码没有得到“重复利用”，表面上看是三个功能，但实际上只是“一个”求和功能，只不过每一次参与求和的实际数值不同。<br>我们现在需要一种方式能让我们把功能性代码写一次，然后给这个功能性代码传递不同的数据，来完成对应的功能。</li>
+<li>这就需要我们掌握 java 语言中的方法机制，接下来大家看看改进之后的代码：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">a1</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">b1</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;<br>add(a1,b1);<br> <br><span class="hljs-type">int</span> <span class="hljs-variable">a2</span> <span class="hljs-operator">=</span> <span class="hljs-number">100</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">b2</span> <span class="hljs-operator">=</span> <span class="hljs-number">200</span>;<br>add(a2,b2);<br> <br><span class="hljs-type">int</span> <span class="hljs-variable">a3</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">b3</span> <span class="hljs-operator">=</span> <span class="hljs-number">2000</span>;<br>add(a3,b3);<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span>&#123;<br>System.out.println(a+<span class="hljs-string">&quot;+&quot;</span>+b+<span class="hljs-string">&quot;=&quot;</span>+(a+b));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>通过以上程序我们可以看出，其实方法也没什么神秘的，方法其实就是一段普通的代码片段，并且这段代码可以完成某个特定的功能，而且可以被<strong>重复的调用&#x2F;使用</strong>。java 中的方法又叫做method，在C 语言中叫做函数。</li>
+<li>从现在开始大家以后在写代码的时候就要有定义方法的意识了，只要是可以独立出来的功能，我们都可以定义为单独的一个方法来完成，如果以后需要使用此功能时直接调用这个方法就行了，这样就会有效增强代码的”可复用性”了。</li>
+<li>总结以上，就可以轻易的得到方法的定义了。<ul>
+<li><strong>方法：就是一段可以完成某个特定功能的并且可以被重复利用<br>的代码片段。</strong><br>  <a name="PZNAy"></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-方法的使用"><a href="#2-方法的使用" class="headerlink" title="2. 方法的使用"></a>2. 方法的使用</h2><ul>
+<li>定义&#x2F;声明方法的语法格式如下所示：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sumInt</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span>&#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> a + b;<br>    System.out.println(a + <span class="hljs-string">&quot;+&quot;</span> b + <span class="hljs-string">&quot;=&quot;</span> + c)<br>&#125;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">* [修饰符列表] 返回值类型 方法名(形式参数列表)&#123;</span><br><span class="hljs-comment">*		方法体；        </span><br><span class="hljs-comment">*&#125;</span><br><span class="hljs-comment">* public static------&gt;是修饰符列表</span><br><span class="hljs-comment">* void-------&gt;是返回值类型</span><br><span class="hljs-comment">* sumInt------&gt;是方法名</span><br><span class="hljs-comment">* (int a,int b)----&gt;形式参数列表(形参)，每一个形参都是局部变量</span><br><span class="hljs-comment">* 形参后面使用一对儿花括号，花括号当中的就是方法体，方法体是完成功能的核心代码，</span><br><span class="hljs-comment">* 方法体中的代码有执行顺序要求，遵循自上而下的顺序依次逐行执行，不存在跳行执行的情况</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumInt</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span>&#123;   <span class="hljs-comment">// sumInt之前的int为返回值类型</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> a + b;<br>    <span class="hljs-keyword">return</span> c;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>接下来我将列出方法的相关规则，其中一些规则目前可能需要大家死记硬背，还有一些规则希望大家在理解的前提下进行记忆：<ul>
+<li>（1）<strong>[修饰符列表]</strong>，此项是可选项，不是必须的，目前大家统一写成public static，后面的课程会详细讲解。</li>
+<li>（2）<strong>返回值类型</strong>，此项可以是java 语言当中任何一种数据类型，包括基本数据类型，也包括所有的引用数据类型，当然，如果一个方法执行结束之后不准备返回任何数据，则返回值类型必须写void。返回值的类型例如：byte,short,int,long,float,double,boolean,char,String,void 等。</li>
+<li>（3）<strong>方法名</strong>，此项需要是合法的标识符，开发规范中要求方法名首字母小写，后面每个单词首字母大写，遵循驼峰命名方式，见名知意，例如：login、getUsername、findAllUser 等。</li>
+<li>（4）<strong>形式参数列表</strong>(int a, int b)，此项又被称为形参，其实<strong>每一个形参都是“局部变量</strong>”，形参的个数为0~N 个，如果是多个参数，则采用半角“,”进行分隔，形参中起<strong>决定性</strong>作用的是参数的<strong>数据类型</strong>，参数名就是变量名，变量名是可以修改的，也就是说(int a , int b)也可以写成(int x , int y)。</li>
+<li>（5）<strong>方法体</strong>，由一对儿大括号括起来，在形参的后面，这个大括号当中的是实现功能的核心代码，方法体由java 语句构成，方法体当中的代码只能遵循<strong>自上而下</strong>的顺序依次逐行执行，不能跳行执行，核心代码在执行过程中如果需要外部提供数据，则通过形参进行获取。</li>
+<li>（6）<strong>方法调用</strong>，当一个方法声明之后，我们应该如何去让这个方法执行呢，当然，这个时候就需要亲自去调用这个方法了，调用方法的语法格式是（前提是方法的修饰符列表中带<strong>有static 关键字</strong>）：“<strong>类名.方法名(实际参数列表)</strong>;”</li>
+<li>注意：现在学习的方法都是带有<strong>static</strong>关键字的，也就是使用<strong>类</strong>就能够进行<strong>直接调用</strong>的，将来还有<strong>不带有static关键字</strong>的方法，是<strong>只有对象才能够调用</strong>的方法。</li>
+<li>（7）关于<strong>实参</strong>，方法在调用的时候，实际传给这个方法的数据被称为实际参数列表，简称实参，java 语法中有这样的规定：<strong>实参和形参必须一一对应</strong>，所谓的一一对应就是，个数要一样，<strong>数据类型要对应相同</strong>。例如：实参(100 , 200)对应的形参(int x , int y)，如果不是一一对应则编译器就会报错。当然也可能会存在自动类型转换，例如：实参(100 , 200)也可以传递给这样的形参(long a , long b)。</li>
+<li>（8）当在 a()方法执行过程中调用 b()方法的时候，并且 a()方法和 b()方法在同一个类当中，此时“类名.”可以省略不写，但如果 a()方法和 b()方法不在同一个类当中，“类名.”则不能省略。</li>
+</ul>
+</li>
+<li>方法定义总结：整体来说方法的声明语法是很简单的，我相信每个人都能记住，其实我觉得方法的定义难度最大的不是语法，而是方法在定义的时候，返回值类型定为什么类型比较合适？方法的形式参数列表中定义几个参数合适？每个参数的数据类型定义为什么比较合适？方法的定义要不要传参数？传什么参数？要不要返回值？要什么返回值？这一切的设计都是由需求做决定的！！！<br>  <a name="S3BOb"></a></li>
+</ul>
+<h2 id="3-方法的返回值"><a href="#3-方法的返回值" class="headerlink" title="3.方法的返回值"></a>3.方法的返回值</h2><p><a name="N9MO3"></a></p>
+<h3 id="3-1返回值概述"><a href="#3-1返回值概述" class="headerlink" title="3.1返回值概述"></a>3.1返回值概述</h3><ul>
+<li>每个方法都是为了完成某个特定的功能，例如：登录功能、求和功能等，既然是功能，那么当这个功能完成之后，大多数情况下都会有一个结果的，比如，登录成功了或者失败了（true&#x2F;false），求和之后最后的结果是100 或者200，等等。这个结果本质上就是一个数据，那么既然是一个数据，就一定会有对应的类型，所以在方法定义的时候需要指定该方法的返回值类型。（注意：开发中也经常会设计没有返回值的方法）</li>
+<li>java 语言中方法的返回值类型可以是任何一种数据类型，包括基本数据类型，也包括引用数据类型，例如：byte,short,int,long,float,double,boolean,char,String,Student（自定义类）等。当然，如果这个方法在执行完之后不需要返回任何数据，返回值类型必须写 void 关键字，不能空着不写。<br>  <a name="ZJ6Jc"></a></li>
+</ul>
+<h2 id="4-方法执行过程中内存的变化"><a href="#4-方法执行过程中内存的变化" class="headerlink" title="4.方法执行过程中内存的变化"></a>4.方法执行过程中内存的变化</h2><p><a name="VSdhq"></a></p>
+<h3 id="4-1栈数据结构"><a href="#4-1栈数据结构" class="headerlink" title="4.1栈数据结构"></a>4.1栈数据结构</h3><ul>
+<li>常见的数据结构有哪些呢？例如：栈、队列、链表、数组、树、图、堆、散列表等。目前我们先来学习一下栈（stack）数据结构，这是一种非常简单的数据结构。<br>如图所示：</li>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181455053.png" srcset="/img/loading.gif" lazyload></li>
+<li>栈（stack），它是一种运算受限的线性表。其限制是：仅允许在表的一端进行插入和删除运算。这一端被称为栈顶，相对地，把另一端称为栈底。向一个栈插入新元素又称作进栈、入栈或压栈（push），它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素；从<br>一个栈删除元素又称作出栈、退栈或弹栈（pop），它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素。</li>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181455084.png" srcset="/img/loading.gif" lazyload></li>
+<li>通过以上的学习，我们可以得知栈数据结构存储数据有这样的特点：<strong>先进后出</strong>，或者<strong>后进先出</strong>原则。也就是说最先进去的元素一定是最后出去，最后进去的元素一定是最先出去，因为一端是开口的，另一端是封闭的。<br>  <a name="k7XIv"></a></li>
+</ul>
+<h3 id="4-2方法执行过程中内存的变化"><a href="#4-2方法执行过程中内存的变化" class="headerlink" title="4.2方法执行过程中内存的变化"></a>4.2方法执行过程中内存的变化</h3><ul>
+<li>对于虚拟机中的内存结构，目前我们只研究其中的“栈”。方法在执行过程中需要的内存空间在栈中分配。开始调用main 方法，main 方法被调用的瞬间，会给main 方法在“栈”内存中分配所属的活动空间，此时发生压栈动作，main 方法的活动空间处于栈底。也就是说，方法只定义不去调用的话，只是把它的代码片段存储在方法区当中，java 虚拟机是不会在栈内存当中给该方法分配活动空间的，只有在调用的瞬间，java 虚拟机才会在“栈内存”当中给该方法分配活动空间，此时发生压栈动作，直到这个方法执行结束的时候，这个方法在栈内存中所对应的活动空间就会释放掉，此时发生弹栈动作。由于栈的特点是先进后出，所以最先调用的方法（最先压栈）一定是最后结束的（最后弹栈）。比如：main 方法最先被调用，那么它一定是最后一个结束的。换句话说：main 方法结束了，程序也就结束了。案例：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MethodTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;main begin&quot;</span>);<br>        m1();<br>        System.out.println(<span class="hljs-string">&quot;main over&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">m1</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;m1 begin&quot;</span>);<br>        m2();<br>        System.out.println(<span class="hljs-string">&quot;m1 over&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">m2</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;m2 begin&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;m2 over&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><br>执行结果：</p>
+<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181501418.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
+<li>通过执行结果我们了解到，main 方法最先被调用，但是它是最后结束的，其中 m2方法最后被调用，但它是最先结束的。大家别忘了调用的时候分配内存是压栈，结束的时候是释放内存弹栈。<br>  <a name="iyemI"></a></li>
+</ul>
+<h2 id="5-方法重载-overload"><a href="#5-方法重载-overload" class="headerlink" title="5.方法重载&#x2F;overload"></a>5.方法重载&#x2F;overload</h2><ul>
+<li>关于方法重载是什么，以及怎么进行重载，这些我们目前先不去研究，先来看看以下代码不使用方法重载机制，存在哪些缺点？</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">x1</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">x2</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">retValue1</span> <span class="hljs-operator">=</span> sumInt(x1 , x2);<br>    System.out.println(x1 + <span class="hljs-string">&quot;+&quot;</span> + x2 + <span class="hljs-string">&quot;=&quot;</span> + retValue1);<br>    <span class="hljs-type">long</span> <span class="hljs-variable">y1</span> <span class="hljs-operator">=</span> <span class="hljs-number">10L</span>;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">y2</span> <span class="hljs-operator">=</span> <span class="hljs-number">20L</span>;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">retValue2</span> <span class="hljs-operator">=</span> sumLong(y1 , y2);<br>    System.out.println(y1 + <span class="hljs-string">&quot;+&quot;</span> + y2 + <span class="hljs-string">&quot;=&quot;</span> + retValue2);<br>    <span class="hljs-type">double</span> <span class="hljs-variable">z1</span> <span class="hljs-operator">=</span> <span class="hljs-number">10.0</span>;<br>    <span class="hljs-type">double</span> <span class="hljs-variable">z2</span> <span class="hljs-operator">=</span> <span class="hljs-number">20.0</span>;<br>    <span class="hljs-type">double</span> <span class="hljs-variable">retValue3</span> <span class="hljs-operator">=</span> sumDouble(z1, z2);<br>    System.out.println(z1 + <span class="hljs-string">&quot;+&quot;</span> + z2 + <span class="hljs-string">&quot;=&quot;</span> + retValue3);<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumInt</span><span class="hljs-params">(<span class="hljs-type">int</span> a , <span class="hljs-type">int</span> b)</span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">long</span> <span class="hljs-title function_">sumLong</span><span class="hljs-params">(<span class="hljs-type">long</span> a , <span class="hljs-type">long</span> b)</span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">double</span> <span class="hljs-title function_">sumDouble</span><span class="hljs-params">(<span class="hljs-type">double</span> a , <span class="hljs-type">double</span> b)</span>&#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>运行结果：</li>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181501967.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
+<li>我们可以看到以上三个方法功能“相似”，都是求和，只不过参与求和的数据类型不同，因此定义了三个方法，分别起了三个不同的方法名。这种方式会增加程序员编程的压力，因为程序员起码要记忆三个方法名，另外代码也不是很美观。所以，我们需要使用方法重载机制来解决这样的问题。</li>
+<li>方法重载（overload）是指在一个类中定义多个同名的方法，但要求每个方法具有不同的参数的类型或参数的个数。调用重载方法时，Java 编译器能通过检查调用的方法的参数类型和个数选择一个恰当的方法。方法重载通常用于创建完成一组任务相似但参数的类型或参数的个数不同的方法。调用方法时通过传递给它们的不同个数和类型的实参来决定具体使用哪个方法。</li>
+<li>什么情况下我们考虑使用方法重载呢？在同一个类当中，如果多个功能是相似的，可以考虑将它们的方法名定义的一致，使用方法重载机制，这样便于程序员的调用，以及代码美观，但相反，如果两个方法所完成的功能完全不同，那么方法名也一定要不一样，这样才是合理的。<br>构成方法重载需要满足以下3个条件：<ul>
+<li><strong>在同一个类当中</strong>。</li>
+<li><strong>方法名相同</strong>。</li>
+<li><strong>参数列表不同</strong>：<strong>个数不同算不同，顺序不同算不同，类型不同也算不同</strong>。</li>
+</ul>
+</li>
+<li>接下来我们来看看以下程序哪些方法构成了方法重载，哪些没有：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OverloadText</span>&#123;<br>    <span class="hljs-comment">//方法1</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSome</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>&#123;<br>        <br>    &#125;<br>    <span class="hljs-comment">//方法2</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSome</span><span class="hljs-params">(<span class="hljs-type">long</span> i)</span>&#123;<br>        <br>    &#125;<br>    <span class="hljs-comment">//方法3</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSome</span><span class="hljs-params">(<span class="hljs-type">int</span> i,<span class="hljs-type">long</span> j)</span>&#123;<br>        <br>    &#125;<br>    <span class="hljs-comment">//方法4</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSome</span><span class="hljs-params">(<span class="hljs-type">long</span> j,<span class="hljs-type">int</span> i)</span>&#123;<br>        <br>    &#125;<br>    <span class="hljs-comment">//方法5</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSome</span><span class="hljs-params">(<span class="hljs-type">long</span> x,<span class="hljs-type">int</span> y)</span>&#123;<br>        <br>    &#125;<br>    <span class="hljs-comment">//方法6</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">doSome</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>&#123;<br>        <span class="hljs-keyword">return</span> i;<br>    &#125;<br>    <span class="hljs-comment">//方法7</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">doSome</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>&#123;<br>        <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>通过观察以上代码以及测试结果我们得知：<ul>
+<li>方法5 和方法4 是一样的，仅仅只是形参的标识符不同，这不是方法重载，因为之前我们就说过方法形参中起决定性作用的是参数的数据类型，参数的名字随意，因为每一个形参都是局部变量，变量名自然是随意的。其中方法6 和方法1 相同，显然方法的重载和方法的返回值类型没有关系这也是合理的，因为之前我们提过，方法执行结束之后的返回值我们可以接收也可以不接收。另外方法7 和方法1 也无法构成重载，<strong>显然方法重载和修饰符无关</strong>。<br>  <a name="iLB1I"></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="6-方法递归"><a href="#6-方法递归" class="headerlink" title="6.方法递归"></a>6.方法递归</h2><p><a name="ITOEz"></a></p>
+<h3 id="6-1什么是方法递归"><a href="#6-1什么是方法递归" class="headerlink" title="6.1什么是方法递归"></a>6.1什么是方法递归</h3><ul>
+<li>方法递归就是方法自己调用自己</li>
+<li>我们先来看一段代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    m();<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">m</span><span class="hljs-params">()</span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;m begin&quot;</span>);<br>    m();<br>    System.out.println(<span class="hljs-string">&quot;m over&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><br>执行结果：</p>
+<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202301181502933.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
+<li>我们可以看到以上代码的执行过程中，一直输出“m begin”，“m over”一次也没有输出，直到最终发生了错误：java.lang.StackOverflowError，这个错误是栈内存溢出错误，错误发生后，JVM 退出了，程序结束了。 实际上以上代码在 m()方法执行过程中又调用了 m()方法，方法自身调用自身，这就是方法递归调用。m()方法一直在被调用（方法中的代码必须遵循自上而下的顺序依次逐行执行，不能跳行执行），对于栈内存来说一直在进行压操作，m()方法从未结束过，所以没有弹栈操作，即使栈内存足够大（也是有限的内存），总有一天栈内存会不够用的，这个时候就会出现栈内存溢出错误。通过以上研究得出递归必须要有合法的结束条件，没有结束条件就一定会发生StackOverflowError。</li>
+<li>递归总结：<ul>
+<li>一个递归程序有的时候存在合法有效的终止条件，但由于递归的太深，在还没有等到条件成立的时候，栈内存已经发生了溢出，这种情况也是存在的，所以实际开发中我们尽可能使用循环来代替递归算法，原则是：能不用递归尽量不用，能用循环代替的尽可能使用循环。</li>
+</ul>
+</li>
+<li><br></li>
+<li><br></li>
+</ul>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

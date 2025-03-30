@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="界面设计">
+  
+    <meta name="description" content="GUI设计 1.Swing工具包下有MVC结构，所谓MVC结构就是：模型(数据)+视图(界面)+控制(监听事件)  2.JFrame窗体  构造JFrame对象  设定窗体宽高setSize()  设定窗体可见setVisible()  设定关闭方式(根据情况设定)  setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)    DO_NOT">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JavaSe基础---GUI设计">
+<meta property="og:url" content="https://rofgd.github.io/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/JavaSe%E5%9F%BA%E7%A1%80---GUI%E8%AE%BE%E8%AE%A1.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="GUI设计 1.Swing工具包下有MVC结构，所谓MVC结构就是：模型(数据)+视图(界面)+控制(监听事件)  2.JFrame窗体  构造JFrame对象  设定窗体宽高setSize()  设定窗体可见setVisible()  设定关闭方式(根据情况设定)  setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)    DO_NOT">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301191151469.png">
+<meta property="article:published_time" content="2020-05-16T02:26:44.000Z">
+<meta property="article:modified_time" content="2025-03-30T12:15:58.388Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="GUI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301191151469.png">
+  
+  
+  
+  <title>JavaSe基础---GUI设计 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" target="_self">
+                    <i class="iconfont icon-a-yingyongchengxu3x"></i>
+                    <span>技术文章</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" target="_self">
+                    <i class="iconfont icon-a-wendang3x"></i>
+                    <span>日常随笔</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C/" target="_self">
+                    <i class="iconfont icon-a-jiangzhang3x"></i>
+                    <span>游戏体验</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301191151469.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JavaSe基础---GUI设计"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h3 id="GUI设计"><a href="#GUI设计" class="headerlink" title="GUI设计"></a>GUI设计</h3><ul>
+<li><p>1.Swing工具包下有MVC结构，所谓MVC结构就是：模型(数据)+视图(界面)+控制(监听事件)</p>
+</li>
+<li><p>2.JFrame窗体</p>
+<ul>
+<li><p>构造JFrame对象</p>
+</li>
+<li><p>设定窗体宽高setSize()</p>
+</li>
+<li><p>设定窗体可见setVisible()</p>
+</li>
+<li><p>设定关闭方式(根据情况设定)</p>
+</li>
+<li><p>setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)</p>
+</li>
+</ul>
+</li>
+<li><p>DO_NOTHING_ON_CLOSE”、“DISPOSE_ON_CLOSE”、“HIDE_ON_CLOSE”、“EXIT_ON_CLOSE”。</p>
+<ul>
+<li>第一种表示什么也不做就将窗体关闭；</li>
+<li>第二种表示任何注册监听程序对象后会自动隐藏并释放窗体；</li>
+<li>第三种表示隐藏窗口的默认窗口关闭；</li>
+<li>第四种表示退出应用程序默认窗口关闭。</li>
+</ul>
+</li>
+<li><p>3.Swing包</p>
+<ul>
+<li>文本框—-JTextField</li>
+<li>密码框—-JPasswordField</li>
+<li>标签—-JLable</li>
+<li>复选框—–jCheckBox</li>
+<li>单选框—–JRadioButton(同一组单选按钮必须先创建ButtonGroup，然后把单选框组件放入到ButtonGroup中)</li>
+</ul>
+</li>
+</ul>
+<h3 id="登录界面Demo"><a href="#登录界面Demo" class="headerlink" title="登录界面Demo"></a>登录界面Demo</h3><h4 id="一、思路"><a href="#一、思路" class="headerlink" title="一、思路"></a>一、思路</h4><ul>
+<li>(1)用到的窗体</li>
+</ul>
+<pre><code class="hljs">-    这次项目中使用的窗体为JFrame，实现图形界面，首先必须有一个顶级窗体
+</code></pre>
+<ul>
+<li>(2) 使用到的标签</li>
+</ul>
+<pre><code class="hljs">-   Jlabel 标签元素类，显示文字和图片
+-   JTextField 文本输入框元素组件类，接收用户输入信息并将其显示
+-   JPasswordField 密码输入框组件类，接收用户输入的信息，然后把每一个字符都用一个加密符号显示
+-   JButton 按钮元素组件类，显示文字或图片，也可以一起显示，可以点击
+</code></pre>
+<ul>
+<li>(3) 使用到的布局</li>
+</ul>
+<pre><code class="hljs">-   java.awt.FlowLayout   流式布局类
+-   java.awt.Dimension   封装组件宽度和高度的类
+</code></pre>
+<ul>
+<li>布局类是针对容器组件的，它会让添加到容器上的组件按照布局类的方式去排列对齐。</li>
+<li>如果我们没有设置窗体的布局，那么我们添加的组件就会出现覆盖的问题，最后只会显示最后添加的那个组件流式布局的效果类似于word文档，对组件按行进行排列，当前行满了再放到下一行。但是不能像word一样回车换行。</li>
+</ul>
+<h4 id="二、项目逻辑"><a href="#二、项目逻辑" class="headerlink" title="二、项目逻辑"></a>二、项目逻辑</h4><ul>
+<li>创建JFrame窗体<ul>
+<li>1.设置窗体文字</li>
+<li>2.设置窗体大小</li>
+<li>3.设置窗体大小不可调(<strong>setResizable(false)</strong>)</li>
+<li>4.设置窗体相对于另一个窗体居中位置(<strong>setLocationRelativeTo(null)</strong>)</li>
+<li>5.设置窗体关闭</li>
+<li>6.设置窗体居中显示</li>
+</ul>
+</li>
+<li>使用流式布局<ul>
+<li>1.创建流式布局对象并实例化</li>
+<li>2.设置对齐方式为居中，组件间隔为10(视情况而定)</li>
+</ul>
+</li>
+<li>设置除顶级窗体大小外，其他<strong>组件</strong>大小<ul>
+<li>Dimension(hight,weight)</li>
+</ul>
+</li>
+<li>创建JLabel标签并添加到窗体<ul>
+<li>1.创建用户名和密码标签</li>
+<li>2.添加到窗体</li>
+</ul>
+</li>
+<li>创建JTextField和JPasswordField组件并添加到窗体<ul>
+<li>1.创建输入文本框和密码框对象</li>
+<li>2.调用setPreferredSize()方法设置文本框和密码框大小</li>
+<li>3.添加到窗体</li>
+</ul>
+</li>
+<li>创建JButton组件并添加到窗体<ul>
+<li>1.创建登录和注册按钮标签</li>
+<li>2.调用setText()方法在按钮上显示登录和注册</li>
+<li>3.添加到窗体</li>
+</ul>
+</li>
+<li>使窗体可显示</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> javax.swing.*;<br><span class="hljs-keyword">import</span> java.awt.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Login</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Frame</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">Jframe</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">//设定窗体容器</span><br>        <span class="hljs-type">JFrame</span> <span class="hljs-variable">frame</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JFrame</span>();<br>        frame.setTitle(<span class="hljs-string">&quot;社团成员登录界面&quot;</span>); <span class="hljs-comment">//容器文字</span><br>        frame.setSize(<span class="hljs-number">350</span>,<span class="hljs-number">120</span>);	<span class="hljs-comment">//容器大小</span><br>        frame.setResizable(<span class="hljs-literal">false</span>);	<span class="hljs-comment">// 设置禁止调整窗体大小</span><br>        frame.setLocationRelativeTo(<span class="hljs-literal">null</span>);<span class="hljs-comment">// 设置窗体相对于另一个组件的居中位置，		</span><br>        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);   	               <span class="hljs-comment">//容器关闭</span><br>        frame.setLocationRelativeTo(<span class="hljs-literal">null</span>);	<span class="hljs-comment">//居中显示</span><br><br>        <span class="hljs-comment">//使用流式布局，对齐方式居中，组件间隔为10</span><br>        <span class="hljs-type">FlowLayout</span> <span class="hljs-variable">fl</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FlowLayout</span>(FlowLayout.CENTER,<span class="hljs-number">10</span>,<span class="hljs-number">10</span>);<br>        frame.setLayout(fl);<br><br>        <span class="hljs-comment">//Dimension 类封装单个对象中组件的宽度和高度（精确到整数）</span><br>        <span class="hljs-type">Dimension</span> <span class="hljs-variable">dim1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Dimension</span>(<span class="hljs-number">100</span>,<span class="hljs-number">20</span>);<br><br>        <span class="hljs-comment">//创建标签对象，该对象显示为用户名，并将其添加到窗体上</span><br>        <span class="hljs-type">JLabel</span> <span class="hljs-variable">lbUser</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JLabel</span>(<span class="hljs-string">&quot;用户名：&quot;</span>);<br>        frame.add(lbUser);<br>        <span class="hljs-comment">//创建用户名文本框</span><br>        <span class="hljs-type">TextField</span> <span class="hljs-variable">text_name</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TextField</span>();<br>        text_name.setPreferredSize(dim1);	<span class="hljs-comment">//设置除顶级容器组件其他组件的大小</span><br>        frame.add(text_name);	<span class="hljs-comment">//添加到容器</span><br><br>        <span class="hljs-comment">//创建标签对象，该对象显示为密码，并将其添加到窗体上</span><br>        <span class="hljs-type">JLabel</span> <span class="hljs-variable">lbPass</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JLabel</span>(<span class="hljs-string">&quot;密码：&quot;</span>);<br>        frame.add(lbPass);<br>        <span class="hljs-comment">//创建密码文本框</span><br>        <span class="hljs-type">JPasswordField</span> <span class="hljs-variable">text_pass</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JPasswordField</span>();<br>        text_pass.setPreferredSize(dim1);<br>        frame.add(text_pass); <span class="hljs-comment">//！！！注意：这里必须是创建一个标签对应创建一个相应文本框</span><br>        <br>        <span class="hljs-comment">//设置登录注册按钮</span><br>        <span class="hljs-type">JButton</span> <span class="hljs-variable">btn_Up</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>();<br>        btn_Up.setText(<span class="hljs-string">&quot;登录&quot;</span>);	<span class="hljs-comment">//调用setText()方法在按钮上显示登录</span><br>        frame.add(btn_Up);<br><br>        <span class="hljs-type">JButton</span> <span class="hljs-variable">btn_Sign</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>();<br>        btn_Sign.setText(<span class="hljs-string">&quot;注册&quot;</span>);	<span class="hljs-comment">//调用setText()方法在按钮上显示注册</span><br>        frame.add(btn_Sign);<br><br>        <span class="hljs-comment">//使窗体可见</span><br>        frame.setVisible(<span class="hljs-literal">true</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Login</span>().Jframe();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/javanew/1956117">https://blog.51cto.com/javanew/1956117</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/javanew/1955440">https://blog.51cto.com/javanew/1955440</a></li>
+</ol>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

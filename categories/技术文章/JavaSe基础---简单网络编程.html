@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="网络编程,Java">
+  
+    <meta name="description" content="Java中的网络编程 1 - 概述 1.1 - 网络编程的三要素1、IP地址2、端口3、协议 1.2 - IP地址 IP地址就是设备（电脑、手机、ipad、空调、冰箱）在网络中的唯一标识（通过IP地址访问的设备）   IP地址的两大分类  IPV4（主流的网络地址格式）  IPV6（未来10年够呛能普及）   常用DOS命令  ipconfig -all (查看当前计算机网卡IP地址) ping">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JavaSe基础---简单网络编程">
+<meta property="og:url" content="https://rofgd.github.io/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/JavaSe%E5%9F%BA%E7%A1%80---%E7%AE%80%E5%8D%95%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="Java中的网络编程 1 - 概述 1.1 - 网络编程的三要素1、IP地址2、端口3、协议 1.2 - IP地址 IP地址就是设备（电脑、手机、ipad、空调、冰箱）在网络中的唯一标识（通过IP地址访问的设备）   IP地址的两大分类  IPV4（主流的网络地址格式）  IPV6（未来10年够呛能普及）   常用DOS命令  ipconfig -all (查看当前计算机网卡IP地址) ping">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301182027345.png">
+<meta property="article:published_time" content="2020-05-21T12:42:47.000Z">
+<meta property="article:modified_time" content="2025-03-30T12:15:36.822Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="JavaSe">
+<meta property="article:tag" content="网络编程">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301182027345.png">
+  
+  
+  
+  <title>JavaSe基础---简单网络编程 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" target="_self">
+                    <i class="iconfont icon-a-yingyongchengxu3x"></i>
+                    <span>技术文章</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" target="_self">
+                    <i class="iconfont icon-a-wendang3x"></i>
+                    <span>日常随笔</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C/" target="_self">
+                    <i class="iconfont icon-a-jiangzhang3x"></i>
+                    <span>游戏体验</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301182027345.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JavaSe基础---简单网络编程"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <p><a name="a4b14711"></a></p>
+<h2 id="Java中的网络编程"><a href="#Java中的网络编程" class="headerlink" title="Java中的网络编程"></a>Java中的网络编程</h2><p><a name="90e6e30f"></a></p>
+<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1 - 概述"></a>1 - 概述</h3><p><a name="90cc8474"></a></p>
+<h4 id="1-1-网络编程的三要素"><a href="#1-1-网络编程的三要素" class="headerlink" title="1.1 - 网络编程的三要素"></a>1.1 - 网络编程的三要素</h4><p>1、IP地址<br>2、端口<br>3、协议<br><a name="263dd7ad"></a></p>
+<h4 id="1-2-IP地址"><a href="#1-2-IP地址" class="headerlink" title="1.2 - IP地址"></a>1.2 - IP地址</h4><blockquote>
+<p>IP地址就是设备（电脑、手机、ipad、空调、冰箱）在网络中的唯一标识（通过IP地址访问的设备）</p>
+</blockquote>
+<ul>
+<li>IP地址的两大分类 <ul>
+<li>IPV4（主流的网络地址格式） </li>
+<li>IPV6（未来10年够呛能普及）</li>
+</ul>
+</li>
+<li>常用DOS命令 <ul>
+<li>ipconfig -all (查看当前计算机网卡IP地址)</li>
+<li>ping  xxx.xxx.xxx.xxx (测试网络是否畅通)</li>
+<li>netstat -ano (查看本机端口占用情况)</li>
+</ul>
+</li>
+<li>特殊的IP地址 <ul>
+<li>127.0.0.1  - 本地的回环地址<br>  <a name="d97a1097"></a></li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3-InetAddress"><a href="#1-3-InetAddress" class="headerlink" title="1.3 - InetAddress"></a>1.3 - InetAddress</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.net.InetAddress;<br><span class="hljs-keyword">import</span> java.net.UnknownHostException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> ly_smith</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span> #TODO  InetAddress</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Demo03</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> UnknownHostException &#123;<br><span class="hljs-comment">//        InetAddress address = InetAddress.getByName(&quot;192.168.1.2&quot;);</span><br><span class="hljs-comment">//        InetAddress address = InetAddress.getByName(&quot;127.0.0.1&quot;);//通过本地回环地址访问自己</span><br>        <span class="hljs-type">InetAddress</span> <span class="hljs-variable">address</span> <span class="hljs-operator">=</span> InetAddress.getByName(<span class="hljs-string">&quot;LAPTOP-93CBHP2O&quot;</span>);<span class="hljs-comment">//通过本主机名获取</span><br><br><br>        System.out.println(address);<br>        System.out.println(address.getHostName());<span class="hljs-comment">//获取主机名</span><br>        System.out.println(address.getHostAddress());<span class="hljs-comment">//获取主机地址</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a name="ca2d935f"></a></p>
+<h4 id="1-4-端口"><a href="#1-4-端口" class="headerlink" title="1.4 - 端口"></a>1.4 - 端口</h4><blockquote>
+<p>端口是一个应用程序（进程&#x2F;线程）在设备中的唯一标识</p>
+</blockquote>
+<p>端口号：用两个字节的整数来表示（unsigned short :  0 ~ 65535）,其中0 ~ 1024之间的端口进行不要使用，因为很多知名网络服务商和应用程序都会在这个区间选择端口（被占用的几率大），建议使用10000以上端口号，如果被占用，再换一个。<br><a name="1fadee68"></a></p>
+<h4 id="1-5-协议"><a href="#1-5-协议" class="headerlink" title="1.5 - 协议"></a>1.5 - 协议</h4><blockquote>
+<p>计算机网络中，连接和通信的规则</p>
+</blockquote>
+<ul>
+<li>UDP <ul>
+<li>User Datagram Protocol  用户数据包协议</li>
+<li>UDP协议是一种无连接的通信协议，即在数据传输的时候，数据的发送端和接收端不会建立所谓的逻辑连接，简单来说就是当一台计算机向另计算机发送数据时，发送端不会确认接收端是否存在，都会将数据发出。同样接收端也不会再接收到数据后做任何的反馈。</li>
+<li>UDP协议消耗资源相对小，通信效率高，但是不安全。一般情况下使用在在线的音乐、视频。</li>
+</ul>
+</li>
+<li>TCP <ul>
+<li>Transmission Control Protoclol 传输控制协议</li>
+<li>TCP协议是一种面向连接&#x2F;安全的数据通信协议，在数据传输之前，会在发送端和接收端各自创建一个逻辑对象，然后再进行数据的传输。</li>
+<li>传输之前会做“三次握手”</li>
+<li>传输之后断开连接会做“四次挥手”<br>  <a name="c6dca399"></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-UDP通信"><a href="#2-UDP通信" class="headerlink" title="2 - UDP通信"></a>2 - UDP通信</h2><p><a name="c4031eb2"></a></p>
+<h3 id="2-1-通信原理"><a href="#2-1-通信原理" class="headerlink" title="2.1 - 通信原理"></a>2.1 - 通信原理</h3><blockquote>
+<p>UDP在通信的时候在两端各自创建一个Socekt（套接字）对象，但是这个两个Socket（对象）只是用来发送和接收数据的对象，因此对于UDP协议通信的双方而言，没有所谓的客户端和服务器端的概念。</p>
+</blockquote>
+<p><a name="53628e69"></a></p>
+<h3 id="2-2-UDP发送"><a href="#2-2-UDP发送" class="headerlink" title="2.2 - UDP发送"></a>2.2 - UDP发送</h3><ul>
+<li>发送步骤<br>1、创建发送端的Socket对象 - DatagramSocket<br>2、创建数据，并打包数据<br>3、调用发送方法<br>4、关闭发送</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> demo04;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.net.*;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> ly_smith</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span> #TODO  UDP发送</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UDPSend</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br><span class="hljs-comment">//        1、创建发送端的Socket对象 - DatagramSocket</span><br>        <span class="hljs-type">DatagramSocket</span> <span class="hljs-variable">ds</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatagramSocket</span>();<br><br><span class="hljs-comment">//        2、创建数据，并打包数据</span><br><span class="hljs-comment">//        byte buf[], int length,InetAddress address, int port</span><br>        <span class="hljs-type">byte</span>[] bytes = <span class="hljs-string">&quot;Hello UDP Send Messages!~&quot;</span>.getBytes();<span class="hljs-comment">//将字符串转换成byte数组</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> bytes.length;<span class="hljs-comment">//数据长度</span><br>        <span class="hljs-type">InetAddress</span> <span class="hljs-variable">address</span> <span class="hljs-operator">=</span> InetAddress.getByName(<span class="hljs-string">&quot;127.0.0.1&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> <span class="hljs-number">9527</span>;<br>        <span class="hljs-type">DatagramPacket</span> <span class="hljs-variable">dp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatagramPacket</span>(bytes, length, address, port);<br><br><span class="hljs-comment">//        3、调用发送方法</span><br>        ds.send(dp);<br><br><span class="hljs-comment">//        4、关闭发送</span><br>        ds.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a name="7764f78d"></a></p>
+<h3 id="2-3-UDP接收"><a href="#2-3-UDP接收" class="headerlink" title="2.3 - UDP接收"></a>2.3 - UDP接收</h3><ul>
+<li>接收数据的步骤<br>1、创建接收端Socket对象  - DatagramSoket<br>2、创建一个数据包，用于接收数据<br>3、调用接收方法<br>4、解析数据包<br>5、关闭接收</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> demo04;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.net.DatagramPacket;<br><span class="hljs-keyword">import</span> java.net.DatagramSocket;<br><span class="hljs-keyword">import</span> java.net.SocketException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> ly_smith</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span> #TODO  UDP接收数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UDPReceive</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br><span class="hljs-comment">//        1、创建接收端Socket对象  - DatagramSoket</span><br>        <span class="hljs-type">DatagramSocket</span> <span class="hljs-variable">ds</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatagramSocket</span>(<span class="hljs-number">9527</span>);<br><br><span class="hljs-comment">//        2、创建一个数据包，用于接收数据</span><br><span class="hljs-comment">//        byte buf[], int length</span><br>        <span class="hljs-type">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> bytes.length;<br>        <span class="hljs-type">DatagramPacket</span> <span class="hljs-variable">dp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatagramPacket</span>(bytes, length);<br><br><span class="hljs-comment">//        3、调用接收方法</span><br>        ds.receive(dp);<br><br><span class="hljs-comment">//        4、解析数据包</span><br>        <span class="hljs-type">byte</span>[] data = dp.getData();<span class="hljs-comment">//获取数据包中的数据</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">length1</span> <span class="hljs-operator">=</span> dp.getLength();<span class="hljs-comment">//获取数据包中数据的长度</span><br>        System.out.println(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(data,<span class="hljs-number">0</span>,length1));<br><br><span class="hljs-comment">//        5、关闭接收</span><br>        ds.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a name="13414b28"></a></p>
+<h3 id="2-4-案例"><a href="#2-4-案例" class="headerlink" title="2.4 - 案例"></a>2.4 - 案例</h3><blockquote>
+<p>需求：<br>UDP发送数据：数据来源于键盘输入，直到输入over的时候就结束发送<br>UDP接收数据：因为不知道发送端发送多少次，所以接收端采用死循环</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> demo05;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.net.DatagramPacket;<br><span class="hljs-keyword">import</span> java.net.DatagramSocket;<br><span class="hljs-keyword">import</span> java.net.SocketException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> ly_smith</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span> #TODO  接收端</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UDPReceive</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-type">DatagramSocket</span> <span class="hljs-variable">ds</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatagramSocket</span>(<span class="hljs-number">9527</span>);<span class="hljs-comment">//创建接收端对象</span><br><br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br>            <span class="hljs-type">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<span class="hljs-comment">//创建容器，用来接收发送过来的数据</span><br>            <span class="hljs-type">DatagramPacket</span> <span class="hljs-variable">dp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatagramPacket</span>(bytes, bytes.length);<span class="hljs-comment">//创建接收数据的数据包</span><br>            ds.receive(dp);<span class="hljs-comment">//接收数据</span><br>            System.out.println(<span class="hljs-string">&quot;接收到-&quot;</span> + <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(bytes,<span class="hljs-number">0</span>,dp.getLength()));<br>        &#125;<br><br>    &#125;<br>&#125;<br>----------------------------------------------------<br><span class="hljs-keyword">package</span> demo05;<br><br><span class="hljs-keyword">import</span> java.io.BufferedReader;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.InputStreamReader;<br><span class="hljs-keyword">import</span> java.net.DatagramPacket;<br><span class="hljs-keyword">import</span> java.net.DatagramSocket;<br><span class="hljs-keyword">import</span> java.net.InetAddress;<br><span class="hljs-keyword">import</span> java.net.SocketException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> ly_smith</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span> #TODO  UDP发送端</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UDPSend</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-comment">//创建发送端对象</span><br>        <span class="hljs-type">DatagramSocket</span> <span class="hljs-variable">ds</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatagramSocket</span>();<br>        <span class="hljs-comment">//自己封装一个获取键盘输入的流</span><br>        <span class="hljs-type">BufferedReader</span> <span class="hljs-variable">br</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InputStreamReader</span>(System.in));<br><br>        String line;<br>        <span class="hljs-keyword">while</span> ((line = br.readLine()) != <span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-comment">//判断用户是否需要退出，如果输入的是over</span><br>            <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;over&quot;</span>.equals(line))<br>                <span class="hljs-keyword">break</span>;<br><br>            <span class="hljs-comment">//用户输入的不是over，则需要将数据发送出去</span><br>            <span class="hljs-type">byte</span>[] bytes = line.getBytes();<span class="hljs-comment">//将数据转换成byte数组</span><br>            <span class="hljs-type">InetAddress</span> <span class="hljs-variable">address</span> <span class="hljs-operator">=</span> InetAddress.getByName(<span class="hljs-string">&quot;127.0.0.1&quot;</span>);<span class="hljs-comment">//创建地址</span><br>            <span class="hljs-type">DatagramPacket</span> <span class="hljs-variable">dp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatagramPacket</span>(bytes, bytes.length, address, <span class="hljs-number">9527</span>);<br>            ds.send(dp);<span class="hljs-comment">//发送数据</span><br>        &#125;<br><br>        <span class="hljs-comment">//关闭发送</span><br>        ds.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

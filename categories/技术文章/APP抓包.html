@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="Hexo,博客,技术">
+  
+    <meta name="description" content="APP抓包一、Charles抓包步骤 环境：Charles 4.6.3   逍遥模拟器 步骤： Charles中下载证书:Help–&gt;SSL Proxying—&gt;Save Charles Root Certificate… 将证书保存到本地，然后将证书放入到与模拟器共享的文件夹下(路径无所谓，只要是与模拟器共享的文件夹就行)  在模拟器的找到设置-&gt;安全-&gt;从SDK安装-&amp;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="APP抓包">
+<meta property="og:url" content="https://rofgd.github.io/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/APP%E6%8A%93%E5%8C%85.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="APP抓包一、Charles抓包步骤 环境：Charles 4.6.3   逍遥模拟器 步骤： Charles中下载证书:Help–&gt;SSL Proxying—&gt;Save Charles Root Certificate… 将证书保存到本地，然后将证书放入到与模拟器共享的文件夹下(路径无所谓，只要是与模拟器共享的文件夹就行)  在模拟器的找到设置-&gt;安全-&gt;从SDK安装-&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301241049221.png">
+<meta property="article:published_time" content="2023-03-08T07:53:13.000Z">
+<meta property="article:modified_time" content="2025-03-30T12:14:42.432Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="APP">
+<meta property="article:tag" content="抓包">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301241049221.png">
+  
+  
+  
+  <title>APP抓包 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" target="_self">
+                    <i class="iconfont icon-a-yingyongchengxu3x"></i>
+                    <span>技术文章</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" target="_self">
+                    <i class="iconfont icon-a-wendang3x"></i>
+                    <span>日常随笔</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C/" target="_self">
+                    <i class="iconfont icon-a-jiangzhang3x"></i>
+                    <span>游戏体验</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301241049221.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="APP抓包"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h3 id="APP抓包"><a href="#APP抓包" class="headerlink" title="APP抓包"></a>APP抓包</h3><h4 id="一、Charles抓包步骤"><a href="#一、Charles抓包步骤" class="headerlink" title="一、Charles抓包步骤"></a>一、Charles抓包步骤</h4><ul>
+<li>环境：Charles 4.6.3   逍遥模拟器</li>
+<li>步骤：<ul>
+<li>Charles中下载证书:<code>Help–&gt;SSL Proxying—&gt;Save Charles Root Certificate…</code></li>
+<li>将证书保存到本地，然后将证书放入到与模拟器共享的文件夹下(路径无所谓，只要是与模拟器共享的文件夹就行)</li>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202303081606177.png" srcset="/img/loading.gif" lazyload alt="image-20230308160627308"></li>
+<li>在模拟器的找到设置-&gt;安全-&gt;从SDK安装-&gt;找到刚刚存放证书的文件(我是放到音乐文件夹里，所以得在模拟器中找Music这个文件夹)</li>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202303081611075.png" srcset="/img/loading.gif" lazyload alt="image-20230308161109823"></li>
+<li><img src="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/APP%E6%8A%93%E5%8C%85/Users\ReadPond\AppData\Roaming\Typora\typora-user-images\image-20230308161126263.png" srcset="/img/loading.gif" lazyload alt="image-20230308161126263"></li>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202303081611688.png" srcset="/img/loading.gif" lazyload alt="image-20230308161141735"></li>
+<li>点击该文件进行安装即可</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、Burp抓包"><a href="#二、Burp抓包" class="headerlink" title="二、Burp抓包"></a>二、Burp抓包</h4><ul>
+<li><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202303081630868.png" srcset="/img/loading.gif" lazyload alt="image-20230308163034121"></li>
+<li>保存后，需要将证书后缀更改为<code>Burp.cer</code>，模拟器中无法识别<code>Burp.der</code>后缀，更改完后，安装与上面安装相同</li>
+</ul>
+<h4 id="三、抓包当中遇到的问题"><a href="#三、抓包当中遇到的问题" class="headerlink" title="三、抓包当中遇到的问题"></a>三、抓包当中遇到的问题</h4><ul>
+<li>在模拟器中测试时，设置代理后，通过代理能正常访问浏览器，并且Burp中有数据包测试抓包正常情况下，打开某个APP后发现抓包工具中没有任何数据包返回，同时APP中有<code>网络连接失败</code>等相关网络提示。可能存在以下情况： <ul>
+<li>此APP内部有反代理机制<ul>
+<li>自身抓包应用</li>
+<li>使用Proxifier PE转发<ul>
+<li>大致原理：如果设置了系统代理app-&gt;代理服务器-&gt;burp-&gt;服务端，APP检查模拟器或者手机的代理设置，发现设置代理则会出现网络连接异常。但是如果使用Proxifier PE软件进行转发(app-&gt;Proxifier PE-&gt;本地burp-&gt;服务)，则不需要设置系统代理，相当于(模拟器的网络出口时通过本机进行的)将APP的流量流向Proxifier PE，通过Proxifier PE将流量传递出去。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>证书问题，如果代理开的是http代理，但是APP数据走的是SLL&#x2F;https<ul>
+<li>情况1，客户端不存在证书校验，服务器也不存在证书校验。</li>
+<li>情况2，客户端存在校验服务端证书，服务器也不存在证书校验，单项校验。</li>
+<li>情况3、客户端存在证书校验，服务器也存在证书校验，双向校验。<ul>
+<li>抓包使用Burp等抓包工具时，证书使用的是抓包工具自身的证书，并不是APP本身的证书，所以双向校验时前后端证书不一致就会出现开了http代理app不能正常运行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

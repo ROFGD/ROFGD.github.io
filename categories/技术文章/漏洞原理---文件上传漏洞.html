@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="Hexo,博客,技术">
+  
+    <meta name="description" content="文件上传漏洞漏洞成因： 后端存在文件上传的功能，并且没有对上传的文件内容，大小，类型做严格的安全限制。导致攻击者可以使用恶意文件直接威胁服务器  挖掘点： 上传头像 上传文档 发表文章，发表评论中的插入图片  漏洞危害： 未限制文件内容或者类型 网站被getshell 服务器被提权   未限制文件大小 服务器拒绝服务攻击    利用思路1、Nginx服务(通常运行在Linux上，如果运行在Wind">
+<meta property="og:type" content="website">
+<meta property="og:title" content="漏洞原理---文件上传漏洞">
+<meta property="og:url" content="https://rofgd.github.io/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86---%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="文件上传漏洞漏洞成因： 后端存在文件上传的功能，并且没有对上传的文件内容，大小，类型做严格的安全限制。导致攻击者可以使用恶意文件直接威胁服务器  挖掘点： 上传头像 上传文档 发表文章，发表评论中的插入图片  漏洞危害： 未限制文件内容或者类型 网站被getshell 服务器被提权   未限制文件大小 服务器拒绝服务攻击    利用思路1、Nginx服务(通常运行在Linux上，如果运行在Wind">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301191151458.png">
+<meta property="article:published_time" content="2022-10-14T05:13:56.000Z">
+<meta property="article:modified_time" content="2025-03-30T12:13:14.152Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="漏洞">
+<meta property="article:tag" content="文件上传">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301191151458.png">
+  
+  
+  
+  <title>漏洞原理---文件上传漏洞 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" target="_self">
+                    <i class="iconfont icon-a-yingyongchengxu3x"></i>
+                    <span>技术文章</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" target="_self">
+                    <i class="iconfont icon-a-wendang3x"></i>
+                    <span>日常随笔</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C/" target="_self">
+                    <i class="iconfont icon-a-jiangzhang3x"></i>
+                    <span>游戏体验</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301191151458.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="漏洞原理---文件上传漏洞"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h3 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h3><h4 id="漏洞成因："><a href="#漏洞成因：" class="headerlink" title="漏洞成因："></a>漏洞成因：</h4><ul>
+<li>后端存在文件上传的功能，并且没有对上传的文件内容，大小，类型做严格的安全限制。导致攻击者可以使用恶意文件直接威胁服务器</li>
+</ul>
+<h4 id="挖掘点："><a href="#挖掘点：" class="headerlink" title="挖掘点："></a>挖掘点：</h4><ul>
+<li>上传头像</li>
+<li>上传文档</li>
+<li>发表文章，发表评论中的插入图片</li>
+</ul>
+<h4 id="漏洞危害："><a href="#漏洞危害：" class="headerlink" title="漏洞危害："></a>漏洞危害：</h4><ul>
+<li>未限制文件内容或者类型<ul>
+<li>网站被<code>getshell</code></li>
+<li>服务器被提权</li>
+</ul>
+</li>
+<li>未限制文件大小<ul>
+<li>服务器拒绝服务攻击</li>
+</ul>
+</li>
+</ul>
+<h4 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h4><h5 id="1、Nginx服务-通常运行在Linux上，如果运行在Windows上，也可以使用windows特性绕过"><a href="#1、Nginx服务-通常运行在Linux上，如果运行在Windows上，也可以使用windows特性绕过" class="headerlink" title="1、Nginx服务(通常运行在Linux上，如果运行在Windows上，也可以使用windows特性绕过)"></a>1、Nginx服务(通常运行在Linux上，如果运行在Windows上，也可以使用windows特性绕过)</h5><ul>
+<li>文件名解析逻辑漏洞<ul>
+<li>前提条件<ul>
+<li>nginx 0.8.41-1.4.3或1.5.0-1.5.7</li>
+<li>上传：<code>webshell.jpg空格</code>，访问:<code>webshell.jpg.php</code> <code>00</code>这里使用HEX编辑，不能使用空格</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>00截断：<ul>
+<li>前提条件<ul>
+<li>版本0.5、0.6、0.7&lt;&#x3D;0.7.65，0.8&lt;&#x3D;0.8.37</li>
+</ul>
+</li>
+<li>上传：<code>webshell.jpg空格</code>，访问:<code>webshell.jpg.php</code> <code>00</code>这里使用HEX编辑，不能使用空格</li>
+</ul>
+</li>
+<li>解析漏洞：<ul>
+<li>前提条件：<ul>
+<li>PHP配置<code>cgi.fix_pathinfo</code>开启</li>
+<li>上传：<code>webshell.jpg</code>图片马，访问<code>webshell,jpg/.php</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="2、IIS服务-IIS服务部署在windows上，可以利用windows特性和IIS对应的解析漏洞绕过"><a href="#2、IIS服务-IIS服务部署在windows上，可以利用windows特性和IIS对应的解析漏洞绕过" class="headerlink" title="2、IIS服务(IIS服务部署在windows上，可以利用windows特性和IIS对应的解析漏洞绕过)"></a>2、IIS服务(IIS服务部署在windows上，可以利用windows特性和IIS对应的解析漏洞绕过)</h5><ul>
+<li>利用windows特性绕过<ul>
+<li>文件后面加空格(%20)会被忽略<ul>
+<li><code>webshell.php%20</code></li>
+</ul>
+</li>
+<li>文件后面加点会被忽略<ul>
+<li><code>webshell.php.</code></li>
+</ul>
+</li>
+<li>文件后面加<code>::$DATA::其他</code>，<code>::$DATA</code>后的文件会识别为文件流<ul>
+<li><code>webshell.php::$DATA::其他</code></li>
+</ul>
+</li>
+<li>会自动删除冒号后面的内容<ul>
+<li><code>webshell.php:.jpg</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="3、Apache服务-通常运行在windows上，如果运行在Windows上，也可以使用windows特性绕过"><a href="#3、Apache服务-通常运行在windows上，如果运行在Windows上，也可以使用windows特性绕过" class="headerlink" title="3、Apache服务(通常运行在windows上，如果运行在Windows上，也可以使用windows特性绕过)"></a>3、Apache服务(通常运行在windows上，如果运行在Windows上，也可以使用windows特性绕过)</h5><ul>
+<li><p><code>.htaccess</code>文件绕过</p>
+<ul>
+<li><code>.htaccess</code>文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置，通过<code>.htaccess</code>可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许&#x2F;阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能</li>
+<li><code>.htaccess</code>文件的主要功能包括使用密码保护文件夹，禁止或允许用户使用IP地址访问，禁止目录浏览，将用户自动重定向到另一个页面或目录，创建和使用自定义错误页面，改变具有特定扩展名的文件的使用方式，或者通过指定文件扩展名或特定文件作为主页。</li>
+<li><code>.htaccess（mod_rewrite）</code>中的apache的重写模块，这个模块允许重定向发生。</li>
+<li>前提条件：<ul>
+<li><code>mod_rewrite</code> 模块开启</li>
+<li><code>AllowOverride ALL</code></li>
+</ul>
+</li>
+<li>先上传<code>.htaccess</code>文件,再上传<code>jpg</code>图片文件<ul>
+<li><code>AddType application/x-httpd-php .jpg</code></li>
+</ul>
+</li>
+<li><code>.htaccess</code>文件内容：</li>
+</ul>
+</li>
+<li><pre><code class="hljs"># 虽然好用，但是会误伤其他正常文件，容易被发现
+&lt;IfModule mime_module&gt;
+AddHandler php5-script .gif          #在当前目录下，只针对gif文件会解析成Php代码执行
+SetHandler application/x-httpd-php    #在当前目录下，所有文件都会被解析成php代码执行
+&lt;/IfModule&gt;
+
+# 精确控制能被解析成php代码的文件，不容易被发现
+&lt;FilesMatch &quot;evil.gif&quot;&gt;
+SetHandler application/x-httpd-php   #在当前目录下，如果匹配到evil.gif文件，则被解析成PHP代码执行
+AddHandler php5-script .gif          #在当前目录下，如果匹配到evil.gif文件，则被解析成PHP代码执行
+&lt;/FilesMatch&gt;
+
+# 同1没太大区别
+&lt;IfModule mime_module&gt;
+AddType application/x-httpd-php .gif
+&lt;/IfModule&gt;
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><br><br>-   利用方式：上传覆盖`.htaccess`文件，重写解析规则，将上传的带有脚本马的图片以脚本方式解析。<br>    -   0A换行绕过<br>        -   前提条件：<br>            -   Apache版本号为2.4.0-2.4.29<br>            -   服务器必须为Linux<br>            -   获取文件名时不能用`<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;file&#x27;</span>][<span class="hljs-string">&#x27;name&#x27;</span>]`,因为它会自动把换行去掉<br>        -   使用：Burp抓包，在文件名后面增加字母`a`，在HEX编辑模式下，修改a的61为`0a`<br>            -   访问文件使用：`**webshell.php%0a**`<br>    -   多后缀上传<br>        -   前提条件：Apache版本为1.x-2.x<br>        -   上传多个后缀，如`webshell.php.qwe.swe`<br>    -   SSI命令执行漏洞<br>        -   前提条件：目标服务器开启了SSI与CGI协议<br>        -   上传`webshell.shtml`文件，即可执行`<span class="hljs-built_in">whoami</span>`命令<br><br><span class="hljs-comment">#### 利用思路-通用方法</span><br><br>-   00截断(运行环境存在漏洞，并不是代码上存在的漏洞)<br>    -   前提条件：<br>        -   PHP版本&lt;5.3.4<br>        -   `magic_quotes_gpc=Off`<br>    -   在Burp中抓上传包修改文件名为`webshell.php1`，在HEX编辑窗口，将1改为`00`；URL当中的00阶段需要使用`%00`<br><br>-   陌生后缀绕过<br><br>    -   可以将陌生后缀保存为常用字典，在测试时使用burp进行爆破<br>    -   PHP站点：`php,php5,php4,php3,php2,html,htm,phtml,phar,pht,shtml`<br>    -   ASP站点：`asp,aspx,asa,asax,ascx,ashx,asmx,cer,cdx`<br>    -   JSP站点：`jsp,jspa,jspx,jsw,jsv,jspf,jtml`<br><br>-   大小写绕过<br><br>    -   后端在设置的时候没有设置统一的大小写设置<br>    -   先获取文件名，将文件名转为字符串，调用字符串当中转小写的方法，把文件名转为小写，然后再判断这个小写的字符串在不在黑名单中<br><br>-   双写后缀绕过<br><br>    -   `webshell.pphphp`剔除`php`后就是`webshell.php`<br>    -   `webshell.p.phphp`剔除`.php`后就是`webshell.php`<br>    -   CTFHub关键代码 `<span class="hljs-variable">$name</span> = str_ireplace(<span class="hljs-variable">$blacklist</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-variable">$name</span>);`<br>    -   `str_ireplace(find,replace,string,count)`替换字符串中的一些字符（不区分大小写）<br>        -   `replace:` 必需。规定替换 <br>        -   `find:`中的值的值。 <br>        -   `string:`必需。规定被搜索的字符串。 <br>        -   `count:`可选。一个变量，对替换数进行计数。 <br><br>-   MIME类型绕过<br><br>    -   上传`webshell.php`，只修改`Content-Type`为图片类型，如`image/jpeg`<br><br>        -   后端只检测`Content-Type`，则只修改`Content-Type`即可绕过，无需修改后缀<br><br>    -   将一句话木马压缩进图片中(尽可能小的图片)<br>        命令：`copy 1.jpg/b+2.php 3.php`<br><br>    -   ```<br>        ie 火狐<br>        <span class="hljs-built_in">id</span> 后缀名 php识别出的文件类型<br>        0 gif image/gif<br>        1 jpg image/jpeg<br>        2 png image/png<br>        3 bmp image/bmp<br>        4 psd application/octet-stream<br>        5 ico image/x-icon<br>        6 rar application/octet-stream<br>        7 zip application/zip<br>        8 7z application/octet-stream<br>        9 exe application/octet-stream<br>        10 avi video/avi<br>        11 rmvb application/vnd.rn-realmedia-vbr<br>        12 3gp application/octet-stream<br>        13 flv application/octet-stream<br>        14 mp3 audio/mpeg<br>        15 wav audio/wav<br>        16 krc application/octet-stream<br>        17 lrc application/octet-stream<br>        18 txt text/plain<br>        19 doc application/msword<br>        20 xls application/vnd.ms-excel<br>        21 ppt application/vnd.ms-powerpoint<br>        22 pdf application/pdf<br>        23 chm application/octet-stream<br>        24 mdb application/msaccess<br>        25 sql application/octet-stream<br>        26 con application/octet-stream<br>        27 <span class="hljs-built_in">log</span> text/plain<br>        28 dat application/octet-stream<br>        29 ini application/octet-stream<br>        30 php application/octet-stream<br>        31 html text/html<br>        32 htm text/html<br>        33 ttf application/octet-stream<br>        34 fon application/octet-stream<br>        35 js application/x-javascript<br>        36 xml text/xml<br>        37 dll application/octet-stream<br>        38 dll application/octet-stream<br>        <span class="hljs-built_in">id</span> 后缀名 php识别出的文件类型<br>        0 gif image/gif<br>        1 jpg image/pjpeg<br>        2 png image/x-png<br>        3 bmp image/bmp<br>        4 psd application/octet-stream<br>        5 ico image/x-icon<br>        6 rar application/octet-stream<br>        7 zip application/x-zip-compressed<br>        8 7z application/octet-stream<br>        9 exe application/octet-stream<br>        10 avi video/avi<br>        11 rmvb application/vnd.rn-realmedia-vbr<br>        12 3gp application/octet-stream<br>        13 flv application/octet-stream<br>        14 mp3 audio/mpeg<br>        15 wav audio/wav<br>        16 krc application/octet-stream<br>        17 lrc application/octet-stream<br>        18 txt text/plain<br>        19 doc application/msword<br>        20 xls application/vnd.ms-excel<br>        21 ppt application/vnd.ms-powerpoint<br>        22 pdf application/pdf<br>        23 chm application/octet-stream<br>        24 mdb application/msaccess<br>        25 sql text/plain<br>        26 con application/octet-stream<br>        27 <span class="hljs-built_in">log</span> text/plain<br>        28 dat text/plain<br>        29 ini application/octet-stream<br>        30 php application/octet-stream<br>        31 html text/html<br>        32 htm text/html<br>        33 ttf application/octet-stream<br>        34 fon application/octet-stream<br>        35 js text/html<br>        36 xml text/xml<br>        37 dll application/octet-stream<br>        38 class application/java<br>        <br>        * application/octet-stream //应用程序<br>        323 text/h323<br>        acx application/internet-property-stream<br>        ai application/postscript<br>        aif audio/x-aiff<br>        aifc audio/x-aiff<br>        aiff audio/x-aiff<br>        asf video/x-ms-asf<br>        asr video/x-ms-asf<br>        asx video/x-ms-asf<br>        au audio/basic<br>        avi video/x-msvideo<br>        axs application/olescript<br>        bas text/plain<br>        bcpio application/x-bcpio<br>        bin application/octet-stream<br>        bmp image/bmp<br>        c text/plain<br>        <span class="hljs-built_in">cat</span> application/vnd.ms-pkiseccat<br>        cdf application/x-cdf<br>        cer application/x-x509-ca-cert<br>        class application/octet-stream<br>        clp application/x-msclip<br>        cmx image/x-cmx<br>        cod image/cis-cod<br>        cpio application/x-cpio<br>        crd application/x-mscardfile<br>        crl application/pkix-crl<br>        crt application/x-x509-ca-cert<br>        csh application/x-csh<br>        css text/css<br>        dcr application/x-director<br>        der application/x-x509-ca-cert<br>        <span class="hljs-built_in">dir</span> application/x-director<br>        dll application/x-msdownload<br>        dms application/octet-stream<br>        doc application/msword<br>        dot application/msword<br>        dvi application/x-dvi<br>        dxr application/x-director<br>        eps application/postscript<br>        etx text/x-setext<br>        evy application/envoy<br>        exe application/octet-stream<br>        fif application/fractals<br>        flr x-world/x-vrml<br>        gif image/gif<br>        gtar application/x-gtar<br>        gz application/x-gzip<br>        h text/plain<br>        hdf application/x-hdf<br>        hlp application/winhlp<br>        hqx application/mac-binhex40<br>        hta application/hta<br>        htc text/x-component<br>        htm text/html<br>        html text/html<br>        htt text/webviewhtml<br>        ico image/x-icon<br>        ief image/ief<br>        iii application/x-iphone<br>        ins application/x-internet-signup<br>        isp application/x-internet-signup<br>        jfif image/pipeg<br>        jpe image/jpeg<br>        jpeg image/jpeg<br>        jpg image/jpeg<br>        jpg image/pjpeg<br>        js application/x-javascript<br>        latex application/x-latex<br>        lha application/octet-stream<br>        lsf video/x-la-asf<br>        lsx video/x-la-asf<br>        lzh application/octet-stream<br>        m13 application/x-msmediaview<br>        m14 application/x-msmediaview<br>        m3u audio/x-mpegurl<br>        man application/x-troff-man<br>        mdb application/x-msaccess<br>        me application/x-troff-me<br>        mht message/rfc822<br>        mhtml message/rfc822<br>        mid audio/mid<br>        mny application/x-msmoney<br>        mov video/quicktime<br>        movie video/x-sgi-movie<br>        mp2 video/mpeg<br>        mp3 audio/mpeg<br>        mpa video/mpeg<br>        mpe video/mpeg<br>        mpeg video/mpeg<br>        mpg video/mpeg<br>        mpp application/vnd.ms-project<br>        mpv2 video/mpeg<br>        ms application/x-troff-ms<br>        mvb application/x-msmediaview<br>        nws message/rfc822<br>        oda application/oda<br>        p10 application/pkcs10<br>        p12 application/x-pkcs12<br>        p7b application/x-pkcs7-certificates<br>        p7c application/x-pkcs7-mime<br>        p7m application/x-pkcs7-mime<br>        p7r application/x-pkcs7-certreqresp<br>        p7s application/x-pkcs7-signature<br>        pbm image/x-portable-bitmap<br>        pdf application/pdf<br>        pfx application/x-pkcs12<br>        pgm image/x-portable-graymap<br>        pko application/ynd.ms-pkipko<br>        pma application/x-perfmon<br>        pmc application/x-perfmon<br>        pml application/x-perfmon<br>        pmr application/x-perfmon<br>        pmw application/x-perfmon<br>        png image/x-png<br>        pnm image/x-portable-anymap<br>        pot, application/vnd.ms-powerpoint<br>        ppm image/x-portable-pixmap<br>        pps application/vnd.ms-powerpoint<br>        ppt application/vnd.ms-powerpoint<br>        prf application/pics-rules<br>        ps application/postscript<br>        pub application/x-mspublisher<br>        qt video/quicktime<br>        ra audio/x-pn-realaudio<br>        ram audio/x-pn-realaudio<br>        ras image/x-cmu-raster<br>        rgb image/x-rgb<br>        rmi audio/mid<br>        roff application/x-troff<br>        rtf application/rtf<br>        rtx text/richtext<br>        scd application/x-msschedule<br>        sct text/scriptlet<br>        setpay application/set-payment-initiation<br>        setreg application/set-registration-initiation<br>        sh application/x-sh<br>        shar application/x-shar<br>        sit application/x-stuffit<br>        snd audio/basic<br>        spc application/x-pkcs7-certificates<br>        spl application/futuresplash<br>        src application/x-wais-source<br>        sst application/vnd.ms-pkicertstore<br>        stl application/vnd.ms-pkistl<br>        stm text/html<br>        sv4cpio application/x-sv4cpio<br>        sv4crc application/x-sv4crc<br>        t application/x-troff<br>        tar application/x-tar<br>        tcl application/x-tcl<br>        tex application/x-tex<br>        texi application/x-texinfo<br>        texinfo application/x-texinfo<br>        tgz application/x-compressed<br>        tif image/tiff<br>        tiff image/tiff<br>        <span class="hljs-built_in">tr</span> application/x-troff<br>        trm application/x-msterminal<br>        tsv text/tab-separated-values<br>        txt text/plain<br>        uls text/iuls<br>        ustar application/x-ustar<br>        vcf text/x-vcard<br>        vrml x-world/x-vrml<br>        wav audio/x-wav<br>        wcm application/vnd.ms-works<br>        wdb application/vnd.ms-works<br>        wks application/vnd.ms-works<br>        wmf application/x-msmetafile<br>        wps application/vnd.ms-works<br>        wri application/x-mswrite<br>        wrl x-world/x-vrml<br>        wrz x-world/x-vrml<br>        xaf x-world/x-vrml<br>        xbm image/x-xbitmap<br>        xla application/vnd.ms-excel<br>        xlc application/vnd.ms-excel<br>        xlm application/vnd.ms-excel<br>        xls application/vnd.ms-excel<br>        xlt application/vnd.ms-excel<br>        xlw application/vnd.ms-excel<br>        xof x-world/x-vrml<br>        xpm image/x-xpixmap<br>        xwd image/x-xwindowdump<br>        z application/x-compress<br>        zip application/zip -firefox<br>        application/x-zip-compressed -IE<br>        <br>        php上传压缩文件(rar,7z,zip)<br>        php上传可执行文件(exe)<br>        php上传视频文件,音乐文件,歌词文件(avi,rmvb,3gp,flv,mp3,wav,krc,lrc)<br>        php上传文本文件和文档文件(word-&gt;doc,excel-&gt;xls,幻灯片-&gt;ppt,pdf,chm)<br>        php上传数据库文件(access文件,sql文件,con文件,日志文件<span class="hljs-built_in">log</span>, dat文件)<br>        php上传网页文件,脚本文件,字体文件(ini,php,html,htm,字体文件：ttf,fon, js ,xml)<br>        php上传其他文件(class类文件,dll动态加载库文件)<br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>上传图片马</p>
+<ul>
+<li>上传图片马后利用文件包含点执行图片马<ul>
+<li>一般来说，如果先找到文件包含漏洞，才考虑使用图片马</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>条件竞争</p>
+<ul>
+<li>通常情况下，条件竞争漏洞不推荐使用，高并发请求容易对服务器造成影响</li>
+<li>先获取上传文件，在保存文件到目录下，判断是否是php文件，如果是，删除。只有在在保存文件到目录下，判断是否是php文件这种逻辑情况下才能使用条件竞争</li>
+</ul>
+</li>
+<li><p>JavaScript校验</p>
+<ul>
+<li>禁用js前端验证</li>
+</ul>
+</li>
+</ul>
+<h4 id="漏洞修复-加固与防御"><a href="#漏洞修复-加固与防御" class="headerlink" title="漏洞修复-加固与防御"></a>漏洞修复-加固与防御</h4><ul>
+<li><p>使用最新版中间件</p>
+<ul>
+<li>及时更新中间件版本，防止使用漏洞版本</li>
+</ul>
+</li>
+<li><p>正确配置中间件</p>
+<ul>
+<li>错误中间件配置会导致解析漏洞</li>
+</ul>
+</li>
+<li><p>对保存上传文件的文件夹限制权限</p>
+<ul>
+<li>配置中间件，不解析上传文件夹中的文件</li>
+</ul>
+</li>
+<li><p>使用白名单和MIME类型限制上传</p>
+<ul>
+<li>在确保以上的情况下，使用白名单和MIME结合检测文件类型和内容，着重检查文件名称中的特殊字符串</li>
+</ul>
+</li>
+<li><p>增加安全设备，网站防火墙</p>
+<ul>
+<li>为了安全保证，最好是加上防火墙和防护设备</li>
+</ul>
+</li>
+<li><p>限制文件大小</p>
+<ul>
+<li>假设服务器有4G内存，直接上传5G内容，导致服务器内存爆满，从而造成拒绝服务攻击</li>
+</ul>
+</li>
+<li><p>OSS</p>
+<ul>
+<li>将所有的静态资源托管到OSS平台上，这样只需要在加载资源时，防范文件包含漏洞即可<br>不暴露上传后的文件的保存路径</li>
+</ul>
+</li>
+</ul>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

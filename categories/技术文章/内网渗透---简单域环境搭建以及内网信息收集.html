@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="Hexo,博客,技术">
+  
+    <meta name="description" content="简单域环境搭建以及内网信息收集一、实验环境windows server 2019， win10 ，win7(配置方法与Win10一致，因为本人Win7是家庭版，所以这里用两个win10虚拟机模拟环境) 二、操作步骤1、在windows server 2019中设置静态IP  把上述三个内容填入下图，其中首先DNS服务器地址与默认网关地址相同    同样操作，在win10中操作跟上述配置一样，只是在">
+<meta property="og:type" content="website">
+<meta property="og:title" content="简单域环境搭建以及内网信息收集">
+<meta property="og:url" content="https://rofgd.github.io/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F---%E7%AE%80%E5%8D%95%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="简单域环境搭建以及内网信息收集一、实验环境windows server 2019， win10 ，win7(配置方法与Win10一致，因为本人Win7是家庭版，所以这里用两个win10虚拟机模拟环境) 二、操作步骤1、在windows server 2019中设置静态IP  把上述三个内容填入下图，其中首先DNS服务器地址与默认网关地址相同    同样操作，在win10中操作跟上述配置一样，只是在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202301191151461.png">
+<meta property="article:published_time" content="2022-11-12T05:13:56.000Z">
+<meta property="article:modified_time" content="2025-03-30T12:14:07.484Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="内网">
+<meta property="article:tag" content="域环境">
+<meta property="article:tag" content="信息收集">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202301191151461.png">
+  
+  
+  
+  <title>简单域环境搭建以及内网信息收集 - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" target="_self">
+                    <i class="iconfont icon-a-yingyongchengxu3x"></i>
+                    <span>技术文章</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" target="_self">
+                    <i class="iconfont icon-a-wendang3x"></i>
+                    <span>日常随笔</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C/" target="_self">
+                    <i class="iconfont icon-a-jiangzhang3x"></i>
+                    <span>游戏体验</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202301191151461.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="简单域环境搭建以及内网信息收集"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h3 id="简单域环境搭建以及内网信息收集"><a href="#简单域环境搭建以及内网信息收集" class="headerlink" title="简单域环境搭建以及内网信息收集"></a>简单域环境搭建以及内网信息收集</h3><h4 id="一、实验环境"><a href="#一、实验环境" class="headerlink" title="一、实验环境"></a>一、实验环境</h4><p>windows server 2019， win10 ，win7(配置方法与Win10一致，因为本人Win7是家庭版，所以这里用两个win10虚拟机模拟环境)</p>
+<h4 id="二、操作步骤"><a href="#二、操作步骤" class="headerlink" title="二、操作步骤"></a>二、操作步骤</h4><h5 id="1、在windows-server-2019中设置静态IP"><a href="#1、在windows-server-2019中设置静态IP" class="headerlink" title="1、在windows server 2019中设置静态IP"></a>1、在windows server 2019中设置静态IP</h5><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021733238.png" srcset="/img/loading.gif" lazyload alt="image-20230202173333526"></p>
+<ul>
+<li>把上述三个内容填入下图，其中首先DNS服务器地址与默认网关地址相同</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021736415.png" srcset="/img/loading.gif" lazyload alt="image-20230202173612756"></p>
+<ul>
+<li>同样操作，在win10中操作跟上述配置一样，只是在DNS服务器选项中设置为server2019的IP地址，同时这里将两台win10虚拟机的计算机名称进行更改后重启。server2019的这台虚拟机的名称更改为“DC”</li>
+</ul>
+<h5 id="2、配置windows-server-2019"><a href="#2、配置windows-server-2019" class="headerlink" title="2、配置windows server 2019"></a>2、配置windows server 2019</h5><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021743241.png" srcset="/img/loading.gif" lazyload alt="image-20230202174329396"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021744719.png" srcset="/img/loading.gif" lazyload alt="image-20230202174400936"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021744967.png" srcset="/img/loading.gif" lazyload alt="image-20230202174435994"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021745173.png" srcset="/img/loading.gif" lazyload alt="image-20230202174523999"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021746742.png" srcset="/img/loading.gif" lazyload alt="image-20230202174602545"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021747694.png" srcset="/img/loading.gif" lazyload alt="image-20230202174738514"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021747863.png" srcset="/img/loading.gif" lazyload alt="image-20230202174754363"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021748390.png" srcset="/img/loading.gif" lazyload alt="image-20230202174814270"></p>
+<ul>
+<li><p>一直安装后将此服务器提升为域控制器</p>
+</li>
+<li><p>选择添加新林，设置根域名为 test.local ，这里最好不要填外网有的域名，不然很容易出错。下一步</p>
+</li>
+<li><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021751999.png" srcset="/img/loading.gif" lazyload alt="image-20230202175131825"></p>
+</li>
+<li><p>输入还原模式密码，这个密码可以与 Administrator 账号密码不一致</p>
+</li>
+<li><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021751003.png" srcset="/img/loading.gif" lazyload alt="image-20230202175141152"></p>
+</li>
+</ul>
+<p>(这里忘记截图，所以随手拿一个图过来，只需要关注密码即可，别的都选默认选项)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021752099.png" srcset="/img/loading.gif" lazyload alt="image-20230202175158990"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021752667.png" srcset="/img/loading.gif" lazyload alt="image-20230202175214185"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021752025.png" srcset="/img/loading.gif" lazyload alt="image-20230202175229329"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021752369.png" srcset="/img/loading.gif" lazyload alt="image-20230202175236437"></p>
+<ul>
+<li>安装完后会重启，重启后，在输入账号处，可以看到账号名称发生了变化，变成了 TEST\Administrator ，这是域账号的登录模式，要登录一个域，需要在账号前面加上域名称和斜杠。输入密码登录系统。如果要登录本地账号，则需要输入.\administrator 来登录</li>
+<li>win7需要企业版或者旗舰版，家庭版则无法加入域</li>
+</ul>
+<h5 id="3、加入域"><a href="#3、加入域" class="headerlink" title="3、加入域"></a>3、加入域</h5><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021758314.png" srcset="/img/loading.gif" lazyload alt="image-20230202175849358"></p>
+<p>此时会要求输入 test.local 域的域管理员密码，也就是 Windows Server 2019 上的 administrator 账号的密码。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021759352.png" srcset="/img/loading.gif" lazyload alt="image-20230202175924348"></p>
+<h5 id="4、设置用户"><a href="#4、设置用户" class="headerlink" title="4、设置用户"></a>4、设置用户</h5><p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021801234.png" srcset="/img/loading.gif" lazyload alt="image-20230202180121044"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021802600.png" srcset="/img/loading.gif" lazyload alt="image-20230202180207464"></p>
+<ul>
+<li>加入域后，还需要有域账号才能登录域，我们先创建两个部门，分别是运维部和行政部，在 test.local 上右键-&gt;新建-&gt;组织单位</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021803093.png" srcset="/img/loading.gif" lazyload alt="image-20230202180326109"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021804340.png" srcset="/img/loading.gif" lazyload alt="image-20230202180401277"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021804409.png" srcset="/img/loading.gif" lazyload alt="image-20230202180449150"></p>
+<ul>
+<li><p>同样的方法在另一个部门里面也创建一个用户</p>
+</li>
+<li><p>创建完用户后，到 john.test.local 计算机，也就是 windows 10 上登录 Jack 账号，点击切换用户</p>
+</li>
+<li><p>我们可以在 Jack.test.local 主机上运行 cmd，执行命令查看一些信息</p>
+</li>
+</ul>
+<h4 id="三、cmd下信息收集常用命令操作"><a href="#三、cmd下信息收集常用命令操作" class="headerlink" title="三、cmd下信息收集常用命令操作"></a>三、cmd下信息收集常用命令操作</h4><h5 id="3-1、判断当前主机是否在域环境中"><a href="#3-1、判断当前主机是否在域环境中" class="headerlink" title="3.1、判断当前主机是否在域环境中"></a>3.1、判断当前主机是否在域环境中</h5><h6 id="3-1-1、查看网卡配置信息"><a href="#3-1-1、查看网卡配置信息" class="headerlink" title="3.1.1、查看网卡配置信息"></a>3.1.1、查看网卡配置信息</h6><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">ipconfig /<span class="hljs-keyword">all</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021812520.png" srcset="/img/loading.gif" lazyload alt="image-20230202181256175"></p>
+<h6 id="3-1-2、查看系统配置"><a href="#3-1-2、查看系统配置" class="headerlink" title="3.1.2、查看系统配置"></a>3.1.2、查看系统配置</h6><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systeminfo</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021818056.png" srcset="/img/loading.gif" lazyload alt="image-20230202181816924"></p>
+<ul>
+<li>主要看域那一栏，如果不在域环境中则是WORKGROUP</li>
+</ul>
+<h6 id="3-1-3、查看当前登录域及登录用户信息"><a href="#3-1-3、查看当前登录域及登录用户信息" class="headerlink" title="3.1.3、查看当前登录域及登录用户信息"></a>3.1.3、查看当前登录域及登录用户信息</h6><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">net config workstation<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021821928.png" srcset="/img/loading.gif" lazyload alt="image-20230202182116182"></p>
+<ul>
+<li>不存在域环境为 WORKGROUP。</li>
+</ul>
+<h6 id="3-1-4、时间同步命令"><a href="#3-1-4、时间同步命令" class="headerlink" title="3.1.4、时间同步命令"></a>3.1.4、时间同步命令</h6><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">net <span class="hljs-built_in">time</span> /<span class="hljs-built_in">domain</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021824937.png" srcset="/img/loading.gif" lazyload alt="image-20230202182421878"></p>
+<ul>
+<li>如果不在则是：</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021825348.png" srcset="/img/loading.gif" lazyload alt="image-20230202182507991"></p>
+<h5 id="3-2、本机信息收集"><a href="#3-2、本机信息收集" class="headerlink" title="3.2、本机信息收集"></a>3.2、本机信息收集</h5><h6 id="3-2-1、查看用户当前登录"><a href="#3-2-1、查看用户当前登录" class="headerlink" title="3.2.1、查看用户当前登录"></a>3.2.1、查看用户当前登录</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">whoami</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021827174.png" srcset="/img/loading.gif" lazyload alt="image-20230202182721132"></p>
+<h6 id="3-2-2、查看网络配置信息"><a href="#3-2-2、查看网络配置信息" class="headerlink" title="3.2.2、查看网络配置信息"></a>3.2.2、查看网络配置信息</h6><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">ipconfig /<span class="hljs-keyword">all</span><br></code></pre></td></tr></table></figure>
+
+<h6 id="3-3-3、查询操作系统和版本信息"><a href="#3-3-3、查询操作系统和版本信息" class="headerlink" title="3.3.3、查询操作系统和版本信息"></a>3.3.3、查询操作系统和版本信息</h6><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">systeminfo | findstr <span class="hljs-string">/B</span> <span class="hljs-string">/C</span>:<span class="hljs-string">&quot;OS Name&quot;</span> <span class="hljs-string">/C</span>:<span class="hljs-string">&quot;OS Version&quot;</span><br>systeminfo | findstr <span class="hljs-string">/B</span> <span class="hljs-string">/C</span>:<span class="hljs-string">&quot;OS 名称&quot;</span> <span class="hljs-string">/C</span>:<span class="hljs-string">&quot;OS 版本&quot;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>此信息可以推测系统可能存在的系统漏洞，针对性收集相应漏洞信息。</li>
+</ul>
+<h6 id="3-3-4、查看操作系统体系结构"><a href="#3-3-4、查看操作系统体系结构" class="headerlink" title="3.3.4、查看操作系统体系结构"></a>3.3.4、查看操作系统体系结构</h6><figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">echo</span> <span class="hljs-variable">%PROCESSOR_ARCHITECTURE%</span><br></code></pre></td></tr></table></figure>
+
+<h6 id="3-3-5、查看本机安装软件版本信息"><a href="#3-3-5、查看本机安装软件版本信息" class="headerlink" title="3.3.5、查看本机安装软件版本信息"></a>3.3.5、查看本机安装软件版本信息</h6><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic product <span class="hljs-keyword">get</span> <span class="hljs-type">name</span>,<span class="hljs-keyword">version</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021829014.png" srcset="/img/loading.gif" lazyload alt="image-20230202182957681"></p>
+<ul>
+<li>这里能查出来的都是在安装时候出现那种下一步下一步的，还有一种是直接安装(安装包下载后直接点击安装没有那种下一步的操作)这类软件这个命令是查询不到的</li>
+</ul>
+<h6 id="3-3-6、查询服务信息"><a href="#3-3-6、查询服务信息" class="headerlink" title="3.3.6、查询服务信息"></a>3.3.6、查询服务信息</h6><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">wmic service list brief</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021833716.png" srcset="/img/loading.gif" lazyload alt="image-20230202183259152"></p>
+<ul>
+<li>等同于任务管理器的服务那一栏</li>
+</ul>
+<h6 id="3-3-7、查询进程信息"><a href="#3-3-7、查询进程信息" class="headerlink" title="3.3.7、查询进程信息"></a>3.3.7、查询进程信息</h6><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">tasklist /v<br>wmic process list brief<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302021835931.png" srcset="/img/loading.gif" lazyload alt="image-20230202183434697"></p>
+<ul>
+<li>常见杀毒进程</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>进程名</th>
+<th>软件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>360sd.exe</td>
+<td>360杀毒</td>
+</tr>
+<tr>
+<td>360tray.exe</td>
+<td>360实时保护</td>
+</tr>
+<tr>
+<td>ZhuDongFangYu.exe</td>
+<td>360主动防御</td>
+</tr>
+<tr>
+<td>KSafeTray.exe</td>
+<td>金山卫士</td>
+</tr>
+<tr>
+<td>SafeDogUpdateCenter.exe</td>
+<td>安全狗</td>
+</tr>
+<tr>
+<td>McAfee McShield.exe</td>
+<td>McAfee</td>
+</tr>
+<tr>
+<td>egui.exe</td>
+<td>NOD32</td>
+</tr>
+<tr>
+<td>AVP.exe</td>
+<td>卡巴斯基</td>
+</tr>
+<tr>
+<td>avguard.exe</td>
+<td>小红伞</td>
+</tr>
+<tr>
+<td>bdagent.exe</td>
+<td>BitDefende</td>
+</tr>
+</tbody></table>
+<h6 id="附表"><a href="#附表" class="headerlink" title="附表"></a>附表</h6><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">wmic startup <span class="hljs-keyword">get</span> command,caption  <span class="hljs-comment">---查询启动程序信息</span><br>schtasks /query /fo LIST /v <span class="hljs-comment">---程序计划任务</span><br>net <span class="hljs-keyword">statistics</span> workstation <span class="hljs-comment">---查询主机开机时间</span><br>net <span class="hljs-keyword">user</span> <span class="hljs-comment">---查询本机用户列表</span><br>net localgroup<br>net localgruop administrators <span class="hljs-comment">---查询本机用户组与管理员组列表</span><br>query <span class="hljs-keyword">user</span> || qwinsta <span class="hljs-comment">---查询当前在线用户</span><br>net <span class="hljs-keyword">session</span> <span class="hljs-comment">---列出或断开本地计算机与所连接的客户端之间的会话</span><br>netstat -ano <span class="hljs-comment">--- 查询端口信息</span><br>systeminfo<br>wmic qfe <span class="hljs-keyword">get</span> Caption,Description,HotFixID,InstalledOn <span class="hljs-comment">---查询补丁信息</span><br>net <span class="hljs-keyword">share</span> <span class="hljs-comment">---查询本机共享列表</span><br>route print<br>arp -a <span class="hljs-comment">---查询路由信息与 arp 缓存表</span><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="3-3、防火墙"><a href="#3-3、防火墙" class="headerlink" title="3.3、防火墙"></a>3.3、防火墙</h4><ul>
+<li>windows server 2003及以下版本:</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">netsh firewall <span class="hljs-keyword">show </span><span class="hljs-built_in">config</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>window server 2003以上版本：</li>
+</ul>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pf">netsh advfirewall show allprofiles <span class="hljs-keyword">state</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>开启，关闭防火墙：</p>
+<ul>
+<li><p>Windows server 2003及之前版本：</p>
+<ul>
+<li><p>netsh firewall set opmode disable  #关闭</p>
+</li>
+<li><p>netsh firewall set opmode enable   #开启</p>
+</li>
+</ul>
+</li>
+<li><p>Windows server 2003之后版本：</p>
+<ul>
+<li><p>netsh advfirewall set allprofiles state off  #关闭</p>
+</li>
+<li><p>netsh advfirewall set allprofiles state on   #开启</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>修改防火墙规则(需要管理员权限)</p>
+</li>
+<li><pre><code class="hljs">Windows server 2003及以下版本，允许指定端口、程序连接：
+    netsh firewall add portopening tcp 4444 test   #指定端口    
+    netsh firewall add allowedprogram c:\a.exe test enable   #指定程序
+
+Windows server 2003之后版本，允许指定端口、程序进站、出站：
+netsh advfirewall firewall add rule name=test dir=in action=allow         protocol=tcp localport=4444  #允许4444端口进站 
+
+netsh advfirewall firewall add rule name=test dir=in action=allow         program=c:\a.exe  #允许a.exe进站  
+
+netsh advfirewall firewall add rule name=test dir=out action=allow         protocol=tcp localport=4444   #允许4444端口出站    
+
+netsh advfirewall firewall add rule name=test dir=out action=allow         program=c:\a.exe   #允许a.exe出站
+</code></pre>
+</li>
+</ul>
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.wangan.com/p/7fygf36b9df57f04#%E2%97%8F%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4">https://www.wangan.com/p/7fygf36b9df57f04#%E2%97%8F%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4</a></li>
+<li><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7663">https://xz.aliyun.com/t/7663</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1885721">https://cloud.tencent.com/developer/article/1885721</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7144153351943372830">https://juejin.cn/post/7144153351943372830</a></li>
+</ul>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

